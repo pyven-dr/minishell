@@ -24,13 +24,13 @@ typedef struct s_tree
 
 typedef struct s_cmd
 {
-	char		**cmd;
+	char			**cmd;
 	struct s_file	*file;
 }	t_cmd;
 
 typedef struct s_file
 {
-	char			*fd;
+	char				*fd;
 	struct e_chevron	chevron;
 }	t_file;
 
