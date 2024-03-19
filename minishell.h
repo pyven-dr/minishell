@@ -6,7 +6,7 @@
 /*   By: sabitbol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 14:02:22 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/03/19 18:56:14 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/03/19 19:32:32 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ typedef struct s_tree
 	struct s_tree	*parent;
 	struct s_tree	*right;
 	struct s_tree	*left;
-	struct s_cmd	*name;
+	char		*name;
 	enum e_operand	operand;
 }	t_tree;
 
