@@ -6,7 +6,7 @@
 /*   By: sabitbol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 14:02:22 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/03/19 14:53:56 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/03/19 16:05:12 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef struct s_tree
 
 typedef struct s_cmd
 {
-	char			**cmd;
+	char			*cmd; //cmd a split en meme temps que l'expand, juste avant d'exec
 	struct s_file	*file;
 }	t_cmd;
 
