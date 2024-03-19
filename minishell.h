@@ -6,7 +6,7 @@
 /*   By: sabitbol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 14:02:22 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/03/19 16:05:12 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/03/19 18:56:14 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,9 @@ typedef struct s_tree
 	struct s_tree	*parent;
 	struct s_tree	*right;
 	struct s_tree	*left;
-	struct s_cmd	*cmd;
+	struct s_cmd	*name;
 	enum e_operand	operand;
 }	t_tree;
-
-typedef struct s_cmd
-{
-	char			*cmd; //cmd a split en meme temps que l'expand, juste avant d'exec
-	struct s_file	*file;
-}	t_cmd;
-
-typedef struct s_file
-{
-	char				*name;
-	struct e_chevron	chevron;
-}	t_file;
 
 typedef enum e_operand
 {
@@ -40,12 +28,10 @@ typedef enum e_operand
 	OR,
 	PIPE,
 	CMD,
+	SIMPLE_IN,
+	DOUBLE_IN,
+	SIMPLE_OUT,
+	DOUBLE_OUT,
 }	t_operand;
-
-typedef enum e_chevron
-{
-	SIMPLE,
-	DOUBLE,
-}	t_chevron;
 
 #endif
