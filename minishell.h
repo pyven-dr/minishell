@@ -6,7 +6,7 @@
 /*   By: sabitbol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 14:02:22 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/03/18 22:51:28 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/03/19 14:41:45 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_cmd
 
 typedef struct s_file
 {
-	char			*fd;
+	char			*name;
 	struct e_chevron	chevron;
 }	t_file;
 
