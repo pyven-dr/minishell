@@ -20,7 +20,12 @@ int	exec(t_tree *node)
 	if (split_cmd[0] == NULL)
 		return (127);
 	if (node->operand == CMD)
-		exec_cmd(split_cmd);
+		return (exec_cmd(split_cmd));
+	if (node->operand == AND)
+	{
+		exec(node->left);
+
+	}
 	return (0);
 }
 

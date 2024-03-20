@@ -18,11 +18,14 @@ int	exec_cmd(char **cmd)
 
 	id = fork();
 	if (id < 0)
+	{
+		perror("Fork error");
 		return(1);
+	}
 	if (id == 0)
 	{
 		execve(cmd[0], cmd, NULL);
-		perror("Execve error :");
+		perror("Execve error");
 		free_cmd(cmd);
 		exit(1);
 	}
