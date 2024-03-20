@@ -3,3 +3,4 @@ src_exec/test.c
 minishell
 .build
 *.a
+a.out
