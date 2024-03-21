@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   new_tree.c                                         :+:      :+:    :+:   */
+/*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sabitbol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/19 14:35:50 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/03/20 00:17:50 by sabitbol         ###   ########.fr       */
+/*   Created: 2024/03/20 00:08:58 by sabitbol          #+#    #+#             */
+/*   Updated: 2024/03/20 00:50:48 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#ifndef PARSING_H
+# define PARSING_H
 
-t_tree	*new_node(t_tree *parent, t_operand operand, char *name)
-{
-	t_tree	*node;
+# include "minishell.h"
+# include <stdlib.h>
+# include <stddef.h>
+# include <stdbool.h>
 
-	node = malloc(sizeof(t_tree));
-	if (!node)
-		return (NULL);
-	node->parent = parent;
-	node->right = NULL;
-	node->left = NULL;
-	node->name = name;
-	node->operand = operand;
-}
+t_tree	*new_node(t_tree *parent, t_operand operand, char *name);
+bool	is_whitespace(char c);
 
+#endif
