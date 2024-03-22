@@ -13,13 +13,13 @@
 #ifndef EXEC_H
 # define EXEC_H
 
-#include "minishell.h"
-#include "libft.h"
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <errno.h>
-#include <sys/wait.h>
+# include "minishell.h"
+# include "libft.h"
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <errno.h>
+# include <sys/wait.h>
 
 int		exec(t_tree *node);
 void	free_cmd(char **cmd);

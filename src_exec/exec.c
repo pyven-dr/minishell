@@ -14,7 +14,7 @@
 
 int	exec(t_tree *node)
 {
-	char **split_cmd;
+	char	**split_cmd;
 
 	if (node->operand == CMD)
 	{

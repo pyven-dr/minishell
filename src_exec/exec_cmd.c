@@ -20,7 +20,7 @@ int	exec_cmd(char **cmd)
 	if (id < 0)
 	{
 		perror("Fork error");
-		return(-1);
+		return (-1);
 	}
 	if (id == 0)
 	{

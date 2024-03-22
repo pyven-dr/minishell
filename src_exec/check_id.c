@@ -14,7 +14,7 @@
 
 int	check_id(int id)
 {
-	int status;
+	int	status;
 
 	status = 0;
 	if (id < 0)

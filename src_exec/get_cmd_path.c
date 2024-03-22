@@ -25,9 +25,9 @@ char	*get_cmd_path(char *command)
 		free(command);
 		return (command_path);
 	}
-		splitted_path = ft_split(path, ':');
-		if (splitted_path == NULL)
-			return (free(command), NULL);
+	splitted_path = ft_split(path, ':');
+	if (splitted_path == NULL)
+		return (free(command), NULL);
 	if (command != NULL)
 		command_path = check_absolute_path(command);
 	if (command_path == NULL && command != NULL)
