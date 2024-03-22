@@ -29,7 +29,7 @@ int	exec(t_tree *node)
 		return (exec_cmd(split_cmd));
 	}
 	if (node->operand == AND)
-		exec_and(node);
+		return (exec_and(node));
 	return (0);
 }
 
@@ -57,8 +57,8 @@ int main(void)
 	rightChild->right = NULL;
 
 	// Assignation des enfants à la racine
-	root->left = leftChild;
-	root->right = rightChild;
+	root->left = rightChild;
+	root->right = leftChild;
 
 	t_tree *leftChild2 = (t_tree *)malloc(sizeof(t_tree));
 	leftChild2->name = "echo test2";
@@ -74,15 +74,15 @@ int main(void)
 	rightChild3->left = NULL;
 	rightChild3->right = NULL;
 
-	root->right->left = leftChild2;
-	root->right->right = rightChild3;
+	root->left->left = leftChild2;
+	root->left->right = rightChild3;
 
 	// Affichage de la structure de l'arbre
 	printf("Root: %s\n", root->name);
 	printf("	Left: %s\n", root->left->name);
+	printf("		Right: %s\n", root->left->right->name);
+	printf("		Left: %s\n", root->left->left->name);
 	printf("	Right: %s\n", root->right->name);
-	printf("		Right: %s\n", root->right->right->name);
-	printf("		Left: %s\n", root->right->left->name);
 
 	exec(root);
 	//wait(NULL);
