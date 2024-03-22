@@ -20,15 +20,17 @@ int	exec_cmd(char **cmd)
 	if (id < 0)
 	{
 		perror("Fork error");
-		return(1);
+		return(-1);
 	}
 	if (id == 0)
 	{
 		execve(cmd[0], cmd, NULL);
 		perror("Execve error");
 		free_cmd(cmd);
+		free(cmd);
 		exit(1);
 	}
 	free_cmd(cmd);
-	return (0);
+	free(cmd);
+	return (id);
 }

@@ -36,5 +36,6 @@ char	*get_cmd_path(char *command)
 		ft_putstr_fd("'': command not found\n", STDERR_FILENO);
 	free(command);
 	free_cmd(splitted_path);
+	free(splitted_path);
 	return (command_path);
 }

@@ -21,10 +21,12 @@
 #include <errno.h>
 #include <sys/wait.h>
 
+int		exec(t_tree *node);
 void	free_cmd(char **cmd);
 int		exec_cmd(char **cmd);
 char	*check_absolute_path(char *cmd);
 char	*find_command(char **path, char *command);
 char	*get_cmd_path(char *command);
+int		exec_and(t_tree *node);
 
 #endif

@@ -1,6 +1,6 @@
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
 DFLAGS = -MD -MP
 
@@ -16,6 +16,7 @@ SRC = exec.c \
 	  find_command.c \
 	  get_cmd_path.c \
 	  check_absolute_path.c \
+	  exec_and.c \
 
 BUILD_DIR = .build
 

@@ -14,18 +14,22 @@
 
 int	exec(t_tree *node)
 {
-	char **split_cmd = ft_split(node->name, ' '); //Temporary split waiting for expand
+	char **split_cmd;
 
-	split_cmd[0] = get_cmd_path(split_cmd[0]);
-	if (split_cmd[0] == NULL)
-		return (127);
 	if (node->operand == CMD)
-		return (exec_cmd(split_cmd));
-	if (node->operand == AND)
 	{
-		exec(node->left);
-
+		split_cmd = ft_split(node->name, ' '); //Temporary split waiting for expand
+		split_cmd[0] = get_cmd_path(split_cmd[0]);
+		if (split_cmd[0] == NULL)
+		{
+			free_cmd(split_cmd + 1);
+			free(split_cmd);
+			return (-127);
+		}
+		return (exec_cmd(split_cmd));
 	}
+	if (node->operand == AND)
+		exec_and(node);
 	return (0);
 }
 
@@ -39,15 +43,15 @@ int main(void)
 	root->right = NULL;
 
 	t_tree *leftChild = (t_tree *)malloc(sizeof(t_tree));
-	leftChild->name = "ls -la";
+	leftChild->name = "echo test1";
 	leftChild->operand = CMD;
 	leftChild->parent = root;
 	leftChild->left = NULL;
 	leftChild->right = NULL;
 
 	t_tree *rightChild = (t_tree *)malloc(sizeof(t_tree));
-	rightChild->name = "PIPE";
-	rightChild->operand = PIPE;
+	rightChild->name = "AND";
+	rightChild->operand = AND;
 	rightChild->parent = root;
 	rightChild->left = NULL;
 	rightChild->right = NULL;
@@ -56,21 +60,21 @@ int main(void)
 	root->left = leftChild;
 	root->right = rightChild;
 
-	t_tree *rightChild2 = (t_tree *)malloc(sizeof(t_tree));
-	rightChild2->name = "ls";
-	rightChild2->operand = CMD;
-	rightChild2->parent = rightChild;
-	rightChild2->left = NULL;
-	rightChild2->right = NULL;
+	t_tree *leftChild2 = (t_tree *)malloc(sizeof(t_tree));
+	leftChild2->name = "echo test2";
+	leftChild2->operand = CMD;
+	leftChild2->parent = rightChild;
+	leftChild2->left = NULL;
+	leftChild2->right = NULL;
 
 	t_tree *rightChild3 = (t_tree *)malloc(sizeof(t_tree));
-	rightChild3->name = "cat";
+	rightChild3->name = "echo test3";
 	rightChild3->operand = CMD;
 	rightChild3->parent = rightChild;
 	rightChild3->left = NULL;
 	rightChild3->right = NULL;
 
-	root->right->left = rightChild2;
+	root->right->left = leftChild2;
 	root->right->right = rightChild3;
 
 	// Affichage de la structure de l'arbre
@@ -80,13 +84,13 @@ int main(void)
 	printf("		Right: %s\n", root->right->right->name);
 	printf("		Left: %s\n", root->right->left->name);
 
-	exec(leftChild);
-	wait(NULL);
+	exec(root);
+	//wait(NULL);
 	// Libération de la mémoire
 	free(root);
 	free(leftChild);
 	free(rightChild);
-	free(rightChild2);
+	free(leftChild2);
 	free(rightChild3);
 
 	return 0;
