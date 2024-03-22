@@ -28,5 +28,6 @@ char	*check_absolute_path(char *cmd);
 char	*find_command(char **path, char *command);
 char	*get_cmd_path(char *command);
 int		exec_and(t_tree *node);
-
+int		exec_or(t_tree *node);
+int		check_id(int id);
 #endif

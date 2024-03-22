@@ -30,6 +30,8 @@ int	exec(t_tree *node)
 	}
 	if (node->operand == AND)
 		return (exec_and(node));
+	if (node->operand == OR)
+		return (exec_or(node));
 	return (0);
 }
 
@@ -50,8 +52,8 @@ int main(void)
 	leftChild->right = NULL;
 
 	t_tree *rightChild = (t_tree *)malloc(sizeof(t_tree));
-	rightChild->name = "AND";
-	rightChild->operand = AND;
+	rightChild->name = "OR";
+	rightChild->operand = OR;
 	rightChild->parent = root;
 	rightChild->left = NULL;
 	rightChild->right = NULL;

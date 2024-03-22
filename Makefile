@@ -17,6 +17,8 @@ SRC = exec.c \
 	  get_cmd_path.c \
 	  check_absolute_path.c \
 	  exec_and.c \
+	  exec_or.c \
+	  check_id.c \
 
 BUILD_DIR = .build
 
