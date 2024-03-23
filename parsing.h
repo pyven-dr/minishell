@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:08:58 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/03/23 03:22:09 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/03/23 14:15:26 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,7 @@ bool		is_special(char c);
 bool		is_quoted(t_quote *scope, char c);
 t_operand	is_operand(char **line);
 char		*strdup_to_next_operand(char **line);
+
+#include <stdio.h>
 
 #endif

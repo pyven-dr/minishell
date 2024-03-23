@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:26:56 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/03/23 02:54:30 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/03/23 17:08:53 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,3 @@ bool	is_quoted(t_quote *scope, char c)
 	else
 		return (false);
 }
-

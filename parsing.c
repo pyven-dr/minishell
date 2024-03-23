@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:18:26 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/03/23 04:22:55 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/03/23 16:52:29 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,17 @@ t_tree	*parse(char *line)
 	{
 		while (*line && is_whitespace(*line))
 			line++;
-		operand = is_operand(&line);
-		if (operand == 'CMD')
+		if (*line == '(' || *line == ')')
+		{
+			if (*line == '(')
+				save_parenthesis(save, tree);
+			else
+				tree = get_last_save(save);
+			line++;
+		}
+		else
+			operand = is_operand(&line);
+		fill_tree(tree, operand, save, line);
 	}
 	line = head;
 	free(line);
@@ -38,13 +47,13 @@ t_tree	*parse(char *line)
 char	*strdup_to_next_operand(char **line)
 {
 	char	*str;
-	int	i;
+	int		i;
 	t_quote	scope;
 	
 	scope.s_quote = false;
 	scope.d_quote = false;
 	i = 0;
-	while (*line[i] && (!is_special(*line[i]) || is_quoted(&scope, *line[i])))
+	while ((*line)[i] && (!is_special((*line)[i]) || is_quoted(&scope, (*line)[i])))
 		i++;
 	str = malloc((i + 1) * sizeof(char));
 	if (!str)
