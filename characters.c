@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   characters.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sabitbol <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:26:56 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/03/23 01:23:18 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/03/23 02:54:30 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ t_operand	is_operand(char **line)
 
 bool	is_special(char c)
 {
-	if (c == '&' || c == '|' || c == '<' || c == '>' || c == '('  || c == ')' || c == '\'' || c == '"')
+	if (c == '&' || c == '|' || c == '<' || c == '>' \
+	|| c == '('  || c == ')' || c == '\'' || c == '"')
 		 return (true);
 	return (false);
 }
@@ -51,21 +52,21 @@ bool	is_quoted(t_quote *scope, char c)
 {
 	if (c == '"')
 	{
-		if (scope.d_quote == false && scope.s_quote == false)
-			scope.d_quote = true;
-		else if (scope.d_quote == true)
-			scope.d_quote = false;
+		if (scope->d_quote == false && scope->s_quote == false)
+			scope->d_quote = true;
+		else if (scope->d_quote == true)
+			scope->d_quote = false;
 		return (true);
 	}
 	if (c == '\'')
 	{
-		if (scope.s_quote == false && scope.d_quote == false)
-			scope.s_quote = true;
-		else if (scope.s_quote == true)
-			scope.s_quote = false;
+		if (scope->s_quote == false && scope->d_quote == false)
+			scope->s_quote = true;
+		else if (scope->s_quote == true)
+			scope->s_quote = false;
 		return (true);
 	}
-	if (scope.d_quote == true || scope.s_quote == true)
+	if (scope->d_quote == true || scope->s_quote == true)
 		return (true);
 	else
 		return (false);

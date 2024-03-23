@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sabitbol <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:08:58 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/03/23 02:47:51 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/03/23 03:22:09 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@ typedef struct s_quote
 	bool	s_quote;
 	bool	d_quote;
 }	t_quote;
+
+typedef struct s_parenthes
+{
+	t_tree				*p;
+	struct s_parenthes	*next;
+}	t_parenthes;
 
 t_tree		*new_node(t_tree *parent, t_operand operand, char *name);
 bool		is_whitespace(char c);

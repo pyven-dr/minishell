@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sabitbol <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:18:26 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/03/23 00:59:01 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/03/23 03:39:27 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 t_tree	*parse(char *line)
 {
-	t_tree	*tree;
-	char	*head;
+	t_tree		*tree;
+	char		*head;
 	t_operand	operand;
+	t_parenthes	*save;
 
+	save = NULL;
 	head = line;
 	if (!line)
 		return (NULL);
@@ -55,4 +57,3 @@ char	*strdup_to_next_operand(char **line)
 	str[i] = '\0';
 	return (str);
 }
-

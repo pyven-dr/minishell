@@ -1,37 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   tree.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/17 14:02:22 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/03/23 02:55:00 by sabitbol         ###   ########.fr       */
+/*   Created: 2024/03/19 14:35:50 by sabitbol          #+#    #+#             */
+/*   Updated: 2024/03/23 03:01:45 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "parsing.h"
 
-typedef enum e_operand
+t_tree	*new_node(t_tree *parent, t_operand operand, char *name)
 {
-	AND,
-	OR,
-	PIPE,
-	CMD,
-	SIMPLE_IN,
-	DOUBLE_IN,
-	SIMPLE_OUT,
-	DOUBLE_OUT,
-}	t_operand;
+	t_tree	*node;
 
-typedef struct s_tree
-{
-	struct s_tree	*parent;
-	struct s_tree	*right;
-	struct s_tree	*left;
-	char			*name;
-	enum e_operand	operand;
-}	t_tree;
+	node = malloc(sizeof(t_tree));
+	if (!node)
+		return (NULL);
+	node->parent = parent;
+	node->right = NULL;
+	node->left = NULL;
+	node->name = name;
+	node->operand = operand;
+}
 
-#endif
