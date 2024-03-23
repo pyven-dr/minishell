@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:18:26 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/03/23 03:39:27 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/03/23 04:22:55 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_tree	*parse(char *line)
 	t_parenthes	*save;
 
 	save = NULL;
+	tree = NULL;
 	head = line;
 	if (!line)
 		return (NULL);
@@ -28,6 +29,7 @@ t_tree	*parse(char *line)
 		while (*line && is_whitespace(*line))
 			line++;
 		operand = is_operand(&line);
+		if (operand == 'CMD')
 	}
 	line = head;
 	free(line);

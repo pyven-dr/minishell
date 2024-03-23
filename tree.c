@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:35:50 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/03/23 03:01:45 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/03/23 04:01:45 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,3 +26,24 @@ t_tree	*new_node(t_tree *parent, t_operand operand, char *name)
 	node->operand = operand;
 }
 
+void	insert_node(t_tree *node, t_operand operand, char *name)
+{
+	if (node == node->parent->left)
+	{
+		node->parent->left = NULL;
+		node->parent->left = new_node(node->parent, operand, name);
+		if (!node->parent->left)
+			exit(44);
+		node->parent->left->left = node;
+		node->parent = node->parent->left;
+	}
+	else if (node == node->parent->right)
+	{
+		node->parent->right = NULL;
+		node->parent->right = new_node(node->parent, operand, name);
+		if (!node->parent->right)
+			exit(44);
+		node->parent->right->left = node;
+		node->parent = node->parent->right;
+	}
+}
