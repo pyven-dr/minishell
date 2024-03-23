@@ -6,7 +6,7 @@
 /*   By: sabitbol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:18:26 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/03/21 20:35:22 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/03/23 00:59:01 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,35 +15,44 @@
 t_tree	*parse(char *line)
 {
 	t_tree	*tree;
-	size_t	i;
+	char	*head;
 	t_operand	operand;
 
+	head = line;
 	if (!line)
 		return (NULL);
-	i = 0;
-	while (line[i] && is_whitespace(line[i]))
-		i++;
-	while (line[i])
+	while (*line)
 	{
-		operand = is_operand(line);
-		fill_tree(....)
+		while (*line && is_whitespace(*line))
+			line++;
+		operand = is_operand(&line);
 	}
+	line = head;
+	free(line);
 }
 
-char	*strdup_to_next_operand(char *line, int *i)
+char	*strdup_to_next_operand(char **line)
 {
-	int	j;
 	char	*str;
-
-	j = *i;
-	while (line[j] && is_operand[line + j] == CMD)
-		j++;
-	str = malloc((j - *i + 1) * sizeof(char));
+	int	i;
+	t_quote	scope;
+	
+	scope.s_quote = false;
+	scope.d_quote = false;
+	i = 0;
+	while (*line[i] && (!is_special(*line[i]) || is_quoted(&scope, *line[i])))
+		i++;
+	str = malloc((i + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
-	j = 0;
-	while (line[j + *i] && is_operand[line + *i + j] == CMD)
-		str[j] = line[*i + j++];
-	str[j] = '\0';
+	i = 0;
+	while (**line && (!is_special(**line) || is_quoted(&scope, **line)))
+	{
+		str[i] = **line;
+		(*line)++;
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
 }
 
