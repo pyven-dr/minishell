@@ -20,6 +20,7 @@ SRC = exec.c \
 	  exec_or.c \
 	  check_id.c \
 	  exec_pipe.c \
+	  exec_simple_in.c \
 
 BUILD_DIR = .build
 

@@ -35,7 +35,7 @@ int	exec(t_tree *node)
 	else if (node->operand == PIPE)
 		return (exec_pipe(node));
 	else if (node->operand == SIMPLE_IN)
-
+		;
 	return (0);
 }
 

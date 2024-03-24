@@ -12,7 +12,7 @@
 
 #include "exec.h"
 
-int	exec_simple_in(t_tree *node)
+/*int	exec_simple_in(t_tree *node)
 {
 
-}
+}*/
