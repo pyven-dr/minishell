@@ -23,7 +23,7 @@ int	check_id(int id)
 	{
 		waitpid(id, &status, 0);
 		if (WEXITSTATUS(status) != 0)
-			return (status);
+			return (WEXITSTATUS(status) * -1);
 	}
 	return (0);
 }

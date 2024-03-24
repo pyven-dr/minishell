@@ -30,4 +30,5 @@ char	*get_cmd_path(char *command);
 int		exec_and(t_tree *node);
 int		exec_or(t_tree *node);
 int		check_id(int id);
+int		exec_pipe(t_tree *node);
 #endif

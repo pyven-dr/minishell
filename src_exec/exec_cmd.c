@@ -32,5 +32,7 @@ int	exec_cmd(char **cmd)
 	}
 	free_cmd(cmd);
 	free(cmd);
+	close(STDIN_FILENO);
+	close(STDOUT_FILENO);
 	return (id);
 }
