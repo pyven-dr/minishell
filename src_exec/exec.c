@@ -28,32 +28,36 @@ int	exec(t_tree *node)
 		}
 		return (exec_cmd(split_cmd));
 	}
-	if (node->operand == AND)
+	else if (node->operand == AND)
 		return (exec_and(node));
-	if (node->operand == OR)
+	else if (node->operand == OR)
 		return (exec_or(node));
+	else if (node->operand == PIPE)
+		return (exec_pipe(node));
+	else if (node->operand == SIMPLE_IN)
+
 	return (0);
 }
 
 int main(void)
 {
 	t_tree *root = (t_tree *)malloc(sizeof(t_tree));
-	root->name = "AND";
-	root->operand = AND;
+	root->name = "PIPE";
+	root->operand = PIPE;
 	root->parent = NULL;
 	root->left = NULL;
 	root->right = NULL;
 
 	t_tree *leftChild = (t_tree *)malloc(sizeof(t_tree));
-	leftChild->name = "echo test1";
+	leftChild->name = "cat";
 	leftChild->operand = CMD;
 	leftChild->parent = root;
 	leftChild->left = NULL;
 	leftChild->right = NULL;
 
 	t_tree *rightChild = (t_tree *)malloc(sizeof(t_tree));
-	rightChild->name = "OR";
-	rightChild->operand = OR;
+	rightChild->name = "PIPE";
+	rightChild->operand = PIPE;
 	rightChild->parent = root;
 	rightChild->left = NULL;
 	rightChild->right = NULL;
@@ -63,14 +67,14 @@ int main(void)
 	root->right = leftChild;
 
 	t_tree *leftChild2 = (t_tree *)malloc(sizeof(t_tree));
-	leftChild2->name = "echo test2";
+	leftChild2->name = "rev";
 	leftChild2->operand = CMD;
 	leftChild2->parent = rightChild;
 	leftChild2->left = NULL;
 	leftChild2->right = NULL;
 
 	t_tree *rightChild3 = (t_tree *)malloc(sizeof(t_tree));
-	rightChild3->name = "echo test3";
+	rightChild3->name = "cat";
 	rightChild3->operand = CMD;
 	rightChild3->parent = rightChild;
 	rightChild3->left = NULL;

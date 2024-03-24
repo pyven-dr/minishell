@@ -18,6 +18,7 @@ char	*get_cmd_path(char *command)
 	char	**splitted_path;
 	char	*command_path;
 
+	command_path = NULL;
 	path = getenv("PATH");
 	if (path == NULL)
 	{
