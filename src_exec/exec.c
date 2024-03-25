@@ -35,29 +35,29 @@ int	exec(t_tree *node)
 	else if (node->operand == PIPE)
 		return (exec_pipe(node));
 	else if (node->operand == SIMPLE_IN)
-		;
+		return (exec_simple_in(node));
 	return (0);
 }
 
 int main(void)
 {
 	t_tree *root = (t_tree *)malloc(sizeof(t_tree));
-	root->name = "PIPE";
-	root->operand = PIPE;
+	root->name = "AND";
+	root->operand = AND;
 	root->parent = NULL;
 	root->left = NULL;
 	root->right = NULL;
 
 	t_tree *leftChild = (t_tree *)malloc(sizeof(t_tree));
-	leftChild->name = "cat";
+	leftChild->name = "rev";
 	leftChild->operand = CMD;
 	leftChild->parent = root;
 	leftChild->left = NULL;
 	leftChild->right = NULL;
 
 	t_tree *rightChild = (t_tree *)malloc(sizeof(t_tree));
-	rightChild->name = "PIPE";
-	rightChild->operand = PIPE;
+	rightChild->name = "Makefile";
+	rightChild->operand = SIMPLE_IN;
 	rightChild->parent = root;
 	rightChild->left = NULL;
 	rightChild->right = NULL;
@@ -67,26 +67,26 @@ int main(void)
 	root->right = leftChild;
 
 	t_tree *leftChild2 = (t_tree *)malloc(sizeof(t_tree));
-	leftChild2->name = "rev";
+	leftChild2->name = "cat";
 	leftChild2->operand = CMD;
 	leftChild2->parent = rightChild;
 	leftChild2->left = NULL;
 	leftChild2->right = NULL;
 
-	t_tree *rightChild3 = (t_tree *)malloc(sizeof(t_tree));
+	/*t_tree *rightChild3 = (t_tree *)malloc(sizeof(t_tree));
 	rightChild3->name = "cat";
 	rightChild3->operand = CMD;
 	rightChild3->parent = rightChild;
 	rightChild3->left = NULL;
-	rightChild3->right = NULL;
+	rightChild3->right = NULL;*/
 
 	root->left->left = leftChild2;
-	root->left->right = rightChild3;
+	//root->left->right = rightChild3;
 
 	// Affichage de la structure de l'arbre
 	printf("Root: %s\n", root->name);
 	printf("	Left: %s\n", root->left->name);
-	printf("		Right: %s\n", root->left->right->name);
+	//printf("		Right: %s\n", root->left->right->name);
 	printf("		Left: %s\n", root->left->left->name);
 	printf("	Right: %s\n", root->right->name);
 
@@ -97,7 +97,7 @@ int main(void)
 	free(leftChild);
 	free(rightChild);
 	free(leftChild2);
-	free(rightChild3);
+	//free(rightChild3);
 
 	return 0;
 }

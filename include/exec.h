@@ -20,6 +20,7 @@
 # include <stdio.h>
 # include <errno.h>
 # include <sys/wait.h>
+# include <fcntl.h>
 
 int		exec(t_tree *node);
 void	free_cmd(char **cmd);
@@ -31,4 +32,6 @@ int		exec_and(t_tree *node);
 int		exec_or(t_tree *node);
 int		check_id(int id);
 int		exec_pipe(t_tree *node);
+int		exec_simple_in(t_tree *node);
+
 #endif
