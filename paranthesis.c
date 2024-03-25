@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst.c                                              :+:      :+:    :+:   */
+/*   paranthesis.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 02:58:04 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/03/23 03:38:29 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/03/24 22:27:59 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,24 +30,26 @@ void    save_parenthesis(t_parenthes *save, t_tree *node)
 		save->next = to_save;
 }
 
-t_tree	*get_last_save(t_parenthes *save)
+t_tree	*get_last_save(t_parenthes **save)
 {
-	t_tree	*p;
+	t_tree		*p;
+	t_parenthes	*head;
 
-	while (save->next && save->next->next)
-		save = save->next;
-	if (!save->next)
+	head = *save;
+	while ((*save)->next && (*save)->next->next)
+		*save = (*save)->next;
+	if (!(*save)->next)
 	{
-		p = save->p;
-		free(save);
-		save = NULL;
-		return (p);
+		p = (*save)->p;
+		free(*save);
+		*save = NULL;
 	}
 	else
 	{
-		p = save->next->p;
-		free(save->next);
-		save->next = NULL;
-		return (p);
+		p = (*save)->next->p;
+		free((*save)->next);
+		(*save)->next = NULL;
 	}
+	*save = head;
+	return (p);
 }

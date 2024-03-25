@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:35:50 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/03/23 17:34:07 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/03/25 18:54:52 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@ t_tree	*new_node(t_tree *parent, t_operand operand, char *name)
 void	insert_node(t_tree *node, t_operand operand, char *name)
 {
 	if (!node->parent)
+	{
 		node->parent = new_node(NULL, operand, name);
+	}
 	else if (node == node->parent->left)
 	{
 		node->parent->left = NULL;
@@ -51,15 +53,49 @@ void	insert_node(t_tree *node, t_operand operand, char *name)
 	}
 }
 
-void	fill_tree(t_tree *tree, t_operand operand, t_parenthes *save, char **line)
+void	fill_tree(t_tree **tree, t_operand operand, t_parenthes *save, char **line)
 {
-	if (!tree)
-		tree = new_node(NULL, operand, strdup_to_next_operand(line));
+	if (operand == CMD)
+		fill_cmd(tree, operand, line);
+	if (operand == PIPE)
+		fill_pipe(tree, operand, save);
+	if (operand == AND || operand == OR)
+		fill_operator(tree, operand, save);
 	if (operand == SIMPLE_IN || operand == DOUBLE_IN || \
 	operand == SIMPLE_OUT || operand == DOUBLE_OUT)
+		fill_file(tree, operand, line);
+}
+
+void	print_tree(t_tree *tree)
+{
+	if (!tree)
+		printf("NULL");
+	else
 	{
-		if (save)
-		insert_node(tree, operand, strdup_to_next_operand(line));
+		print_node(tree);
+		printf("\n");
+		print_tree(tree->left);
+		printf("	\\\\	");
+		print_tree(tree->right);
 	}
-	
+}
+
+void	print_node(t_tree *node)
+{
+	if (node->operand == AND)
+		printf("&&");
+	if (node->operand == OR)
+		printf("||");
+	if (node->operand == PIPE)
+		printf("|");
+	if (node->operand == CMD)
+		printf("CMD : %s", node->name);
+	if (node->operand == SIMPLE_IN)
+		printf("< : %s", node->name);
+	if (node->operand == DOUBLE_IN)
+		printf("<< : %s", node->name);
+	if (node->operand == SIMPLE_OUT)
+		printf("> : %s", node->name);
+	if (node->operand == DOUBLE_OUT)
+		printf(">> : %s", node->name);	
 }

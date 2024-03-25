@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:08:58 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/03/23 14:15:26 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/03/25 18:55:30 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <stdlib.h>
 # include <stddef.h>
 # include <stdbool.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
 typedef struct s_quote
 {
@@ -30,13 +32,26 @@ typedef struct s_parenthes
 	struct s_parenthes	*next;
 }	t_parenthes;
 
+t_tree	*parse(char *line);
 t_tree		*new_node(t_tree *parent, t_operand operand, char *name);
+void		insert_node(t_tree *node, t_operand operand, char *name);
 bool		is_whitespace(char c);
 bool		is_special(char c);
 bool		is_quoted(t_quote *scope, char c);
 t_operand	is_operand(char **line);
 char		*strdup_to_next_operand(char **line);
+char		*strdup_to_next_space(char **line);
+void		insert_node(t_tree *node, t_operand operand, char *name);
+void		save_parenthesis(t_parenthes *save, t_tree *node);
+t_tree		*get_last_save(t_parenthes **save);
+void		fill_tree(t_tree **tree, t_operand operand, t_parenthes *save, char **line);
+void		fill_file(t_tree **tree, t_operand operand, char **line);
+void		fill_pipe(t_tree **tree, t_operand operand, t_parenthes *save);
+void		fill_operator(t_tree **tree, t_operand operand, t_parenthes *save);
+void		fill_cmd(t_tree **tree, t_operand operand, char **line);
 
 #include <stdio.h>
+void	print_node(t_tree *node);
+void	print_tree(t_tree *tree);
 
 #endif
