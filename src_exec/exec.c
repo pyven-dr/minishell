@@ -36,6 +36,8 @@ int	exec(t_tree *node)
 		return (exec_pipe(node));
 	else if (node->operand == SIMPLE_IN)
 		return (exec_simple_in(node));
+	else if (node->operand == SIMPLE_OUT)
+		return (exec_simple_out(node));
 	return (0);
 }
 
@@ -56,8 +58,8 @@ int main(void)
 	leftChild->right = NULL;
 
 	t_tree *rightChild = (t_tree *)malloc(sizeof(t_tree));
-	rightChild->name = "Makefile";
-	rightChild->operand = SIMPLE_IN;
+	rightChild->name = "out";
+	rightChild->operand = SIMPLE_OUT;
 	rightChild->parent = root;
 	rightChild->left = NULL;
 	rightChild->right = NULL;
@@ -67,7 +69,7 @@ int main(void)
 	root->right = leftChild;
 
 	t_tree *leftChild2 = (t_tree *)malloc(sizeof(t_tree));
-	leftChild2->name = "cat";
+	leftChild2->name = "cat Makefile";
 	leftChild2->operand = CMD;
 	leftChild2->parent = rightChild;
 	leftChild2->left = NULL;
