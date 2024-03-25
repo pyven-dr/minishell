@@ -19,7 +19,7 @@ static int	*create_pipe(int pipe_fd[2])
 	return (pipe_fd);
 }
 
-static int	dup_fd(int fd, int pipe_fd[2])
+static int	redirect_fd(int fd, int pipe_fd[2])
 {
 	int	val;
 
@@ -53,7 +53,7 @@ static int	exec_node_pipe(int pipe_fd[2], t_tree *node, int fd)
 	}
 	if (id == 0)
 	{
-		if (dup_fd(fd, pipe_fd) != 0)
+		if (redirect_fd(fd, pipe_fd) != 0)
 			exit(1);
 		exec_id = exec(node);
 		status = check_id(exec_id);
