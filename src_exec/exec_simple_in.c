@@ -12,20 +12,6 @@
 
 #include "exec.h"
 
-int	dup_fd(int fd1, int fd2)
-{
-	int	dup_val;
-
-	dup_val = dup2(fd1, fd2);
-	close(fd1);
-	if (dup_val < 0)
-	{
-		perror("Dup2 error");
-		return (-1);
-	}
-	return (0);
-}
-
 int	exec_simple_in(t_tree *node)
 {
 	int	oldfd;

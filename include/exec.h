@@ -33,5 +33,6 @@ int		exec_or(t_tree *node);
 int		check_id(int id);
 int		exec_pipe(t_tree *node);
 int		exec_simple_in(t_tree *node);
+int		dup_fd(int fd1, int fd2);
 
 #endif

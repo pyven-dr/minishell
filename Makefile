@@ -21,6 +21,7 @@ SRC = exec.c \
 	  check_id.c \
 	  exec_pipe.c \
 	  exec_simple_in.c \
+	  dup_fd.c \
 
 BUILD_DIR = .build
 
