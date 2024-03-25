@@ -25,7 +25,6 @@ int	exec_simple_in(t_tree *node)
 		return (-1);
 	}
 	oldfd = dup(STDIN_FILENO);
-	printf("%d\n", oldfd);
 	if (oldfd == -1)
 	{
 		perror("Dup error");
