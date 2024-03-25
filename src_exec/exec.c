@@ -38,6 +38,8 @@ int	exec(t_tree *node)
 		return (exec_simple_in(node));
 	else if (node->operand == SIMPLE_OUT)
 		return (exec_simple_out(node));
+	else if (node->operand == DOUBLE_OUT)
+		return (exec_double_out(node));
 	return (0);
 }
 
@@ -59,7 +61,7 @@ int main(void)
 
 	t_tree *rightChild = (t_tree *)malloc(sizeof(t_tree));
 	rightChild->name = "out";
-	rightChild->operand = SIMPLE_OUT;
+	rightChild->operand = DOUBLE_OUT;
 	rightChild->parent = root;
 	rightChild->left = NULL;
 	rightChild->right = NULL;
