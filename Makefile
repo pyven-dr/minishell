@@ -23,6 +23,7 @@ SRC = exec.c \
 	  exec_simple_in.c \
 	  dup_fd.c \
 	  exec_simple_out.c \
+	  exec_double_out.c \
 
 BUILD_DIR = .build
 
