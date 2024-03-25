@@ -12,7 +12,7 @@
 
 #include "exec.h"
 
-int dup_fd(int fd1, int fd2)
+int	dup_fd(int fd1, int fd2)
 {
 	int	dup_val;
 
@@ -30,7 +30,7 @@ int	exec_simple_in(t_tree *node)
 {
 	int	oldfd;
 	int	newfd;
-	int exec_val;
+	int	exec_val;
 
 	newfd = open(node->name, O_RDONLY);
 	if (newfd == -1)
@@ -39,9 +39,11 @@ int	exec_simple_in(t_tree *node)
 		return (-1);
 	}
 	oldfd = dup(STDIN_FILENO);
-	if (oldfd < 0)
+	printf("%d\n", oldfd);
+	if (oldfd == -1)
 	{
 		perror("Dup error");
+		close(newfd);
 		return (-1);
 	}
 	if (dup_fd(newfd, STDIN_FILENO) == -1)
@@ -49,8 +51,5 @@ int	exec_simple_in(t_tree *node)
 	exec_val = exec(node->left);
 	if (dup_fd(oldfd, STDIN_FILENO) == -1)
 		return (-1);
-	char *args[] = {"echo","10",NULL};
-	printf("%d\n",STDIN_FILENO);
-	execvp("echo", args);
 	return (exec_val);
 }

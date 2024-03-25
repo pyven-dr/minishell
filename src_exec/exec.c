@@ -91,6 +91,8 @@ int main(void)
 	printf("	Right: %s\n", root->right->name);
 
 	exec(root);
+	close(STDIN_FILENO);
+	close(STDOUT_FILENO);
 	//wait(NULL);
 	// Libération de la mémoire
 	free(root);
