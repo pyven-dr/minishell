@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 16:31:20 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/03/25 19:59:24 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/03/27 15:06:23 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,30 +18,39 @@ void	fill_file(t_tree **tree, t_operand operand, char **line)
 {
 	if (!*tree)
 		*tree = new_node(NULL, operand, strdup_to_next_space(line));
-	else
-    {
-		insert_node(*tree, operand, strdup_to_next_space(line));
-		(*tree)->parent->left = *tree;
-		*tree = (*tree)->parent;
+	else if ((*tree)->operand == AND || (*tree)->operand == OR || (*tree)->operand == PIPE)
+	{
+		(*tree)->right = new_node(*tree, operand, strdup_to_next_space(line));
+		*tree = (*tree)->right;
 	}
-} 
+	else if ((*tree)->operand != CMD)
+	{
+		(*tree)->left = new_node(*tree, operand, strdup_to_next_space(line));
+		*tree = (*tree)->left;
+	}
+	else if (!(*tree)->parent)
+	{
+		(*tree)->parent = new_node(NULL, operand, strdup_to_next_space(line));
+		(*tree)->parent->left = *tree;
+	}
+	else
+		insert_node(*tree, operand, strdup_to_next_space(line));
+}
 
 void	fill_pipe(t_tree **tree, t_operand operand, t_parenthes *save)
 {
 	while (save && save->next)
 		save = save->next;
-	while ((*tree)->parent && ( \
-	(*tree)->parent->operand == SIMPLE_IN || \
-	(*tree)->parent->operand == DOUBLE_IN || \
-	(*tree)->parent->operand == SIMPLE_OUT || \
-	(*tree)->parent->operand == DOUBLE_OUT || \
-	(*tree)->parent->operand == PIPE) && \
-	(!save || save->p != (*tree)->parent) && (*tree)->parent)
+	while ((!save || save->p != (*tree)->parent) && (*tree)->parent \
+	&& (*tree)->parent->operand != AND && (*tree)->parent->operand != OR) 
 		*tree = (*tree)->parent;
 	if ((*tree)->parent)
 		insert_node(*tree, operand, NULL);
 	else
+	{
 		(*tree)->parent = new_node(NULL, operand, NULL);
+		(*tree)->parent->left = *tree;
+	}
 	*tree = (*tree)->parent;
 }
 
@@ -55,31 +64,30 @@ void	fill_operator(t_tree **tree, t_operand operand, t_parenthes *save)
 		insert_node(*tree, operand, NULL);
 	else
 		(*tree)->parent = new_node(NULL, operand, NULL);
+	(*tree)->parent->left = *tree;
 	*tree = (*tree)->parent;
 }
 
 void	fill_cmd(t_tree **tree, t_operand operand, char **line)
 {
-	t_tree	*head;
-
 	if (!*tree)
-	{
 		*tree = new_node(NULL, operand, strdup_to_next_operand(line));
+	else if ((*tree)->operand == AND || (*tree)->operand == OR || (*tree)->operand == PIPE)
+	{
+		(*tree)->right = new_node(*tree, operand, strdup_to_next_operand(line));
+		*tree = (*tree)->right;
+	}
+	else if ((*tree)->operand == CMD)
+	{
+		(*tree)->name = join_cmd((*tree)->name, strdup_to_next_operand(line));
+	}
+	else if (!(*tree)->left)
+	{
+		(*tree)->left = new_node(*tree, operand, strdup_to_next_operand(line));
+		*tree = (*tree)->left;
 	}
 	else
-	{
-		if ((*tree)->operand == AND || (*tree)->operand == OR || (*tree)->operand == PIPE)
-			(*tree)->right = new_node(*tree, operand, strdup_to_next_operand(line));
-		else
-		{
-			head = *tree;
-			while ((*tree)->left->operand == SIMPLE_IN || (*tree)->left->operand == DOUBLE_IN || \
-			(*tree)->left->operand == SIMPLE_OUT || (*tree)->left->operand == DOUBLE_OUT)
-				*tree = (*tree)->left;
-			(*tree)->left->name = join_cmd((*tree)->left->name, strdup_to_next_operand(line));
-			*tree = head;
-		}
-	}
+		printf("WTF\n");
 }
 
 char	*join_cmd(char *s1, char *s2)

@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:08:58 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/03/25 18:55:30 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/03/26 16:36:41 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,9 @@ void		fill_operator(t_tree **tree, t_operand operand, t_parenthes *save);
 void		fill_cmd(t_tree **tree, t_operand operand, char **line);
 
 #include <stdio.h>
+#include <unistd.h>
 void	print_node(t_tree *node);
-void	print_tree(t_tree *tree);
+void	print_tree(t_tree *tree, int space);
+void	free_tree(t_tree **tree);
 
 #endif

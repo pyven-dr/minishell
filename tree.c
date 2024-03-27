@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:35:50 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/03/25 18:54:52 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/03/27 13:10:42 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ t_tree	*new_node(t_tree *parent, t_operand operand, char *name)
 
 void	insert_node(t_tree *node, t_operand operand, char *name)
 {
-	if (!node->parent)
-	{
-		node->parent = new_node(NULL, operand, name);
-	}
-	else if (node == node->parent->left)
+	// if (!node->parent)
+	// {
+	// 	node->parent = new_node(NULL, operand, name);
+	// }
+	if (node == node->parent->left)
 	{
 		node->parent->left = NULL;
 		node->parent->left = new_node(node->parent, operand, name);
@@ -66,36 +66,62 @@ void	fill_tree(t_tree **tree, t_operand operand, t_parenthes *save, char **line)
 		fill_file(tree, operand, line);
 }
 
-void	print_tree(t_tree *tree)
+void	free_tree(t_tree **tree)
 {
-	if (!tree)
-		printf("NULL");
+	if (!*tree)
+		;
 	else
 	{
+		free_tree(&(*tree)->right);
+		free_tree(&(*tree)->left);
+		if ((*tree)->operand == PIPE || \
+		(*tree)->operand == AND || (*tree)->operand == OR)
+			;
+		else
+			free((*tree)->name);
+		free(*tree);
+	}
+}
+
+void	print_tree(t_tree *tree, int space)
+{
+	int	c;
+
+	c = space;
+	if (!tree)
+	{
+		while (c-- > 0)
+			printf(" ");
+		printf("NULL\n");
+	}
+	else
+	{
+		while (c-- > 0)
+			printf(" ");
 		print_node(tree);
-		printf("\n");
-		print_tree(tree->left);
-		printf("	\\\\	");
-		print_tree(tree->right);
+
+		print_tree(tree->left, space + 5);
+
+		print_tree(tree->right, space + 5);
 	}
 }
 
 void	print_node(t_tree *node)
 {
 	if (node->operand == AND)
-		printf("&&");
-	if (node->operand == OR)
-		printf("||");
-	if (node->operand == PIPE)
-		printf("|");
-	if (node->operand == CMD)
-		printf("CMD : %s", node->name);
-	if (node->operand == SIMPLE_IN)
-		printf("< : %s", node->name);
-	if (node->operand == DOUBLE_IN)
-		printf("<< : %s", node->name);
-	if (node->operand == SIMPLE_OUT)
-		printf("> : %s", node->name);
-	if (node->operand == DOUBLE_OUT)
-		printf(">> : %s", node->name);	
+		printf("&&\n");
+	else if (node->operand == OR)
+		printf("||\n");
+	else if (node->operand == PIPE)
+		printf("|\n");
+	else if (node->operand == CMD)
+		printf("CMD : %s\n", node->name);
+	else if (node->operand == SIMPLE_IN)
+		printf("< : %s\n", node->name);
+	else if (node->operand == DOUBLE_IN)
+		printf("<< : %s\n", node->name);
+	else if (node->operand == SIMPLE_OUT)
+		printf("> : %s\n", node->name);
+	else if (node->operand == DOUBLE_OUT)
+		printf(">> : %s\n", node->name);
 }

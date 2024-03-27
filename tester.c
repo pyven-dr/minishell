@@ -10,12 +10,9 @@ int main(void)
 	{
     	str = readline("minishell$");
 		tree = parse(str);
-		print_tree(tree);
+		print_tree(tree, 0);
+		free_tree(&tree);
 		i++;
-		// free(tree->left->name);
-		// free(tree->left);
-		// free(tree->name);
-		// free(tree);
 	}
 
 }

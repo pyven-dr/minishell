@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:18:26 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/03/25 17:45:05 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/03/26 16:17:31 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,10 @@ char	*strdup_to_next_operand(char **line)
 	scope.d_quote = false;
 	i = 0;
 	while ((*line)[i] && (!is_special((*line)[i]) || is_quoted(&scope, (*line)[i])))
+	{
 		i++;
+	}
+	
 	str = malloc((i + 1) * sizeof(char));
 	if (!str)
 		return (NULL);

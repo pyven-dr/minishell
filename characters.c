@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:26:56 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/03/25 17:28:58 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/03/26 16:16:20 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ bool	is_whitespace(char c)
 t_operand	is_operand(char **line)
 {
 	if (**line == '&' && *((*line) + 1) == '&')
-		return ((*line)++, AND);
+		return ((*line) += 2, AND);
 	else if (**line == '|' && *((*line) + 1) == '|')
 		return ((*line) += 2, OR);
 	else if (**line == '|')
