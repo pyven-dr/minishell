@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:35:50 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/03/27 13:10:42 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/03/27 21:49:48 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,17 @@ void	insert_node(t_tree *node, t_operand operand, char *name)
 	}
 }
 
-void	fill_tree(t_tree **tree, t_operand operand, t_parenthes *save, char **line)
+void	fill_tree(t_parsing *pars, char **line)
 {
-	if (operand == CMD)
-		fill_cmd(tree, operand, line);
-	if (operand == PIPE)
-		fill_pipe(tree, operand, save);
-	if (operand == AND || operand == OR)
-		fill_operator(tree, operand, save);
-	if (operand == SIMPLE_IN || operand == DOUBLE_IN || \
-	operand == SIMPLE_OUT || operand == DOUBLE_OUT)
-		fill_file(tree, operand, line);
+	if (pars->operand == CMD)
+		fill_cmd(pars, line);
+	if (pars->operand == PIPE)
+		fill_pipe(pars);
+	if (pars->operand == AND || pars->operand == OR)
+		fill_operator(pars);
+	if (pars->operand == SIMPLE_IN || pars->operand == DOUBLE_IN || \
+	pars->operand == SIMPLE_OUT || pars->operand == DOUBLE_OUT)
+		fill_file(pars, line);
 }
 
 void	free_tree(t_tree **tree)

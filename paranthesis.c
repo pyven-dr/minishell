@@ -6,50 +6,52 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 02:58:04 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/03/24 22:27:59 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/03/28 00:03:04 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-void    save_parenthesis(t_parenthes *save, t_tree *node)
+void    save_parenthesis(t_parsing *pars)
 {
 	t_parenthes	*to_save;
 
-	while (save && save->next)
-		save = save->next;
+	while (pars->save && pars->save->next)
+		pars->save = pars->save->next;
 	to_save = malloc(sizeof(t_parenthes));
 	if (!to_save)
 	{
 		exit(00000);
 	}
-	to_save->p = node;
-	if (!save)
-		save = to_save;
+	to_save->next = NULL;
+	to_save->p = pars->tree;
+	if (!pars->save)
+		pars->save = to_save;
 	else
-		save->next = to_save;
+		pars->save->next = to_save;
 }
 
-t_tree	*get_last_save(t_parenthes **save)
+t_tree	*get_last_save(t_parsing *pars)
 {
 	t_tree		*p;
 	t_parenthes	*head;
 
-	head = *save;
-	while ((*save)->next && (*save)->next->next)
-		*save = (*save)->next;
-	if (!(*save)->next)
+	head = pars->save;
+	while (pars->save->next && pars->save->next->next)
+		pars->save = pars->save->next;
+	if (!pars->save->next)
 	{
-		p = (*save)->p;
-		free(*save);
-		*save = NULL;
+		p = pars->save->p;
+		free(pars->save);
+		pars->save = NULL;
 	}
 	else
 	{
-		p = (*save)->next->p;
-		free((*save)->next);
-		(*save)->next = NULL;
+		p = pars->save->next->p;
+		free(pars->save->next);
+		pars->save->next = NULL;
 	}
-	*save = head;
+	pars->save = head;
+	pars->parenthes = true;
 	return (p);
 }

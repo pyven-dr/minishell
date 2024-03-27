@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:08:58 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/03/26 16:36:41 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/03/27 23:45:10 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,15 @@ typedef struct s_parenthes
 	struct s_parenthes	*next;
 }	t_parenthes;
 
-t_tree	*parse(char *line);
+typedef struct s_parsing
+{
+	t_tree		*tree;
+	t_operand	operand;
+	t_parenthes	*save;
+	bool		parenthes;
+}	t_parsing;
+
+t_tree		*parse(char *line);
 t_tree		*new_node(t_tree *parent, t_operand operand, char *name);
 void		insert_node(t_tree *node, t_operand operand, char *name);
 bool		is_whitespace(char c);
@@ -42,13 +50,13 @@ t_operand	is_operand(char **line);
 char		*strdup_to_next_operand(char **line);
 char		*strdup_to_next_space(char **line);
 void		insert_node(t_tree *node, t_operand operand, char *name);
-void		save_parenthesis(t_parenthes *save, t_tree *node);
-t_tree		*get_last_save(t_parenthes **save);
-void		fill_tree(t_tree **tree, t_operand operand, t_parenthes *save, char **line);
-void		fill_file(t_tree **tree, t_operand operand, char **line);
-void		fill_pipe(t_tree **tree, t_operand operand, t_parenthes *save);
-void		fill_operator(t_tree **tree, t_operand operand, t_parenthes *save);
-void		fill_cmd(t_tree **tree, t_operand operand, char **line);
+void    	save_parenthesis(t_parsing *pars);
+t_tree		*get_last_save(t_parsing *pars);
+void		fill_tree(t_parsing *pars, char **line);
+void		fill_file(t_parsing *pars, char **line);
+void		fill_pipe(t_parsing *pars);
+void		fill_operator(t_parsing *pars);
+void		fill_cmd(t_parsing *pars, char **line);
 
 #include <stdio.h>
 #include <unistd.h>

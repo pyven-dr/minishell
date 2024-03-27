@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:18:26 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/03/26 16:17:31 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/03/27 23:46:25 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 t_tree	*parse(char *line)
 {
-	t_tree		*tree;
+	t_tree		*saved_node;
 	char		*head;
-	t_operand	operand;
-	t_parenthes	*save;
+	t_parsing	pars;
 
-	save = NULL;
-	tree = NULL;
+	pars.save = NULL;
+	pars.tree = NULL;
+	pars.parenthes = false;
 	head = line;
 	if (!line)
 		return (NULL);
@@ -31,25 +31,29 @@ t_tree	*parse(char *line)
 		if (*line == '(' || *line == ')')
 		{
 			if (*line == '(')
-				save_parenthesis(save, tree);
+				save_parenthesis(&pars);
 			else
-				tree = get_last_save(&save);
+			{
+				saved_node = get_last_save(&pars);
+				if (saved_node)
+					pars.tree = saved_node;
+			}
 			line++;
 		}
 		else if (*line)
 		{
-			operand = is_operand(&line);
+			pars.operand = is_operand(&line);
 			while (*line && is_whitespace(*line))
 				line++;
-			fill_tree(&tree, operand, save, &line);
+			fill_tree(&pars, &line);
 		}
 	}
 	line = head;
 	free(line);
-	if (tree)
-		while (tree->parent)
-			tree = tree->parent;
-	return (tree);
+	if (pars.tree)
+		while (pars.tree->parent)
+			pars.tree = pars.tree->parent;
+	return (pars.tree);
 }
 
 char	*strdup_to_next_operand(char **line)
