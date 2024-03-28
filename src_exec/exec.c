@@ -46,53 +46,62 @@ int	exec(t_tree *node)
 int main(void)
 {
 	t_tree *root = (t_tree *)malloc(sizeof(t_tree));
-	root->name = "AND";
-	root->operand = AND;
+	root->name = "out1";
+	root->operand = SIMPLE_OUT;
 	root->parent = NULL;
 	root->left = NULL;
 	root->right = NULL;
 
 	t_tree *leftChild = (t_tree *)malloc(sizeof(t_tree));
-	leftChild->name = "rev";
-	leftChild->operand = CMD;
+	leftChild->name = "&&";
+	leftChild->operand = AND;
 	leftChild->parent = root;
 	leftChild->left = NULL;
 	leftChild->right = NULL;
 
-	t_tree *rightChild = (t_tree *)malloc(sizeof(t_tree));
-	rightChild->name = "out";
-	rightChild->operand = DOUBLE_OUT;
-	rightChild->parent = root;
+
+	// Assignation des enfants à la racine
+	root->left = leftChild;
+
+		t_tree *rightChild = (t_tree *)malloc(sizeof(t_tree));
+	rightChild->name = "echo cmd1";
+	rightChild->operand = CMD;
+	rightChild->parent = leftChild;
 	rightChild->left = NULL;
 	rightChild->right = NULL;
 
-	// Assignation des enfants à la racine
-	root->left = rightChild;
-	root->right = leftChild;
-
 	t_tree *leftChild2 = (t_tree *)malloc(sizeof(t_tree));
-	leftChild2->name = "cat Makefile";
-	leftChild2->operand = CMD;
-	leftChild2->parent = rightChild;
+	leftChild2->name = "out2";
+	leftChild2->operand = SIMPLE_OUT;
+	leftChild2->parent = leftChild;
 	leftChild2->left = NULL;
 	leftChild2->right = NULL;
 
-	/*t_tree *rightChild3 = (t_tree *)malloc(sizeof(t_tree));
-	rightChild3->name = "cat";
-	rightChild3->operand = CMD;
-	rightChild3->parent = rightChild;
-	rightChild3->left = NULL;
-	rightChild3->right = NULL;*/
-
 	root->left->left = leftChild2;
-	//root->left->right = rightChild3;
+	root->left->right = rightChild;
+
+	t_tree *rightChild3 = (t_tree *)malloc(sizeof(t_tree));
+	rightChild3->name = "echo cmd2";
+	rightChild3->operand = CMD;
+	rightChild3->parent = leftChild2;
+	rightChild3->left = NULL;
+	rightChild3->right = NULL;
+
+	root->left->left->left = rightChild3;
 
 	// Affichage de la structure de l'arbre
+	int fd_test = open(random_name(), O_CREAT | O_WRONLY, 0777);
+	write(fd_test, "salut\n",6);
+	close(fd_test);
+
 	printf("Root: %s\n", root->name);
+
 	printf("	Left: %s\n", root->left->name);
-	//printf("		Right: %s\n", root->left->right->name);
+
 	printf("		Left: %s\n", root->left->left->name);
-	printf("	Right: %s\n", root->right->name);
+	printf("		Right: %s\n", root->left->right->name);
+
+	printf("			Left: %s\n", root->left->left->left->name);
 
 	exec(root);
 	close(STDIN_FILENO);
