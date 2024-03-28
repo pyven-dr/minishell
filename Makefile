@@ -24,6 +24,7 @@ SRC = exec.c \
 	  dup_fd.c \
 	  exec_simple_out.c \
 	  exec_double_out.c \
+	  random_name.c \
 
 BUILD_DIR = .build
 
