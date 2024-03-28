@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 16:31:20 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/03/27 23:44:01 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/03/28 00:23:22 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,12 @@ void	fill_pipe(t_parsing *pars)
 {
 	t_parenthes	*save;
 
+	if (pars->parenthes)
+	{
+		if (pars->tree->operand == AND || pars->tree->operand == OR)
+			pars->tree = pars->tree->right;
+		pars->parenthes = false;
+	}
 	save = pars->save;
 	while (save && save->next)
 		save = save->next;
@@ -61,8 +67,6 @@ void	fill_pipe(t_parsing *pars)
 		pars->tree->parent->left = pars->tree;
 	}
 	pars->tree = pars->tree->parent;
-	if (pars->parenthes)
-		pars->parenthes = false;
 }
 
 void	fill_operator(t_parsing *pars)

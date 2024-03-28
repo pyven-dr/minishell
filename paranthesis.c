@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 02:58:04 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/03/28 00:03:04 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/03/28 00:28:08 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ t_tree	*get_last_save(t_parsing *pars)
 		free(pars->save->next);
 		pars->save->next = NULL;
 	}
-	pars->save = head;
+	if (pars->save)
+		pars->save = head;
 	pars->parenthes = true;
 	return (p);
 }
