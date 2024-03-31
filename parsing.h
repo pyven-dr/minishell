@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:08:58 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/04/01 00:02:43 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/04/01 00:57:53 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,18 +50,18 @@ t_operand	is_operand(char **line);
 char		*strdup_to_next_operand(char **line);
 char		*strdup_to_next_space(char **line);
 void		insert_node(t_tree *node, t_operand operand, char *name);
-void    	save_parenthesis(t_parsing *pars);
+void		save_parenthesis(t_parsing *pars);
 t_tree		*get_last_save(t_parsing *pars);
 void		fill_tree(t_parsing *pars, char **line);
 void		fill_file(t_parsing *pars, char **line);
 void		fill_pipe(t_parsing *pars);
 void		fill_operator(t_parsing *pars);
 void		fill_cmd(t_parsing *pars, char **line);
+void		free_tree(t_tree **tree);
 
 #include <stdio.h>
 #include <unistd.h>
 void	print_node(t_tree *node);
 void	print_tree(t_tree *tree, int space);
-void	free_tree(t_tree **tree);
 
 #endif

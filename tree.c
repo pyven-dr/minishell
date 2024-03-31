@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:35:50 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/03/27 21:49:48 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/04/01 01:24:03 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,6 @@ t_tree	*new_node(t_tree *parent, t_operand operand, char *name)
 
 void	insert_node(t_tree *node, t_operand operand, char *name)
 {
-	// if (!node->parent)
-	// {
-	// 	node->parent = new_node(NULL, operand, name);
-	// }
 	if (node == node->parent->left)
 	{
 		node->parent->left = NULL;
@@ -57,32 +53,14 @@ void	fill_tree(t_parsing *pars, char **line)
 {
 	if (pars->operand == CMD)
 		fill_cmd(pars, line);
-	if (pars->operand == PIPE)
+	else if (pars->operand == PIPE)
 		fill_pipe(pars);
-	if (pars->operand == AND || pars->operand == OR)
+	else if (pars->operand == AND || pars->operand == OR)
 		fill_operator(pars);
-	if (pars->operand == SIMPLE_IN || pars->operand == DOUBLE_IN || \
-	pars->operand == SIMPLE_OUT || pars->operand == DOUBLE_OUT)
+	else	
 		fill_file(pars, line);
 }
-
-void	free_tree(t_tree **tree)
-{
-	if (!*tree)
-		;
-	else
-	{
-		free_tree(&(*tree)->right);
-		free_tree(&(*tree)->left);
-		if ((*tree)->operand == PIPE || \
-		(*tree)->operand == AND || (*tree)->operand == OR)
-			;
-		else
-			free((*tree)->name);
-		free(*tree);
-	}
-}
-
+//---------------PRINT TREE FUNCTIUN----------------//
 void	print_tree(t_tree *tree, int space)
 {
 	int	c;
@@ -96,12 +74,10 @@ void	print_tree(t_tree *tree, int space)
 	}
 	else
 	{
+		print_tree(tree->left, space + 5);
 		while (c-- > 0)
 			printf(" ");
 		print_node(tree);
-
-		print_tree(tree->left, space + 5);
-
 		print_tree(tree->right, space + 5);
 	}
 }
@@ -125,3 +101,4 @@ void	print_node(t_tree *node)
 	else if (node->operand == DOUBLE_OUT)
 		printf(">> : %s\n", node->name);
 }
+//---------------PRINT TREE FUNCTIUN----------------//

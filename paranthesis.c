@@ -6,13 +6,13 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 02:58:04 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/03/28 00:28:08 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/04/01 00:53:51 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-void    save_parenthesis(t_parsing *pars)
+void	save_parenthesis(t_parsing *pars)
 {
 	t_parenthes	*to_save;
 

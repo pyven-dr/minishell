@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:18:26 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/04/01 00:05:30 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/04/01 00:51:51 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,15 +70,13 @@ char	*strdup_to_next_operand(char **line)
 	char	*str;
 	int		i;
 	t_quote	scope;
-	
+
 	scope.s_quote = false;
 	scope.d_quote = false;
 	i = 0;
-	while ((*line)[i] && (!is_special((*line)[i]) || is_quoted(&scope, (*line)[i])))
-	{
+	while ((*line)[i] && (!is_special((*line)[i]) || \
+	is_quoted(&scope, (*line)[i])))
 		i++;
-	}
-	
 	str = malloc((i + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
@@ -98,17 +96,19 @@ char	*strdup_to_next_space(char **line)
 	char	*str;
 	int		i;
 	t_quote	scope;
-	
+
 	scope.s_quote = false;
 	scope.d_quote = false;
 	i = 0;
-	while ((*line)[i] && ((!is_whitespace((*line)[i]) && !is_special((*line)[i])) || is_quoted(&scope, (*line)[i])))
+	while ((*line)[i] && ((!is_whitespace((*line)[i]) && \
+	!is_special((*line)[i])) || is_quoted(&scope, (*line)[i])))
 		i++;
 	str = malloc((i + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
 	i = 0;
-	while (**line && ((!is_whitespace(**line) && !is_special(**line)) || is_quoted(&scope, **line)))
+	while (**line && ((!is_whitespace(**line) && \
+	!is_special(**line)) || is_quoted(&scope, **line)))
 	{
 		str[i] = **line;
 		(*line)++;

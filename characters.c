@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:26:56 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/03/26 16:16:20 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/04/01 00:50:40 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,11 @@ t_operand	is_operand(char **line)
 		return (CMD);
 }
 
-
 bool	is_special(char c)
 {
 	if (c == '&' || c == '|' || c == '<' || c == '>' \
-	|| c == '('  || c == ')' || c == '\'' || c == '"')
-		 return (true);
+	|| c == '(' || c == ')' || c == '\'' || c == '"')
+		return (true);
 	return (false);
 }
 
