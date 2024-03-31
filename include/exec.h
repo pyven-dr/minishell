@@ -47,5 +47,6 @@ int		exec_simple_out(t_tree *node);
 int		exec_double_out(t_tree *node);
 
 char	*random_name(void);
+char	*create_heredoc(char *delim);
 
 #endif

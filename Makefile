@@ -1,6 +1,6 @@
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -g3
 
 DFLAGS = -MD -MP
 
@@ -25,6 +25,7 @@ SRC = exec.c \
 	  exec_simple_out.c \
 	  exec_double_out.c \
 	  random_name.c \
+	  create_heredoc.c \
 
 BUILD_DIR = .build
 

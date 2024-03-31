@@ -19,8 +19,8 @@ static char	*replace_chars(char *name)
 	i = 0;
 	while (i < 20)
 	{
-		if (name[i] == '\\')
-			name[i] = 'a';
+		if (name[i] == '/' || name[i] == '\0')
+			name[i] += 40;
 		i++;
 	}
 	return (name);
@@ -34,7 +34,7 @@ char	*random_name(void)
 	fd_random = open("/dev/urandom", O_RDONLY);
 	if (fd_random == -1)
 		return (NULL);
-	name = malloc(sizeof(char) * 20);
+	name = malloc(sizeof(char) * 21);
 	if (name == NULL)
 	{
 		close(fd_random);
@@ -46,5 +46,7 @@ char	*random_name(void)
 		close(fd_random);
 		return (NULL);
 	}
+	name[20] = '\0';
+	close(fd_random);
 	return (replace_chars(name));
 }
