@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:08:58 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/03/27 23:45:10 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/04/01 00:02:43 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct s_parsing
 	t_tree		*tree;
 	t_operand	operand;
 	t_parenthes	*save;
-	bool		parenthes;
+	int			parenthes;
 }	t_parsing;
 
 t_tree		*parse(char *line);

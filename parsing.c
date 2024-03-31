@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:18:26 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/03/28 00:14:39 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/04/01 00:05:30 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_tree	*parse(char *line)
 
 	pars.save = NULL;
 	pars.tree = NULL;
-	pars.parenthes = false;
+	pars.parenthes = 0;
 	head = line;
 	if (!line)
 		return (NULL);
@@ -36,10 +36,16 @@ t_tree	*parse(char *line)
 			{
 				saved_node = get_last_save(&pars);
 				if (saved_node)
+				{
 					pars.tree = saved_node;
+					pars.parenthes = 1;
+				}
 				else
+				{
 					while (pars.tree->parent)
 						pars.tree = pars.tree->parent;
+					pars.parenthes = 2;
+				}
 			}
 			line++;
 		}

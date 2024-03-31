@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 16:31:20 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/03/28 00:23:22 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/04/01 00:07:29 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,19 @@ void	fill_file(t_parsing *pars, char **line)
 		pars->tree->left = new_node(pars->tree, pars->operand, strdup_to_next_space(line));
 		pars->tree = pars->tree->left;
 	}
-	else if (!pars->tree->parent)
+	else if ((!pars->tree->parent && pars->parenthes != 1) || pars->parenthes == 2)
 	{
 		pars->tree->parent = new_node(NULL, pars->operand, strdup_to_next_space(line));
 		pars->tree->parent->left = pars->tree;
 	}
 	else
-		insert_node(pars->tree, pars->operand, strdup_to_next_space(line));
-	if (pars->parenthes)
 	{
-		pars->parenthes = false;
-		pars->tree = pars->tree->parent;
+		if (pars->parenthes)
+		{
+			pars->tree = pars->tree->right;
+			pars->parenthes = 0;
+		}
+		insert_node(pars->tree, pars->operand, strdup_to_next_space(line));
 	}
 }
 
@@ -51,7 +53,7 @@ void	fill_pipe(t_parsing *pars)
 	{
 		if (pars->tree->operand == AND || pars->tree->operand == OR)
 			pars->tree = pars->tree->right;
-		pars->parenthes = false;
+		pars->parenthes = 0;
 	}
 	save = pars->save;
 	while (save && save->next)
@@ -87,7 +89,7 @@ void	fill_operator(t_parsing *pars)
 	}
 	pars->tree = pars->tree->parent;
 	if (pars->parenthes)
-		pars->parenthes = false;
+		pars->parenthes = 0;
 }
 
 void	fill_cmd(t_parsing *pars, char **line)
