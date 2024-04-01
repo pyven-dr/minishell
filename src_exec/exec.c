@@ -40,6 +40,8 @@ int	exec(t_tree *node)
 		return (exec_simple_out(node));
 	else if (node->operand == DOUBLE_OUT)
 		return (exec_double_out(node));
+	else if (node->operand == DOUBLE_IN)
+		return (exec_double_in(node));
 	return (0);
 }
 
@@ -47,7 +49,7 @@ int main(void)
 {
 	t_tree *root = (t_tree *)malloc(sizeof(t_tree));
 	root->name = "out1";
-	root->operand = SIMPLE_OUT;
+	root->operand = DOUBLE_IN;
 	root->parent = NULL;
 	root->left = NULL;
 	root->right = NULL;
@@ -59,12 +61,11 @@ int main(void)
 	leftChild->left = NULL;
 	leftChild->right = NULL;
 
-
 	// Assignation des enfants à la racine
 	root->left = leftChild;
 
 		t_tree *rightChild = (t_tree *)malloc(sizeof(t_tree));
-	rightChild->name = "echo cmd1";
+	rightChild->name = "cat";
 	rightChild->operand = CMD;
 	rightChild->parent = leftChild;
 	rightChild->left = NULL;
@@ -72,7 +73,7 @@ int main(void)
 
 	t_tree *leftChild2 = (t_tree *)malloc(sizeof(t_tree));
 	leftChild2->name = "out2";
-	leftChild2->operand = SIMPLE_OUT;
+	leftChild2->operand = DOUBLE_IN;
 	leftChild2->parent = leftChild;
 	leftChild2->left = NULL;
 	leftChild2->right = NULL;
@@ -81,7 +82,7 @@ int main(void)
 	root->left->right = rightChild;
 
 	t_tree *rightChild3 = (t_tree *)malloc(sizeof(t_tree));
-	rightChild3->name = "echo cmd2";
+	rightChild3->name = "cat";
 	rightChild3->operand = CMD;
 	rightChild3->parent = leftChild2;
 	rightChild3->left = NULL;
@@ -89,10 +90,9 @@ int main(void)
 
 	root->left->left->left = rightChild3;
 
-	// Affichage de la structure de l'arbre
-	int fd_test = open(random_name(), O_CREAT | O_WRONLY, 0777);
-	write(fd_test, "salut\n",6);
-	close(fd_test);
+	//char *file = create_heredoc("end\n");
+	//unlink(file);
+	//free(file);
 
 	printf("Root: %s\n", root->name);
 
@@ -103,16 +103,20 @@ int main(void)
 
 	printf("			Left: %s\n", root->left->left->left->name);
 
+	printf("%d\n",make_all_heredocs(root));
 	exec(root);
+
 	close(STDIN_FILENO);
 	close(STDOUT_FILENO);
 	//wait(NULL);
 	// Libération de la mémoire
+	free(root->name);
+	free(leftChild2->name);
 	free(root);
 	free(leftChild);
 	free(rightChild);
 	free(leftChild2);
-	//free(rightChild3);
+	free(rightChild3);
 
 	return 0;
 }
