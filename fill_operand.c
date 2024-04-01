@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 16:31:20 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/04/01 00:07:29 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/04/01 02:58:35 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,31 @@ char	*join_cmd(char *s1, char *s2);
 void	fill_file(t_parsing *pars, char **line)
 {
 	if (!pars->tree)
+	{
 		pars->tree = new_node(NULL, pars->operand, strdup_to_next_space(line));
+		if (!pars->tree)
+			clean_exit(pars, line, 1);
+	}
 	else if ((pars->tree->operand == AND || pars->tree->operand == OR \
 	|| pars->tree->operand == PIPE) && !pars->parenthes)
 	{
 		pars->tree->right = new_node(pars->tree, pars->operand, strdup_to_next_space(line));
+		if (!pars->tree->right)
+			clean_exit(pars, line, 1);
 		pars->tree = pars->tree->right;
 	}
 	else if (pars->tree->operand != CMD && !pars->parenthes)
 	{
 		pars->tree->left = new_node(pars->tree, pars->operand, strdup_to_next_space(line));
+		if (!pars->tree->left)
+			clean_exit(pars, line, 1);
 		pars->tree = pars->tree->left;
 	}
 	else if ((!pars->tree->parent && pars->parenthes != 1) || pars->parenthes == 2)
 	{
 		pars->tree->parent = new_node(NULL, pars->operand, strdup_to_next_space(line));
+		if (!pars->tree->parent)
+			clean_exit(pars, line, 1);
 		pars->tree->parent->left = pars->tree;
 	}
 	else
@@ -41,11 +51,11 @@ void	fill_file(t_parsing *pars, char **line)
 			pars->tree = pars->tree->right;
 			pars->parenthes = 0;
 		}
-		insert_node(pars->tree, pars->operand, strdup_to_next_space(line));
+		insert_node(pars->tree, pars->operand, line, pars);
 	}
 }
 
-void	fill_pipe(t_parsing *pars)
+void	fill_pipe(t_parsing *pars, char **line)
 {
 	t_parenthes	*save;
 
@@ -62,16 +72,18 @@ void	fill_pipe(t_parsing *pars)
 	&& pars->tree->parent->operand != AND && pars->tree->parent->operand != OR)
 		pars->tree = pars->tree->parent;
 	if (pars->tree->parent)
-		insert_node(pars->tree, pars->operand, NULL);
+		insert_node(pars->tree, pars->operand, line, pars);
 	else
 	{
 		pars->tree->parent = new_node(NULL, pars->operand, NULL);
+		if (!pars->tree->parent)
+			clean_exit(pars, line, 1);
 		pars->tree->parent->left = pars->tree;
 	}
 	pars->tree = pars->tree->parent;
 }
 
-void	fill_operator(t_parsing *pars)
+void	fill_operator(t_parsing *pars, char **line)
 {
 	t_parenthes	*save;
 
@@ -81,10 +93,12 @@ void	fill_operator(t_parsing *pars)
 	while ((!save || save->p != pars->tree->parent) && pars->tree->parent)
 		pars->tree = pars->tree->parent;
 	if (pars->tree->parent)
-		insert_node(pars->tree, pars->operand, NULL);
+		insert_node(pars->tree, pars->operand, line, pars);
 	else
 	{
 		pars->tree->parent = new_node(NULL, pars->operand, NULL);
+		if (!pars->tree->parent)
+			clean_exit(pars, line, 1);
 		pars->tree->parent->left = pars->tree;
 	}
 	pars->tree = pars->tree->parent;
@@ -95,20 +109,30 @@ void	fill_operator(t_parsing *pars)
 void	fill_cmd(t_parsing *pars, char **line)
 {
 	if (!pars->tree)
+	{
 		pars->tree = new_node(NULL, pars->operand, strdup_to_next_operand(line));
+		if (!pars->tree)
+			clean_exit(pars, line, 1);
+	}
 	else if (pars->tree->operand == AND || pars->tree->operand == OR \
 	|| pars->tree->operand == PIPE)
 	{
 		pars->tree->right = new_node(pars->tree, pars->operand, strdup_to_next_operand(line));
+		if (!pars->tree->right)
+			clean_exit(pars, line, 1);
 		pars->tree = pars->tree->right;
 	}
 	else if (pars->tree->operand == CMD)
 	{
 		pars->tree->name = join_cmd(pars->tree->name, strdup_to_next_operand(line));
+		if (!pars->tree->name)
+			clean_exit(pars, line, 1);
 	}
 	else if (!pars->tree->left)
 	{
 		pars->tree->left = new_node(pars->tree, pars->operand, strdup_to_next_operand(line));
+		if (!pars->tree->left)
+			clean_exit(pars, line, 1);
 		pars->tree = pars->tree->left;
 	}
 	else

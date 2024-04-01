@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:35:50 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/04/01 01:24:03 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/04/01 03:06:49 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,34 +16,43 @@ t_tree	*new_node(t_tree *parent, t_operand operand, char *name)
 {
 	t_tree	*node;
 
+	if ((operand == CMD || operand == SIMPLE_IN || operand == SIMPLE_OUT || \
+	operand == DOUBLE_IN || operand == DOUBLE_OUT) && !name)
+		return (NULL);
 	node = malloc(sizeof(t_tree));
 	if (!node)
 		return (NULL);
+	node->name = name;
 	node->parent = parent;
 	node->right = NULL;
 	node->left = NULL;
-	node->name = name;
 	node->operand = operand;
 	return (node);
 }
 
-void	insert_node(t_tree *node, t_operand operand, char *name)
+void	insert_node(t_tree *node, t_operand operand, char **line, t_parsing *pars)
 {
 	if (node == node->parent->left)
 	{
 		node->parent->left = NULL;
-		node->parent->left = new_node(node->parent, operand, name);
+		if (operand == AND || operand == OR || operand == PIPE)
+			node->parent->left = new_node(node->parent, operand, NULL);
+		else
+			node->parent->left = new_node(node->parent, operand, strdup_to_next_space(line));
 		if (!node->parent->left)
-			exit(44);
+			clean_exit(pars, line, 1);
 		node->parent->left->left = node;
 		node->parent = node->parent->left;
 	}
 	else if (node == node->parent->right)
 	{
 		node->parent->right = NULL;
-		node->parent->right = new_node(node->parent, operand, name);
+		if (operand == AND || operand == OR || operand == PIPE)
+			node->parent->right = new_node(node->parent, operand, NULL);
+		else
+			node->parent->right = new_node(node->parent, operand, strdup_to_next_space(line));
 		if (!node->parent->right)
-			exit(44);
+			clean_exit(pars, line, 1);
 		node->parent->right->left = node;
 		node->parent = node->parent->right;
 	}
@@ -54,9 +63,9 @@ void	fill_tree(t_parsing *pars, char **line)
 	if (pars->operand == CMD)
 		fill_cmd(pars, line);
 	else if (pars->operand == PIPE)
-		fill_pipe(pars);
+		fill_pipe(pars, line);
 	else if (pars->operand == AND || pars->operand == OR)
-		fill_operator(pars);
+		fill_operator(pars, line);
 	else	
 		fill_file(pars, line);
 }

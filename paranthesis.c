@@ -6,13 +6,13 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 02:58:04 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/04/01 00:53:51 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/04/01 02:28:39 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-void	save_parenthesis(t_parsing *pars)
+void	save_parenthesis(t_parsing *pars, char **line)
 {
 	t_parenthes	*to_save;
 
@@ -20,9 +20,7 @@ void	save_parenthesis(t_parsing *pars)
 		pars->save = pars->save->next;
 	to_save = malloc(sizeof(t_parenthes));
 	if (!to_save)
-	{
-		exit(00000);
-	}
+		clean_exit(pars, line, 1);
 	to_save->next = NULL;
 	to_save->p = pars->tree;
 	if (!pars->save)
