@@ -10,23 +10,32 @@ IFLAGS = \
 		 -I $(INCLUDE_DIR) \
 		 -I $(LIBFT_DIR)/$(INCLUDE_DIR)
 
-SRC = exec.c \
+FIND_CMD_SRC = check_absolute_path.c \
+			   find_command.c \
+			   get_cmd_path.c
+
+HEREDOCS_SRC = create_heredoc.c \
+			   make_all_heredocs.c \
+			   random_name.c
+
+OPERATOR_SRC = exec_and.c \
+	  		   exec_or.c \
+	  		   exec_pipe.c
+
+REDIR_SRC = exec_simple_out.c \
+	  	    exec_double_out.c \
+	  	    exec_double_in.c \
+	  	    exec_simple_in.c
+
+SRC = $(addprefix find_command/, $(FIND_CMD_SRC)) \
+	  $(addprefix heredocs/, $(HEREDOCS_SRC)) \
+	  $(addprefix operators/, $(OPERATOR_SRC)) \
+	  $(addprefix redirections/, $(REDIR_SRC)) \
+	  exec.c \
 	  exec_cmd.c \
 	  free_cmd.c \
-	  find_command.c \
-	  get_cmd_path.c \
-	  check_absolute_path.c \
-	  exec_and.c \
-	  exec_or.c \
 	  check_id.c \
-	  exec_pipe.c \
-	  exec_simple_in.c \
 	  dup_fd.c \
-	  exec_simple_out.c \
-	  exec_double_out.c \
-	  random_name.c \
-	  create_heredoc.c \
-	  make_all_heredocs.c \
 
 BUILD_DIR = .build
 
@@ -53,7 +62,7 @@ $(NAME): $(OBJ) $(LIBFT_DIR)/$(LIBFT)
 -include $(DEP)
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c $(LIBFT_DIR)/$(LIBFT)
-	mkdir -p .build
+	mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(DFLAGS) $(IFLAGS) -c $< -o $@
 
 $(LIBFT_DIR)/$(LIBFT): FORCE
