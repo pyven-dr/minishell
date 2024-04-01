@@ -24,7 +24,7 @@ static int	check_error(char *name, int fd)
 	return (0);
 }
 
-int	write_file(int fd, char *name, char *delim)
+static int	write_file(int fd, char *name, char *delim)
 {
 	char	*line;
 

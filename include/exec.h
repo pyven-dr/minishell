@@ -46,7 +46,10 @@ int		exec_simple_in(t_tree *node);
 int		exec_simple_out(t_tree *node);
 int		exec_double_out(t_tree *node);
 
+// Heredocs //
+
 char	*random_name(void);
 char	*create_heredoc(char *delim);
+int		make_all_heredocs(t_tree *node);
 
 #endif

@@ -26,6 +26,7 @@ SRC = exec.c \
 	  exec_double_out.c \
 	  random_name.c \
 	  create_heredoc.c \
+	  make_all_heredocs.c \
 
 BUILD_DIR = .build
 
