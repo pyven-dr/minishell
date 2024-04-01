@@ -6,11 +6,12 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 00:58:12 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/04/01 02:35:41 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/04/01 03:15:33 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+#include "error.h"
 
 void	free_tree(t_tree **tree)
 {
@@ -47,5 +48,7 @@ void    clean_exit(t_parsing *pars, char **line, int exit_code)
     free_tree(&pars->tree);
     *line = pars->head_line;
     free(*line);
+    if (exit_code == 1)
+        write(2, ERR_MALLOC, 25);
     exit(exit_code);
 }

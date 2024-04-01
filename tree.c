@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:35:50 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/04/01 03:06:49 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/04/01 03:12:36 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,11 @@ t_tree	*new_node(t_tree *parent, t_operand operand, char *name)
 		return (NULL);
 	node = malloc(sizeof(t_tree));
 	if (!node)
+	{
+		if (name)
+			free(name);
 		return (NULL);
+	}
 	node->name = name;
 	node->parent = parent;
 	node->right = NULL;
