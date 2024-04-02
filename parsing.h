@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:08:58 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/04/02 01:31:31 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/04/02 18:30:04 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ typedef struct s_parsing
 
 t_tree		*parse(char *line);
 t_tree		*new_node(t_tree *parent, t_operand operand, char *name);
-void		insert_node(t_tree *node, t_operand operand, char **line, t_parsing *pars);
+void		insert_node(t_tree *node, t_operand operand, char \
+**line, t_parsing *pars);
 bool		is_whitespace(char c);
 bool		is_special(char c);
 bool		is_quoted(t_quote *scope, char c);
@@ -58,7 +59,7 @@ void		fill_pipe(t_parsing *pars, char **line);
 void		fill_operator(t_parsing *pars, char **line);
 void		fill_cmd(t_parsing *pars, char **line);
 void		free_tree(t_tree **tree);
-void    	clean_exit(t_parsing *pars, char **line, int exit_code);
+void		clean_exit(t_parsing *pars, char **line, int exit_code);
 
 #include <stdio.h>
 #include <unistd.h>

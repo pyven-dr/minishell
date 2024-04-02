@@ -6,64 +6,11 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 16:31:20 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/04/02 01:30:58 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/04/02 18:38:47 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-
-char	*join_cmd(char *s1, char *s2);
-
-void	fill_file(t_parsing *pars, char **line)
-{
-	if (!pars->tree)
-	{
-		pars->tree = new_node(NULL, pars->operand, strdup_to_next_space(line, pars));
-		if (!pars->tree)
-			clean_exit(pars, line, 1);
-		if (!*pars->tree->name)
-			clean_exit(pars, line, 2);
-	}
-	else if ((pars->tree->operand == AND || pars->tree->operand == OR \
-	|| pars->tree->operand == PIPE) && !pars->parenthes)
-	{
-		pars->tree->right = new_node(pars->tree, pars->operand, strdup_to_next_space(line, pars));
-		if (!pars->tree->right)
-			clean_exit(pars, line, 1);
-		pars->tree = pars->tree->right;
-		if (!*pars->tree->name)
-			clean_exit(pars, line, 2);
-	}
-	else if (pars->tree->operand != CMD && !pars->parenthes)
-	{
-		pars->tree->left = new_node(pars->tree, pars->operand, strdup_to_next_space(line, pars));
-		if (!pars->tree->left)
-			clean_exit(pars, line, 1);
-		pars->tree = pars->tree->left;
-		if (!*pars->tree->name)
-			clean_exit(pars, line, 2);
-	}
-	else if ((!pars->tree->parent && pars->parenthes != 1) || pars->parenthes == 2)
-	{
-		pars->tree->parent = new_node(NULL, pars->operand, strdup_to_next_space(line, pars));
-		if (!pars->tree->parent)
-			clean_exit(pars, line, 1);
-		pars->tree->parent->left = pars->tree;
-		if (!*pars->tree->parent->name)
-			clean_exit(pars, line, 2);
-	}
-	else
-	{
-		if (pars->parenthes)
-		{
-			pars->tree = pars->tree->right;
-			pars->parenthes = 0;
-		}
-		insert_node(pars->tree, pars->operand, line, pars);
-		if (!*pars->tree->parent->name)
-			clean_exit(pars, line, 2);
-	}
-}
 
 void	fill_pipe(t_parsing *pars, char **line)
 {
@@ -90,7 +37,7 @@ void	fill_pipe(t_parsing *pars, char **line)
 		pars->tree->parent->left = pars->tree;
 	}
 	if (!pars->tree->parent)
-			clean_exit(pars, line, 1);
+		clean_exit(pars, line, 1);
 	pars->tree = pars->tree->parent;
 }
 
@@ -118,73 +65,4 @@ void	fill_operator(t_parsing *pars, char **line)
 	pars->tree = pars->tree->parent;
 	if (pars->parenthes)
 		pars->parenthes = 0;
-}
-
-void	fill_cmd(t_parsing *pars, char **line)
-{
-	char	*name;
-
-	name = strdup_to_next_operand(line, pars);
-	if (!name)
-		clean_exit(pars, line, 1);
-	else if (!*name)
-		clean_exit(pars, line, 2);
-	if (!pars->tree)
-	{
-		pars->tree = new_node(NULL, pars->operand, name);
-		if (!pars->tree)
-			clean_exit(pars, line, 1);
-	}
-	else if (pars->tree->operand == AND || pars->tree->operand == OR \
-	|| pars->tree->operand == PIPE)
-	{
-		pars->tree->right = new_node(pars->tree, pars->operand, name);
-		if (!pars->tree->right)
-			clean_exit(pars, line, 1);
-		pars->tree = pars->tree->right;
-	}
-	else if (pars->tree->operand == CMD)
-	{
-		pars->tree->name = join_cmd(pars->tree->name, name);
-		if (!pars->tree->name)
-			clean_exit(pars, line, 1);
-	}
-	else if (!pars->tree->left)
-	{
-		pars->tree->left = new_node(pars->tree, pars->operand, name);
-		if (!pars->tree->left)
-			clean_exit(pars, line, 1);
-		pars->tree = pars->tree->left;
-	}
-	else
-		printf("WTF\n");
-}
-
-char	*join_cmd(char *s1, char *s2)
-{
-	char	*str;
-	int		i;
-	int		j;
-
-	i = 0;
-	while (s1[i])
-		i++;
-	j = 0;
-	while (s2[j])
-		j++;
-	str = malloc((i + j + 2) * sizeof(char));
-	if (!str)
-		return (NULL);
-	i = -1;
-	while (s1[++i])
-		str[i] = s1[i];
-	str[i] = ' ';
-	i++;
-	j = -1;
-	while (s2[++j])
-		str[i + j] = s2[j];
-	str[i + j] = '\0';
-	free(s1);
-	free(s2);
-	return (str);
 }
