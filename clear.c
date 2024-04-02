@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 00:58:12 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/04/01 03:15:33 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/04/02 02:03:24 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,28 +27,38 @@ void	free_tree(t_tree **tree)
 		else
 			free((*tree)->name);
 		free(*tree);
-        *tree = NULL;
+		*tree = NULL;
 	}
 }
 
-void    free_save(t_parenthes **save)
+void	free_save(t_parenthes **save)
 {
-    if (!*save)
-        ;
-    else
-    {
-        free_save(&(*save)->next);
-        free(*save);
-    }
+	if (!*save)
+		;
+	else
+	{
+		free_save(&(*save)->next);
+		free(*save);
+	}
 }
 
-void    clean_exit(t_parsing *pars, char **line, int exit_code)
+void	clean_exit(t_parsing *pars, char **line, int exit_code)
 {
-    free_save(&pars->save);
-    free_tree(&pars->tree);
-    *line = pars->head_line;
-    free(*line);
-    if (exit_code == 1)
-        write(2, ERR_MALLOC, 25);
-    exit(exit_code);
+	if (pars->tree)
+		while (pars->tree->parent)
+			pars->tree = pars->tree->parent;
+	free_save(&pars->save);
+	free_tree(&pars->tree);
+	*line = pars->head_line;
+	free(*line);
+	if (exit_code == 1)
+		write(2, ERR_MALLOC, 25);
+	else if (exit_code == 2)
+		write(2, ERR_SYNTHAX, 26);
+	else if (exit_code == 3)
+	{
+		write(2, ERR_UNCLOSED, 42);
+		exit_code = 2;
+	}
+	exit(exit_code);
 }

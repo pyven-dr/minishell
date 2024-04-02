@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 02:58:04 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/04/01 03:16:37 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/04/02 01:08:28 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	save_parenthesis(t_parsing *pars, char **line)
 {
 	t_parenthes	*to_save;
 
+	if (pars->tree && pars->tree->operand != AND && pars->tree->operand != OR && pars->tree->operand != PIPE)
+		clean_exit(pars, line, 2);
 	while (pars->save && pars->save->next)
 		pars->save = pars->save->next;
 	to_save = malloc(sizeof(t_parenthes));

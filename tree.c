@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:35:50 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/04/01 03:12:36 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/04/02 01:31:13 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	insert_node(t_tree *node, t_operand operand, char **line, t_parsing *pars)
 		if (operand == AND || operand == OR || operand == PIPE)
 			node->parent->left = new_node(node->parent, operand, NULL);
 		else
-			node->parent->left = new_node(node->parent, operand, strdup_to_next_space(line));
+			node->parent->left = new_node(node->parent, operand, strdup_to_next_space(line, pars));
 		if (!node->parent->left)
 			clean_exit(pars, line, 1);
 		node->parent->left->left = node;
@@ -54,7 +54,7 @@ void	insert_node(t_tree *node, t_operand operand, char **line, t_parsing *pars)
 		if (operand == AND || operand == OR || operand == PIPE)
 			node->parent->right = new_node(node->parent, operand, NULL);
 		else
-			node->parent->right = new_node(node->parent, operand, strdup_to_next_space(line));
+			node->parent->right = new_node(node->parent, operand, strdup_to_next_space(line, pars));
 		if (!node->parent->right)
 			clean_exit(pars, line, 1);
 		node->parent->right->left = node;

@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:18:26 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/04/01 02:28:51 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/04/02 02:02:48 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@ t_tree	*parse(char *line)
 				save_parenthesis(&pars, &line);
 			else
 			{
+				if (!pars.save || !pars.tree || ((pars.tree->operand == AND \
+				|| pars.tree->operand == OR || pars.tree->operand == PIPE) && \
+				!pars.tree->right))
+					clean_exit(&pars, &line, 2);
 				saved_node = get_last_save(&pars);
 				if (saved_node)
 				{
@@ -56,6 +60,11 @@ t_tree	*parse(char *line)
 			fill_tree(&pars, &line);
 		}
 	}
+	if (pars.save)
+		clean_exit(&pars, &line, 3);
+	if (pars.tree && ((pars.tree->operand == AND || pars.tree->operand == OR \
+	|| pars.tree->operand == PIPE) && !pars.tree->right))
+		clean_exit(&pars, &line, 2);
 	line = pars.head_line;
 	free(line);
 	if (pars.tree)
@@ -64,7 +73,7 @@ t_tree	*parse(char *line)
 	return (pars.tree);
 }
 
-char	*strdup_to_next_operand(char **line)
+char	*strdup_to_next_operand(char **line, t_parsing *pars)
 {
 	char	*str;
 	int		i;
@@ -76,6 +85,8 @@ char	*strdup_to_next_operand(char **line)
 	while ((*line)[i] && (!is_special((*line)[i]) || \
 	is_quoted(&scope, (*line)[i])))
 		i++;
+	if (scope.s_quote || scope.d_quote)
+		clean_exit(pars, line, 3);
 	str = malloc((i + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
@@ -90,7 +101,7 @@ char	*strdup_to_next_operand(char **line)
 	return (str);
 }
 
-char	*strdup_to_next_space(char **line)
+char	*strdup_to_next_space(char **line, t_parsing *pars)
 {
 	char	*str;
 	int		i;
@@ -102,6 +113,8 @@ char	*strdup_to_next_space(char **line)
 	while ((*line)[i] && ((!is_whitespace((*line)[i]) && \
 	!is_special((*line)[i])) || is_quoted(&scope, (*line)[i])))
 		i++;
+	if (scope.s_quote || scope.d_quote)
+		clean_exit(pars, line, 3);
 	str = malloc((i + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
