@@ -12,13 +12,13 @@
 
 #include "exec.h"
 
-int	exec_and(t_tree *node)
+int	exec_and(t_tree *node, t_utils *utils)
 {
 	pid_t	id;
 
-	id = exec(node->left);
+	id = exec(node->left, utils);
 	if (check_id(id) != 0)
 		return (id);
-	id = exec(node->right);
+	id = exec(node->right, utils);
 	return (check_id(id));
 }

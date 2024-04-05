@@ -12,7 +12,7 @@
 
 #include "exec.h"
 
-int	exec_double_out(t_tree *node)
+int	exec_double_out(t_tree *node, t_utils *utils)
 {
 	int	oldfd;
 	int	newfd;
@@ -33,7 +33,7 @@ int	exec_double_out(t_tree *node)
 	}
 	if (dup_fd(newfd, STDOUT_FILENO) == -1)
 		return (-1);
-	exec_val = exec(node->left);
+	exec_val = exec(node->left, utils);
 	if (dup_fd(oldfd, STDOUT_FILENO) == -1)
 		return (-1);
 	return (exec_val);

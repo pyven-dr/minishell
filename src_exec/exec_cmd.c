@@ -12,7 +12,7 @@
 
 #include "exec.h"
 
-int	exec_cmd(char **cmd)
+int	exec_cmd(char **cmd, t_utils *utils)
 {
 	pid_t	id;
 
