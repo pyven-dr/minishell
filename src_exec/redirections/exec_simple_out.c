@@ -24,14 +24,12 @@ int	exec_simple_out(t_tree *node, t_utils *utils)
 		perror("Redirect in error");
 		return (-1);
 	}
-	oldfd = dup(STDOUT_FILENO);
+	oldfd = dup_oldfd(utils);
 	if (oldfd == -1)
 	{
-		perror("Dup error");
 		close(newfd);
 		return (-1);
 	}
-	add_vector(utils->fds_vector, &oldfd);
 	if (dup_fd(newfd, STDOUT_FILENO) == -1)
 		return (-1);
 	exec_val = exec(node->left, utils);

@@ -108,6 +108,13 @@ int main(void)
 	t_utils utils;
 
 	utils.fds_vector = new_vector(10, sizeof(int));
+	if (utils.fds_vector == NULL)
+	{
+		free_tree(root);
+		close(STDIN_FILENO);
+		close(STDOUT_FILENO);
+		return (1);
+	}
 	make_all_heredocs(root);
 	exec(root, &utils);
 	del_vector(utils.fds_vector);
@@ -118,5 +125,5 @@ int main(void)
 	// Libération de la mémoire
 	free_tree(root);
 
-	return 0;
+	return (0);
 }
