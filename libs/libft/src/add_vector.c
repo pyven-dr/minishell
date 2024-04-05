@@ -38,5 +38,5 @@ int	add_vector(t_vector *vector, void *elem)
 	}
 	ft_memcpy(vector->elements + vector->size * vector->elem_size, \
 		elem, vector->elem_size);
-	return (vector->size++, free(elem), 0);
+	return (vector->size++, 0);
 }
