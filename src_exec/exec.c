@@ -12,7 +12,7 @@
 
 #include "exec.h"
 
-int	exec(t_tree *node)
+int	exec(t_tree *node, t_utils *utils)
 {
 	char	**split_cmd;
 
@@ -26,22 +26,22 @@ int	exec(t_tree *node)
 			free(split_cmd);
 			return (-127);
 		}
-		return (exec_cmd(split_cmd));
+		return (exec_cmd(split_cmd, utils));
 	}
 	else if (node->operand == AND)
-		return (exec_and(node));
+		return (exec_and(node, utils));
 	else if (node->operand == OR)
-		return (exec_or(node));
+		return (exec_or(node, utils));
 	else if (node->operand == PIPE)
-		return (exec_pipe(node));
+		return (exec_pipe(node, utils));
 	else if (node->operand == SIMPLE_IN)
-		return (exec_simple_in(node));
+		return (exec_simple_in(node, utils));
 	else if (node->operand == SIMPLE_OUT)
-		return (exec_simple_out(node));
+		return (exec_simple_out(node, utils));
 	else if (node->operand == DOUBLE_OUT)
-		return (exec_double_out(node));
+		return (exec_double_out(node, utils));
 	else if (node->operand == DOUBLE_IN)
-		return (exec_double_in(node));
+		return (exec_double_in(node, utils));
 	return (0);
 }
 
@@ -49,7 +49,7 @@ int main(void)
 {
 	t_tree *root = (t_tree *)malloc(sizeof(t_tree));
 	root->name = "out1";
-	root->operand = DOUBLE_IN;
+	root->operand = SIMPLE_OUT;
 	root->parent = NULL;
 	root->left = NULL;
 	root->right = NULL;
@@ -64,8 +64,8 @@ int main(void)
 	// Assignation des enfants à la racine
 	root->left = leftChild;
 
-		t_tree *rightChild = (t_tree *)malloc(sizeof(t_tree));
-	rightChild->name = "cat";
+	t_tree *rightChild = (t_tree *)malloc(sizeof(t_tree));
+	rightChild->name = "echo test1";
 	rightChild->operand = CMD;
 	rightChild->parent = leftChild;
 	rightChild->left = NULL;
@@ -73,7 +73,7 @@ int main(void)
 
 	t_tree *leftChild2 = (t_tree *)malloc(sizeof(t_tree));
 	leftChild2->name = "out2";
-	leftChild2->operand = DOUBLE_IN;
+	leftChild2->operand = SIMPLE_OUT;
 	leftChild2->parent = leftChild;
 	leftChild2->left = NULL;
 	leftChild2->right = NULL;
@@ -82,7 +82,7 @@ int main(void)
 	root->left->right = rightChild;
 
 	t_tree *rightChild3 = (t_tree *)malloc(sizeof(t_tree));
-	rightChild3->name = "cat";
+	rightChild3->name = "echo test2";
 	rightChild3->operand = CMD;
 	rightChild3->parent = leftChild2;
 	rightChild3->left = NULL;
@@ -103,15 +103,18 @@ int main(void)
 
 	printf("			Left: %s\n", root->left->left->left->name);
 
-	printf("%d\n",make_all_heredocs(root));
+	//EXEC
+
+	t_utils utils;
+
+	utils.fds_vector = new_vector(10, int);
+	make_all_heredocs(root);
 	exec(root);
 
 	close(STDIN_FILENO);
 	close(STDOUT_FILENO);
-	//wait(NULL);
+
 	// Libération de la mémoire
-	free(root->name);
-	free(leftChild2->name);
 	free(root);
 	free(leftChild);
 	free(rightChild);
