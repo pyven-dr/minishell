@@ -27,10 +27,15 @@ REDIR_SRC = exec_simple_out.c \
 	  	    exec_double_in.c \
 	  	    exec_simple_in.c
 
+PIPES_SRC = create_pipe.c \
+			redirect_fd.c \
+			exec_node_pipe.c
+
 SRC = $(addprefix find_command/, $(FIND_CMD_SRC)) \
 	  $(addprefix heredocs/, $(HEREDOCS_SRC)) \
 	  $(addprefix operators/, $(OPERATOR_SRC)) \
 	  $(addprefix redirections/, $(REDIR_SRC)) \
+	  $(addprefix pipes/, $(PIPES_SRC)) \
 	  exec.c \
 	  exec_cmd.c \
 	  free_cmd.c \

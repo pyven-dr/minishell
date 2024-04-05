@@ -22,9 +22,15 @@
 # include <sys/wait.h>
 # include <fcntl.h>
 
-int		exec(t_tree *node);
+typedef struct s_utils
+{
+	t_vector	*fds_vector;
+	char		**env;
+}				t_utils;
+
+int		exec(t_tree *node, t_utils *utils);
 void	free_cmd(char **cmd);
-int		exec_cmd(char **cmd);
+int		exec_cmd(char **cmd, t_utils *utils);
 int		check_id(int id);
 int		dup_fd(int fd1, int fd2);
 
@@ -36,16 +42,22 @@ char	*get_cmd_path(char *command);
 
 // Operators //
 
-int		exec_pipe(t_tree *node);
-int		exec_and(t_tree *node);
-int		exec_or(t_tree *node);
+int		exec_pipe(t_tree *node, t_utils *utils);
+int		exec_and(t_tree *node, t_utils *utils);
+int		exec_or(t_tree *node, t_utils *utils);
 
 // Redirections //
 
-int		exec_simple_in(t_tree *node);
-int		exec_simple_out(t_tree *node);
-int		exec_double_out(t_tree *node);
-int		exec_double_in(t_tree *node);
+int		exec_simple_in(t_tree *node, t_utils *utils);
+int		exec_simple_out(t_tree *node, t_utils *utils);
+int		exec_double_out(t_tree *node, t_utils *utils);
+int		exec_double_in(t_tree *node, t_utils *utils);
+
+// Pipes //
+
+int	*create_pipe(int pipe_fd[2]);
+int	redirect_fd(int fd, int pipe_fd[2]);
+int	exec_node_pipe(int pipe_fd[2], t_tree *node, int fd, t_utils *utils);
 
 // Heredocs //
 
