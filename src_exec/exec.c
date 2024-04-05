@@ -55,8 +55,8 @@ int main(void)
 	root->right = NULL;
 
 	t_tree *leftChild = (t_tree *)malloc(sizeof(t_tree));
-	leftChild->name = "&&";
-	leftChild->operand = AND;
+	leftChild->name = "|";
+	leftChild->operand = PIPE;
 	leftChild->parent = root;
 	leftChild->left = NULL;
 	leftChild->right = NULL;
@@ -78,8 +78,8 @@ int main(void)
 	leftChild2->left = NULL;
 	leftChild2->right = NULL;
 
-	root->left->left = leftChild2;
-	root->left->right = rightChild;
+	leftChild->left = leftChild2;
+	leftChild->right = rightChild;
 
 	t_tree *rightChild3 = (t_tree *)malloc(sizeof(t_tree));
 	rightChild3->name = "echo test2";
@@ -88,7 +88,7 @@ int main(void)
 	rightChild3->left = NULL;
 	rightChild3->right = NULL;
 
-	root->left->left->left = rightChild3;
+	leftChild2->left = rightChild3;
 
 	//char *file = create_heredoc("end\n");
 	//unlink(file);
@@ -116,11 +116,7 @@ int main(void)
 	close(STDOUT_FILENO);
 
 	// Libération de la mémoire
-	free(root);
-	free(leftChild);
-	free(rightChild);
-	free(leftChild2);
-	free(rightChild3);
+	free_tree(root);
 
 	return 0;
 }

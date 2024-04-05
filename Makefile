@@ -41,6 +41,9 @@ SRC = $(addprefix find_command/, $(FIND_CMD_SRC)) \
 	  free_cmd.c \
 	  check_id.c \
 	  dup_fd.c \
+	  close_fds.c \
+	  free_tree.c \
+	  find_root.c \
 
 BUILD_DIR = .build
 

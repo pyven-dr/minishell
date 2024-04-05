@@ -33,6 +33,9 @@ int	exec_node_pipe(int pipe_fd[2], t_tree *node, int fd, t_utils *utils)
 		status = check_id(exec_id);
 		close(STDIN_FILENO);
 		close(STDOUT_FILENO);
+		close_fds(utils);
+		del_vector(utils->fds_vector);
+		free_tree(find_root(node));
 		exit(status);
 	}
 	return (id);

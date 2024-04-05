@@ -12,13 +12,6 @@
 
 #include "exec.h"
 
-t_tree *find_root(t_tree *node)
-{
-	while (node->parent != NULL)
-		node = node->parent;
-	return (node);
-}
-
 void	free_tree(t_tree *node)
 {
 	if (node->left != NULL)
