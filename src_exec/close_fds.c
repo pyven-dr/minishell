@@ -20,7 +20,7 @@ void	close_fds(t_utils *utils)
 	i = 0;
 	while (i < utils->fds_vector->size)
 	{
-		fd = *(int*)get_elem_vector(utils->fds_vector, i);
+		fd = *(int *)get_elem_vector(utils->fds_vector, i);
 		close(fd);
 		i++;
 	}

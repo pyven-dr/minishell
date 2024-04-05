@@ -12,7 +12,7 @@
 
 #include "exec.h"
 
-t_tree *find_root(t_tree *node)
+t_tree	*find_root(t_tree *node)
 {
 	while (node->parent != NULL)
 		node = node->parent;

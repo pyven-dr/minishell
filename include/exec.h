@@ -35,7 +35,7 @@ int		check_id(int id);
 int		dup_fd(int fd1, int fd2);
 void	close_fds(t_utils *utils);
 void	free_tree(t_tree *node);
-t_tree *find_root(t_tree *node);
+t_tree	*find_root(t_tree *node);
 
 // Find command //
 
@@ -58,9 +58,9 @@ int		exec_double_in(t_tree *node, t_utils *utils);
 
 // Pipes //
 
-int	*create_pipe(int pipe_fd[2]);
-int	redirect_fd(int fd, int pipe_fd[2]);
-int	exec_node_pipe(int pipe_fd[2], t_tree *node, int fd, t_utils *utils);
+int		*create_pipe(int pipe_fd[2]);
+int		redirect_fd(int fd, int pipe_fd[2]);
+int		exec_node_pipe(int pipe_fd[2], t_tree *node, int fd, t_utils *utils);
 
 // Heredocs //
 
