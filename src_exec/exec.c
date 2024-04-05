@@ -107,9 +107,10 @@ int main(void)
 
 	t_utils utils;
 
-	utils.fds_vector = new_vector(10, int);
+	utils.fds_vector = new_vector(10, sizeof(int));
 	make_all_heredocs(root);
-	exec(root);
+	exec(root, &utils);
+	del_vector(utils.fds_vector);
 
 	close(STDIN_FILENO);
 	close(STDOUT_FILENO);

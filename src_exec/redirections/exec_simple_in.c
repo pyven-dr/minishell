@@ -31,6 +31,7 @@ int	exec_simple_in(t_tree *node, t_utils *utils)
 		close(newfd);
 		return (-1);
 	}
+	add_vector(utils->fds_vector, &oldfd);
 	if (dup_fd(newfd, STDIN_FILENO) == -1)
 		return (-1);
 	exec_val = exec(node->left, utils);
