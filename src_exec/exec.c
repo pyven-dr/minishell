@@ -65,7 +65,7 @@ int main(void)
 	root->left = leftChild;
 
 	t_tree *rightChild = (t_tree *)malloc(sizeof(t_tree));
-	rightChild->name = "echo test1";
+	rightChild->name = "./src_exec";
 	rightChild->operand = CMD;
 	rightChild->parent = leftChild;
 	rightChild->left = NULL;
@@ -116,7 +116,8 @@ int main(void)
 		return (1);
 	}
 	make_all_heredocs(root);
-	exec(root, &utils);
+	int exit = exec(root, &utils);
+	printf("return value : %d\n",exit & 0b11111111);
 	del_vector(utils.fds_vector);
 
 	close(STDIN_FILENO);

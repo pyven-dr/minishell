@@ -29,6 +29,8 @@ int	exec_cmd(char **cmd, t_utils *utils)
 		perror("Execve error");
 		free_cmd(cmd);
 		free(cmd);
+		if (errno == EACCES)
+			exit(126);
 		exit(1);
 	}
 	free_cmd(cmd);
