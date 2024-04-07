@@ -34,7 +34,7 @@ PIPES_SRC = create_pipe.c \
 
 BUILTINS_SRC = echo.c \
 			   check_builtins.c \
-
+			   pwd.c \
 
 SRC = $(addprefix find_command/, $(FIND_CMD_SRC)) \
 	  $(addprefix heredocs/, $(HEREDOCS_SRC)) \

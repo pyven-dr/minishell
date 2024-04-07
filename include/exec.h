@@ -73,5 +73,6 @@ int		make_all_heredocs(t_tree *node);
 
 int		check_builtins(char **cmd, t_utils *utils);
 int		echo(char **args);
+int		pwd(void);
 
 #endif

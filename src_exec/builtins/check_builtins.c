@@ -17,5 +17,7 @@ int	check_builtins(char **cmd, t_utils *utils)
 	(void)utils;
 	if (ft_strcmp(cmd[0], "echo") == 0)
 		return (echo(cmd));
+	else if (ft_strcmp(cmd[0], "pwd") == 0)
+		return (pwd());
 	return (-127);
 }
