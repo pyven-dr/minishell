@@ -15,10 +15,14 @@
 int	exec(t_tree *node, t_utils *utils)
 {
 	char	**split_cmd;
+	int 	ret_value;
 
 	if (node->operand == CMD)
 	{
 		split_cmd = ft_split(node->name, ' '); //Temporary split waiting for expand
+		ret_value = check_builtins(split_cmd, utils);
+		if (ret_value != -127)
+			return (ret_value);
 		split_cmd[0] = get_cmd_path(split_cmd[0]);
 		if (split_cmd[0] == NULL)
 		{
@@ -65,7 +69,7 @@ int main(void)
 	root->left = leftChild;
 
 	t_tree *rightChild = (t_tree *)malloc(sizeof(t_tree));
-	rightChild->name = "./src_exec";
+	rightChild->name = "echo test1 -n-n-n";
 	rightChild->operand = CMD;
 	rightChild->parent = leftChild;
 	rightChild->left = NULL;

@@ -32,11 +32,16 @@ PIPES_SRC = create_pipe.c \
 			redirect_fd.c \
 			exec_node_pipe.c
 
+BUILTINS_SRC = echo.c \
+			   check_builtins.c \
+
+
 SRC = $(addprefix find_command/, $(FIND_CMD_SRC)) \
 	  $(addprefix heredocs/, $(HEREDOCS_SRC)) \
 	  $(addprefix operators/, $(OPERATOR_SRC)) \
 	  $(addprefix redirections/, $(REDIR_SRC)) \
 	  $(addprefix pipes/, $(PIPES_SRC)) \
+	  $(addprefix builtins/, $(BUILTINS_SRC)) \
 	  exec.c \
 	  exec_cmd.c \
 	  free_cmd.c \
