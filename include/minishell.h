@@ -31,11 +31,7 @@ typedef struct s_tree
 	struct s_tree	*right;
 	struct s_tree	*left;
 	char			*name;
-<<<<<<<< HEAD:includes_parsing/minishell.h
-	enum e_operand	operand;
-========
 	t_operand		operand;
->>>>>>>> exec:include/minishell.h
 }	t_tree;
 
 #endif

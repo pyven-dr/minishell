@@ -24,5 +24,6 @@ t_tree	*new_node(t_tree *parent, t_operand operand, char *name)
 	node->left = NULL;
 	node->name = name;
 	node->operand = operand;
+	return (node);
 }
 
