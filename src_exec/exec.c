@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "exec.h"
+#include <sys/stat.h>
+#include <dirent.h>
 
 int	exec(t_tree *node, t_utils *utils)
 {
@@ -22,7 +24,11 @@ int	exec(t_tree *node, t_utils *utils)
 		split_cmd = ft_split(node->name, ' '); //Temporary split waiting for expand
 		ret_value = check_builtins(split_cmd, utils);
 		if (ret_value != -127)
+		{
+			free_cmd(split_cmd);
+			free(split_cmd);
 			return (ret_value);
+		}
 		split_cmd[0] = get_cmd_path(split_cmd[0]);
 		if (split_cmd[0] == NULL)
 		{
@@ -69,7 +75,7 @@ int main(void)
 	root->left = leftChild;
 
 	t_tree *rightChild = (t_tree *)malloc(sizeof(t_tree));
-	rightChild->name = "echo test1 -n-n-n";
+	rightChild->name = "echo test1 -n";
 	rightChild->operand = CMD;
 	rightChild->parent = leftChild;
 	rightChild->left = NULL;
@@ -86,7 +92,7 @@ int main(void)
 	leftChild->right = rightChild;
 
 	t_tree *rightChild3 = (t_tree *)malloc(sizeof(t_tree));
-	rightChild3->name = "echo test2";
+	rightChild3->name = "pwd";
 	rightChild3->operand = CMD;
 	rightChild3->parent = leftChild2;
 	rightChild3->left = NULL;
