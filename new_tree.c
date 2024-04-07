@@ -1,40 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tree_function.c                                    :+:      :+:    :+:   */
+/*   new_tree.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sabitbol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:35:50 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/03/19 16:15:15 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/03/23 02:48:01 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parsing.h"
 
-
-
-t_file	*new_file(char *file_name, t_chevron chevron)
+t_tree	*new_node(t_tree *parent, t_operand operand, char *name)
 {
-	t_file	*file;
+	t_tree	*node;
 
-	file = malloc(sizeof(t_file));
-	if (!file)
+	node = malloc(sizeof(t_tree));
+	if (!node)
 		return (NULL);
-	file->name = file_name;
-	file->chevron = chevron;
-	return (file);
-}
-
-t_cmd	*new_cmd(char *cmd, t_file *file)
-{
-	t_cmd	*cmd;
-
-	cmd = malloc(sizeof(t_cmd));
-	if (!cmd)
-		return (NULL);
-	cmd->file = file;
-	cmd->cmd = cmd;
-	return (cmd);
+	node->parent = parent;
+	node->right = NULL;
+	node->left = NULL;
+	node->name = name;
+	node->operand = operand;
 }
 

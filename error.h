@@ -1,37 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/17 14:02:22 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/03/23 02:55:00 by sabitbol         ###   ########.fr       */
+/*   Created: 2024/03/28 21:45:29 by sabitbol          #+#    #+#             */
+/*   Updated: 2024/04/01 03:15:14 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef ERROR_H
+# define ERROR_H
 
-typedef enum e_operand
-{
-	AND,
-	OR,
-	PIPE,
-	CMD,
-	SIMPLE_IN,
-	DOUBLE_IN,
-	SIMPLE_OUT,
-	DOUBLE_OUT,
-}	t_operand;
-
-typedef struct s_tree
-{
-	struct s_tree	*parent;
-	struct s_tree	*right;
-	struct s_tree	*left;
-	char			*name;
-	enum e_operand	operand;
-}	t_tree;
+# define ERR_UNCLOSED "Minishell : Unclosed quote or parenthesis\n"
+# define ERR_SYNTHAX "Minishell : Synthax error\n"
+# define ERR_MALLOC "Minishell : Error malloc\n"
 
 #endif
