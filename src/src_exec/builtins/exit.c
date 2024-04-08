@@ -34,7 +34,7 @@ static void	free_utils(char **args, t_utils *utils)
 	free(args);
 	del_vector(utils->fds_vector);
 	free_tree(&utils->root);
-	free_cmd(utils->env);
+	//free_cmd(utils->env);
 }
 
 int	exit_builtin(char **args, t_utils *utils)

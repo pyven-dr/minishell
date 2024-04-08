@@ -61,6 +61,7 @@ BUILTINS_SRC = echo.c \
 			   pwd.c \
 			   exit.c \
 			   nb_args.c \
+			   env.c \
 
 SRC = $(addprefix src_exec/find_command/, $(FIND_CMD_SRC)) \
 	  $(addprefix src_exec/heredocs/, $(HEREDOCS_SRC)) \

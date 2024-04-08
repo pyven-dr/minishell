@@ -76,5 +76,6 @@ int		nb_args(char **args);
 int		echo(char **args);
 int		pwd(void);
 int		exit_builtin(char **args, t_utils *utils);
+int		env(char **env);
 
 #endif
