@@ -25,6 +25,8 @@ int main(void)
 		{
 			make_all_heredocs(tree);
 			exec(tree, &utils);
+			while (wait(NULL) >= 0)
+				;
 		}
 		del_vector(utils.fds_vector);
 		free_tree(&tree);
