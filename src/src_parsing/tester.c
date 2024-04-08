@@ -1,19 +1,20 @@
 #include "parsing.h"
 #include "exec.h"
 
-int main(void)
+int main(int argc, char **argv, char **envp)
 {
+	(void)argc;
+	(void)argv;
     char    *str;
 	int		i = 0;
 	t_tree	*tree;
 	t_utils utils;
-	
+
+	utils.env = envp;
 	while (1)
 	{
     	str = readline("minishell$> ");
 		tree = parse(str);
-
-		utils.env = NULL;
 
 		utils.root = tree;
 		utils.fds_vector = new_vector(10, sizeof(int));
