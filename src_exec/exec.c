@@ -75,7 +75,7 @@ int main(void)
 	root->left = leftChild;
 
 	t_tree *rightChild = (t_tree *)malloc(sizeof(t_tree));
-	rightChild->name = "echo test1 -n";
+	rightChild->name = "echo -n test1";
 	rightChild->operand = CMD;
 	rightChild->parent = leftChild;
 	rightChild->left = NULL;

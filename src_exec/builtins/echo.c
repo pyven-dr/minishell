@@ -27,10 +27,10 @@ int	echo(char **args)
 		{
 			if (write(1, args[i], ft_strlen(args[i])) == -1)
 				return (-1);
+			if (args[i + 1] != NULL)
+				if (write(1, " ", 1) == -1)
+					return (-1);
 		}
-		if (args[i + 1] != NULL)
-			if (write(1, " ", 1) == -1)
-				return (-1);
 		i++;
 	}
 	if (nl == 1)
