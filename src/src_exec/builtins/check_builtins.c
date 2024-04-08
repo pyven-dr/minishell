@@ -19,5 +19,7 @@ int	check_builtins(char **cmd, t_utils *utils)
 		return (echo(cmd));
 	else if (ft_strcmp(cmd[0], "pwd") == 0)
 		return (pwd());
+	else if (ft_strcmp(cmd[0], "exit") == 0)
+		exit_builtin(cmd, utils);
 	return (-127);
 }

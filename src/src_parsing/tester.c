@@ -13,6 +13,9 @@ int main(void)
     	str = readline("minishell$> ");
 		tree = parse(str);
 
+		utils.env = NULL;
+
+		utils.root = tree;
 		utils.fds_vector = new_vector(10, sizeof(int));
 		if (utils.fds_vector == NULL)
 		{

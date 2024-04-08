@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_cmd.c                                         :+:      :+:    :+:   */
+/*   nb_args.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pyven-dr <pyven-dr@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/20 00:59:22 by pyven-dr          #+#    #+#             */
-/*   Updated: 2024/03/20 00:59:22 by pyven-dr         ###   ########.fr       */
+/*   Created: 2024/04/08 20:03:10 by pyven-dr          #+#    #+#             */
+/*   Updated: 2024/04/08 20:03:10 by pyven-dr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-void	free_cmd(char **cmd)
+int	nb_args(char **args)
 {
-	size_t	i;
+	int	nb_args;
 
-	i = 0;
-	if (cmd == NULL)
-		return ;
-	while (cmd[i] != NULL)
-	{
-		free(cmd[i]);
-		i++;
-	}
+	nb_args = 0;
+	while (args[nb_args] != NULL)
+		nb_args++;
+	return (nb_args);
 }

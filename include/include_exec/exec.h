@@ -25,6 +25,7 @@
 typedef struct s_utils
 {
 	t_vector	*fds_vector;
+	t_tree		*root;
 	char		**env;
 }				t_utils;
 
@@ -71,7 +72,9 @@ int		make_all_heredocs(t_tree *node);
 // Builtins //
 
 int		check_builtins(char **cmd, t_utils *utils);
+int		nb_args(char **args);
 int		echo(char **args);
 int		pwd(void);
+int		exit_builtin(char **args, t_utils *utils);
 
 #endif
