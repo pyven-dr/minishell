@@ -10,7 +10,7 @@ int main(void)
 	
 	while (1)
 	{
-    	str = readline("minishell$");
+    	str = readline("minishell$> ");
 		tree = parse(str);
 
 		utils.fds_vector = new_vector(10, sizeof(int));

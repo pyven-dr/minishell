@@ -12,7 +12,7 @@
 
 #include "exec.h"
 
-int pwd(void)
+int	pwd(void)
 {
 	char	*cwd;
 
