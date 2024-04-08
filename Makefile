@@ -19,12 +19,10 @@ IFLAGS = \
 PARSING_SRC = characters.c \
 			  fill_cmd.c \
 			  fill_operand.c \
-			  new_tree.c \
 			  parsing.c \
 			  tree.c \
 			  clear.c \
 			  fill_file.c \
-			  lst.c \
 			  paranthesis.c \
 			  tester.c
 
@@ -34,7 +32,6 @@ EXEC_SRC = exec.c \
 		   check_id.c \
 	   	   dup_fd.c \
 		   close_fds.c \
-		   free_tree.c \
 		   find_root.c
 
 FIND_CMD_SRC = check_absolute_path.c \
@@ -92,13 +89,13 @@ NAME = minishell
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT_DIR)/$(LIBFT)
-	$(CC) -g -o $(NAME) $(CFLAGS) $(OBJ) $(LIBFT_DIR)/$(LIBFT)
+	$(CC) -o $(NAME) $(CFLAGS) $(OBJ) $(LIBFT_DIR)/$(LIBFT) -lreadline
 
 -include $(DEP)
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c $(LIBFT_DIR)/$(LIBFT)
 	mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) $(DFLAGS) $(IFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(DFLAGS) $(IFLAGS) -c $< -o $@ -lreadline
 
 $(LIBFT_DIR)/$(LIBFT): FORCE
 	$(MAKE) -C $(LIBFT_DIR) $(LIBFT)

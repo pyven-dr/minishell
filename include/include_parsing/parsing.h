@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:08:58 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/04/02 18:30:04 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/04/08 15:30:37 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void		fill_file(t_parsing *pars, char **line);
 void		fill_pipe(t_parsing *pars, char **line);
 void		fill_operator(t_parsing *pars, char **line);
 void		fill_cmd(t_parsing *pars, char **line);
-void		free_tree(t_tree **tree);
 void		clean_exit(t_parsing *pars, char **line, int exit_code);
 
 #include <stdio.h>
