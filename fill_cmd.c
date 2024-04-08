@@ -6,14 +6,14 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 18:22:08 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/04/02 18:39:57 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/04/08 13:35:43 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-static char	*join_cmd(char *s1, char *s2);
 static void	fill_cmd_2(t_parsing *pars, char **line, char *name);
+static char	*join_cmd(char *s1, char *s2);
 
 void	fill_cmd(t_parsing *pars, char **line)
 {
@@ -62,9 +62,11 @@ static void	fill_cmd_2(t_parsing *pars, char **line, char *name)
 static char	*join_cmd(char *s1, char *s2)
 {
 	char	*str;
-	int		i;
-	int		j;
+	long	i;
+	long	j;
 
+	if (!s1 || !s2)
+		return (NULL);
 	i = 0;
 	while (s1[i])
 		i++;
@@ -73,7 +75,7 @@ static char	*join_cmd(char *s1, char *s2)
 		j++;
 	str = malloc((i + j + 2) * sizeof(char));
 	if (!str)
-		return (NULL);
+		return (free(s1), free(s2), NULL);
 	i = -1;
 	while (s1[++i])
 		str[i] = s1[i];
@@ -83,7 +85,5 @@ static char	*join_cmd(char *s1, char *s2)
 	while (s2[++j])
 		str[i + j] = s2[j];
 	str[i + j] = '\0';
-	free(s1);
-	free(s2);
-	return (str);
+	return (free(s1), free(s2), str);
 }

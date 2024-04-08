@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:08:58 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/04/02 18:30:04 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/04/07 22:16:25 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,14 @@ void		fill_operator(t_parsing *pars, char **line);
 void		fill_cmd(t_parsing *pars, char **line);
 void		free_tree(t_tree **tree);
 void		clean_exit(t_parsing *pars, char **line, int exit_code);
+char		*ft_expand(char *line, char **env);
+char		*get_file(char *line, char **env);
 
+//libft functiuns
+int			ft_strncmp(const char *s1, const char *s2, size_t n);
+size_t		ft_strlen(char *s);
+char		*ft_strjoin(char *s1, char *s2);
+char		*ft_strdup(char *s);
 #include <stdio.h>
 #include <unistd.h>
 void	print_node(t_tree *node);
