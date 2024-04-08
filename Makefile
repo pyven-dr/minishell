@@ -6,9 +6,33 @@ DFLAGS = -MD -MP
 
 INCLUDE_DIR = include
 
+EXEC_INCLUDE_DIR = include_exec
+
+PARSING_INCLUDE_DIR = include_parsing
+
 IFLAGS = \
 		 -I $(INCLUDE_DIR) \
+		 -I $(INCLUDE_DIR)/$(EXEC_INCLUDE_DIR) \
+		 -I $(INCLUDE_DIR)/$(PARSING_INCLUDE_DIR) \
 		 -I $(LIBFT_DIR)/$(INCLUDE_DIR)
+
+PARSING_SRC = characters.c \
+			  fill_cmd.c \
+			  fill_operand.c \
+			  parsing.c \
+			  tree.c \
+			  clear.c \
+			  fill_file.c \
+			  paranthesis.c \
+			  tester.c
+
+EXEC_SRC = exec.c \
+	  	   exec_cmd.c \
+		   free_cmd.c \
+		   check_id.c \
+	   	   dup_fd.c \
+		   close_fds.c \
+		   find_root.c
 
 FIND_CMD_SRC = check_absolute_path.c \
 			   find_command.c \
@@ -36,20 +60,14 @@ BUILTINS_SRC = echo.c \
 			   check_builtins.c \
 			   pwd.c \
 
-SRC = $(addprefix find_command/, $(FIND_CMD_SRC)) \
-	  $(addprefix heredocs/, $(HEREDOCS_SRC)) \
-	  $(addprefix operators/, $(OPERATOR_SRC)) \
-	  $(addprefix redirections/, $(REDIR_SRC)) \
-	  $(addprefix pipes/, $(PIPES_SRC)) \
-	  $(addprefix builtins/, $(BUILTINS_SRC)) \
-	  exec.c \
-	  exec_cmd.c \
-	  free_cmd.c \
-	  check_id.c \
-	  dup_fd.c \
-	  close_fds.c \
-	  free_tree.c \
-	  find_root.c \
+SRC = $(addprefix src_exec/find_command/, $(FIND_CMD_SRC)) \
+	  $(addprefix src_exec/heredocs/, $(HEREDOCS_SRC)) \
+	  $(addprefix src_exec/operators/, $(OPERATOR_SRC)) \
+	  $(addprefix src_exec/redirections/, $(REDIR_SRC)) \
+	  $(addprefix src_exec/pipes/, $(PIPES_SRC)) \
+	  $(addprefix src_exec/builtins/, $(BUILTINS_SRC)) \
+	  $(addprefix src_parsing/, $(PARSING_SRC)) \
+	  $(addprefix src_exec/, $(EXEC_SRC))
 
 BUILD_DIR = .build
 
@@ -57,7 +75,7 @@ OBJ = $(addprefix $(BUILD_DIR)/, $(SRC:.c=.o))
 
 DEP = $(OBJ:.o=.d)
 
-SRC_DIR = src_exec
+SRC_DIR = src
 
 LIBS_DIR = libs
 
@@ -71,13 +89,13 @@ NAME = minishell
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT_DIR)/$(LIBFT)
-	$(CC) -g -o $(NAME) $(CFLAGS) $(OBJ) $(LIBFT_DIR)/$(LIBFT)
+	$(CC) -o $(NAME) $(CFLAGS) $(OBJ) $(LIBFT_DIR)/$(LIBFT) -lreadline
 
 -include $(DEP)
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c $(LIBFT_DIR)/$(LIBFT)
 	mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) $(DFLAGS) $(IFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(DFLAGS) $(IFLAGS) -c $< -o $@ -lreadline
 
 $(LIBFT_DIR)/$(LIBFT): FORCE
 	$(MAKE) -C $(LIBFT_DIR) $(LIBFT)

@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_tree.c                                        :+:      :+:    :+:   */
+/*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pyven-dr <pyven-dr@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/05 05:11:26 by pyven-dr          #+#    #+#             */
-/*   Updated: 2024/04/05 05:11:26 by pyven-dr         ###   ########.fr       */
+/*   Created: 2024/03/28 21:45:29 by sabitbol          #+#    #+#             */
+/*   Updated: 2024/04/01 03:15:14 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#ifndef ERROR_H
+# define ERROR_H
 
-void	free_tree(t_tree *node)
-{
-	if (node->left != NULL)
-		free_tree(node->left);
-	if (node->right != NULL)
-		free_tree(node->right);
-	free(node);
-}
+# define ERR_UNCLOSED "Minishell : Unclosed quote or parenthesis\n"
+# define ERR_SYNTHAX "Minishell : Synthax error\n"
+# define ERR_MALLOC "Minishell : Error malloc\n"
+
+#endif

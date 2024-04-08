@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "exec.h"
-#include <sys/stat.h>
 #include <dirent.h>
 
 int	exec(t_tree *node, t_utils *utils)
@@ -55,7 +54,7 @@ int	exec(t_tree *node, t_utils *utils)
 	return (0);
 }
 
-int main(void)
+/*int main(void)
 {
 	t_tree *root = (t_tree *)malloc(sizeof(t_tree));
 	root->name = "out1";
@@ -137,4 +136,4 @@ int main(void)
 	free_tree(root);
 
 	return (0);
-}
+}*/

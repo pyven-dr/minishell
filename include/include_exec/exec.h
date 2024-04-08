@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pyven-dr <pyven-dr@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 01:32:49 by pyven-dr          #+#    #+#             */
-/*   Updated: 2024/03/20 01:32:49 by pyven-dr         ###   ########.fr       */
+/*   Updated: 2024/04/08 15:30:03 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int		exec_cmd(char **cmd, t_utils *utils);
 int		check_id(int id);
 int		dup_fd(int fd1, int fd2);
 void	close_fds(t_utils *utils);
-void	free_tree(t_tree *node);
 t_tree	*find_root(t_tree *node);
 
 // Find command //
