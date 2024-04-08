@@ -18,6 +18,7 @@ int	exec_simple_out(t_tree *node, t_utils *utils)
 	int	newfd;
 	int	exec_val;
 
+	exec_val = 0;
 	newfd = open(node->name, O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (newfd == -1)
 	{
@@ -32,7 +33,8 @@ int	exec_simple_out(t_tree *node, t_utils *utils)
 	}
 	if (dup_fd(newfd, STDOUT_FILENO) == -1)
 		return (-1);
-	exec_val = exec(node->left, utils);
+	if (node->left != NULL)
+		exec_val = exec(node->left, utils);
 	if (dup_fd(oldfd, STDOUT_FILENO) == -1)
 		return (-1);
 	return (exec_val);

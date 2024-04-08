@@ -18,6 +18,7 @@ int	exec_double_in(t_tree *node, t_utils *utils)
 	int	newfd;
 	int	exec_val;
 
+	exec_val = 0;
 	newfd = open(node->name, O_RDONLY);
 	if (newfd == -1)
 	{
@@ -32,7 +33,8 @@ int	exec_double_in(t_tree *node, t_utils *utils)
 	}
 	if (dup_fd(newfd, STDIN_FILENO) == -1)
 		return (-1);
-	exec_val = exec(node->left, utils);
+	if (node->left != NULL)
+		exec_val = exec(node->left, utils);
 	if (dup_fd(oldfd, STDIN_FILENO) == -1)
 		return (-1);
 	unlink(node->name);
