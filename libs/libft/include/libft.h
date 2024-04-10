@@ -83,5 +83,6 @@ int			ft_strcmp(char *s1, char *s2);
 int			ft_atoi_base(char *str, char *base);
 char		*ft_strminiminize(char *str);
 long int	ft_atol(const char *nptr);
+int			del_elem_vector(t_vector *vector, size_t index);
 
 #endif

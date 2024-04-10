@@ -1,7 +1,8 @@
 VECTOR_SRC = new_vector.c \
 			 del_vector.c \
 			 add_vector.c \
-			 get_elem_vector.c
+			 get_elem_vector.c \
+			 del_elem_vector.c
 
 LIST_SRC = ft_lstnew_bonus.c \
 	 	   ft_lstadd_front_bonus.c \
