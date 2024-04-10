@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/libft.h"
+#include "libft.h"
 
 int	del_elem_vector(t_vector *vector, size_t index)
 {
@@ -19,7 +19,7 @@ int	del_elem_vector(t_vector *vector, size_t index)
 	ft_bzero(vector->elements + index * vector->elem_size, vector->elem_size);
 	while (index < vector->size)
 	{
-		ft_memcpy(vector->elements + index * vector->elem_size ,\
+		ft_memcpy(vector->elements + index * vector->elem_size, \
 				vector->elements + (index + 1) * vector->elem_size, \
 				vector->elem_size);
 		index++;

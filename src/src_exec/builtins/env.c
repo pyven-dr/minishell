@@ -14,7 +14,7 @@
 
 int	env(char **env)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (env == NULL)

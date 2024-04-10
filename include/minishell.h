@@ -34,6 +34,12 @@ typedef struct s_tree
 	t_operand		operand;
 }	t_tree;
 
+typedef	struct s_env
+{
+	char	*name;
+	char	*value;
+}	t_env;
+
 void	free_tree(t_tree **tree);
 
 #endif
