@@ -31,6 +31,7 @@ int	exec(t_tree *node, t_utils *utils)
 		split_cmd[0] = get_cmd_path(split_cmd[0]);
 		if (split_cmd[0] == NULL)
 		{
+			ft_putendl_fd("Command not found", 2);
 			free_cmd(split_cmd + 1);
 			free(split_cmd);
 			return (-127);

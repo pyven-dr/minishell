@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_builtins.c                                   :+:      :+:    :+:   */
+/*   free_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pyven-dr <pyven-dr@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/07 05:08:16 by pyven-dr          #+#    #+#             */
-/*   Updated: 2024/04/07 05:08:16 by pyven-dr         ###   ########.fr       */
+/*   Created: 2024/04/10 17:45:40 by pyven-dr          #+#    #+#             */
+/*   Updated: 2024/04/10 17:45:40 by pyven-dr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-int	check_builtins(char **cmd, t_utils *utils)
+void	free_env(t_vector *env)
 {
-	(void)utils;
-	if (ft_strcmp(cmd[0], "echo") == 0)
-		return (echo(cmd));
-	else if (ft_strcmp(cmd[0], "pwd") == 0)
-		return (pwd());
-	else if (ft_strcmp(cmd[0], "exit") == 0)
-		exit_builtin(cmd, utils);
-	//else if (ft_strcmp(cmd[0], "env") == 0)
-		//env(utils->env);
-	return (-127);
+	/*size_t	i;
+	t_env	*line;
+
+	i = 1;
+	line = get_elem_vector(env, 0);
+	while (i < env->size)
+	{
+		free(line->value);
+		free(line->name);
+		free(line);
+		line = get_elem_vector(env, i);
+		i++;
+	}*/
+	del_vector(env);
 }

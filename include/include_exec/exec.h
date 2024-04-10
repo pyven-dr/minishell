@@ -26,7 +26,7 @@ typedef struct s_utils
 {
 	t_vector	*fds_vector;
 	t_tree		*root;
-	char		**env;
+	t_vector	*env_vector;
 }				t_utils;
 
 int		exec(t_tree *node, t_utils *utils);
@@ -36,6 +36,8 @@ int		check_id(int id);
 int		dup_fd(int fd1, int fd2);
 void	close_fds(t_utils *utils);
 t_tree	*find_root(t_tree *node);
+void	free_env(t_vector *env);
+int		init_env(t_utils *utils, char **envp);
 
 // Find command //
 

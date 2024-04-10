@@ -8,17 +8,19 @@ int main(int argc, char **argv, char **envp)
     char    *str;
 	int		i = 0;
 	t_tree	*tree;
-	t_utils utils;
+	t_utils *utils;
 
-	utils.env = envp;
+	utils = malloc(sizeof(t_utils));
+	utils->env_vector = new_vector(10, sizeof(t_env));
+	init_env(utils, envp);
 	while (1)
 	{
     	str = readline("minishell$> ");
 		tree = parse(str);
 
-		utils.root = tree;
-		utils.fds_vector = new_vector(10, sizeof(int));
-		if (utils.fds_vector == NULL)
+		utils->root = tree;
+		utils->fds_vector = new_vector(10, sizeof(int));
+		if (utils->fds_vector == NULL)
 		{
 			free_tree(&tree);
 			close(STDIN_FILENO);
@@ -28,11 +30,11 @@ int main(int argc, char **argv, char **envp)
 		if (tree != NULL)
 		{
 			make_all_heredocs(tree);
-			exec(tree, &utils);
+			exec(tree, utils);
 			while (wait(NULL) >= 0)
 				;
 		}
-		del_vector(utils.fds_vector);
+		del_vector(utils->fds_vector);
 		free_tree(&tree);
 		i++;
 	}

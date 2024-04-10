@@ -19,7 +19,7 @@ char	*get_cmd_path(char *command)
 	char	*command_path;
 
 	command_path = NULL;
-	path = getenv("PATH");
+	path = getenv("PATH"); //Replace by real env                            /
 	if (path == NULL)
 	{
 		command_path = check_absolute_path(command);

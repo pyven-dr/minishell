@@ -32,7 +32,9 @@ EXEC_SRC = exec.c \
 		   check_id.c \
 	   	   dup_fd.c \
 		   close_fds.c \
-		   find_root.c
+		   find_root.c \
+		   init_env.c \
+		   free_env.c
 
 FIND_CMD_SRC = check_absolute_path.c \
 			   find_command.c \
