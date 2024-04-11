@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int	del_elem_vector(t_vector *vector, size_t index)
+int	del_elem_vector(t_vector *vector, size_t index, void(*ft_free) (void *elem))
 {
 	if (index > vector->size)
 		return (1);
@@ -25,7 +25,8 @@ int	del_elem_vector(t_vector *vector, size_t index)
 		index++;
 	}
 	if (get_elem_vector(vector, index) != NULL)
-		free(vector->elements + index * vector->elem_size);
+		if (ft_free != NULL)
+			ft_free(vector->elements + index * vector->elem_size);
 	vector->size--;
 	return (0);
 }
