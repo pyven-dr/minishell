@@ -14,53 +14,40 @@
 
 static int	fill_env(char *line, t_vector *env)
 {
-	t_env	*res;
+	t_env	res;
 	int		i;
 
 	i = 0;
-	res = malloc(sizeof(t_env));
-	if (res == NULL)
-		return (1);
 	while (line[i] != '=')
 		i++;
 	line[i] = '\0';
 	i++;
-	res->name = ft_strdup(line);
-	if (res->name == NULL)
-	{
-		free(res);
+	res.name = ft_strdup(line);
+	if (res.name == NULL)
 		return (1);
-	}
-	res->value = ft_strdup(&line[i]);
-	if (res->value == NULL)
+	res.value = ft_strdup(&line[i]);
+	if (res.value == NULL)
 	{
-		free(res->name);
-		free(res);
+		free(res.name);
 		return (1);
 	}
 	line[i - 1] = '=';
-	add_vector(env, res);
+	add_vector(env, &res, free_env_line);
 	return (0);
 }
 
-int init_env(t_utils *utils, char **envp)
+int	init_env(t_utils *utils, char **envp)
 {
-	int 	i;
-	t_env	*line;
+	int	i;
 
 	i = 0;
 	while (envp[i] != NULL)
 	{
 		if (fill_env(envp[i], utils->env_vector) == 1)
 		{
-			del_vector(utils->env_vector);
+			del_vector(utils->env_vector, free_env_line);
 			return (1);
 		}
-		line = get_elem_vector(utils->env_vector, i);
-		if (line == NULL)
-			dprintf(2, "NULL\n");
-		else
-			dprintf(2, "%d %p %p\n",i, line->name, line->value);
 		i++;
 	}
 	return (0);

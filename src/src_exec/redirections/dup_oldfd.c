@@ -22,7 +22,7 @@ int	dup_oldfd(t_utils *utils)
 		perror("Dup error");
 		return (-1);
 	}
-	if (add_vector(utils->fds_vector, &oldfd) == -1)
+	if (add_vector(utils->fds_vector, &oldfd, NULL) == -1)
 		return (-1);
 	return (oldfd);
 }

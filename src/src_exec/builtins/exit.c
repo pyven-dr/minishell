@@ -32,8 +32,8 @@ static void	free_utils(char **args, t_utils *utils)
 {
 	free_cmd(args);
 	free(args);
-	free_env(utils->env_vector);
-	del_vector(utils->fds_vector);
+	del_vector(utils->env_vector, free_env_line);
+	del_vector(utils->fds_vector, NULL);
 	free_tree(&utils->root);
 }
 

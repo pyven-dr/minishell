@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int	add_vector(t_vector *vector, void *elem)
+int	add_vector(t_vector *vector, void *elem, void(*ft_free) (void *elem))
 {
 	size_t	new_capacity;
 	void	*new_elements;
@@ -29,7 +29,8 @@ int	add_vector(t_vector *vector, void *elem)
 			vector->size * vector->elem_size);
 		while (i - 1 < vector->size)
 		{
-			free(vector->elements + i * vector->elem_size);
+			if (ft_free != NULL)
+				ft_free(vector->elements + i * vector->elem_size);
 			i++;
 		}
 		free(vector->elements);

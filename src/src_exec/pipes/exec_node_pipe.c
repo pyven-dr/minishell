@@ -32,7 +32,7 @@ int	exec_node_pipe(int pipe_fd[2], t_tree *node, int fd, t_utils *utils)
 		close(STDIN_FILENO);
 		close(STDOUT_FILENO);
 		close_fds(utils);
-		del_vector(utils->fds_vector);
+		del_vector(utils->fds_vector, NULL);
 		root = find_root(node);
 		free_tree(&root);
 		exit(status);

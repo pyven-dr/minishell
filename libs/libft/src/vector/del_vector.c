@@ -12,14 +12,15 @@
 
 #include "libft.h"
 
-void	del_vector(t_vector *vector)
+void	del_vector(t_vector *vector, void(*ft_free) (void *elem))
 {
 	size_t	i;
 
 	i = 0;
-	while (i - 1 < vector->size)
+	while (i < vector->size)
 	{
-		free(vector->elements + i * vector->elem_size);
+		if (ft_free != NULL)
+			ft_free(vector->elements + i * vector->elem_size);
 		i++;
 	}
 	free(vector->elements);

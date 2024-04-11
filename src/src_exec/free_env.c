@@ -12,20 +12,11 @@
 
 #include "exec.h"
 
-void	free_env(t_vector *env)
+void	free_env_line(void *line)
 {
-	/*size_t	i;
-	t_env	*line;
+	t_env	*env_line;
 
-	i = 1;
-	line = get_elem_vector(env, 0);
-	while (i < env->size)
-	{
-		free(line->value);
-		free(line->name);
-		free(line);
-		line = get_elem_vector(env, i);
-		i++;
-	}*/
-	del_vector(env);
+	env_line = line;
+	free(env_line->name);
+	free(env_line->value);
 }
