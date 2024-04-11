@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-void	del_vector(t_vector *vector, void(*ft_free) (void *elem))
+void	del_vector(t_vector *vector, void (*ft_free) (void *elem))
 {
 	size_t	i;
 

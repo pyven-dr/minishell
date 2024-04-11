@@ -76,13 +76,15 @@ t_list		*ft_lstmap(t_list *lst, void *(*f)(void*), void (*del)(void*));
 t_list		*ft_lstmap(t_list *lst, void *(*f)(void*), void (*del)(void*));
 char		*get_next_line(int fd);
 t_vector	*new_vector(size_t capacity, size_t elem_size);
-void		del_vector(t_vector *vector, void(*ft_free) (void *elem));
-int			add_vector(t_vector *vector, void *elem, void(*ft_free) (void *elem));
+void		del_vector(t_vector *vector, void (*ft_free) (void *elem));
+int			add_vector(t_vector *vector, void *elem, \
+						void (*ft_free) (void *elem));
 void		*get_elem_vector(t_vector *vector, size_t index);
 int			ft_strcmp(char *s1, char *s2);
 int			ft_atoi_base(char *str, char *base);
 char		*ft_strminiminize(char *str);
 long int	ft_atol(const char *nptr);
-int			del_elem_vector(t_vector *vector, size_t index, void(*ft_free) (void *elem));
+int			del_elem_vector(t_vector *vector, size_t i, \
+							void (*ft_free) (void *elem));
 
 #endif

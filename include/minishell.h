@@ -34,7 +34,7 @@ typedef struct s_tree
 	t_operand		operand;
 }	t_tree;
 
-typedef	struct s_env
+typedef struct s_env
 {
 	char	*name;
 	char	*value;

@@ -12,17 +12,16 @@
 
 #include "libft.h"
 
-int	add_vector(t_vector *vector, void *elem, void(*ft_free) (void *elem))
+int	add_vector(t_vector *vector, void *elem, void (*ft_free) (void *elem))
 {
-	size_t	new_capacity;
 	void	*new_elements;
 	size_t	i;
 
 	i = 0;
 	if (vector->size == vector->capacity)
 	{
-		new_capacity = vector->capacity * 2;
-		new_elements = malloc(new_capacity * vector->elem_size);
+		vector->capacity *= 2;
+		new_elements = malloc(vector->capacity * vector->elem_size);
 		if (!new_elements || !elem)
 			return (-1);
 		ft_memcpy(new_elements, vector->elements, \
@@ -35,7 +34,6 @@ int	add_vector(t_vector *vector, void *elem, void(*ft_free) (void *elem))
 		}
 		free(vector->elements);
 		vector->elements = new_elements;
-		vector->capacity = new_capacity;
 	}
 	ft_memcpy(vector->elements + vector->size * vector->elem_size, \
 		elem, vector->elem_size);

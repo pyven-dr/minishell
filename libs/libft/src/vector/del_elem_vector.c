@@ -12,21 +12,21 @@
 
 #include "libft.h"
 
-int	del_elem_vector(t_vector *vector, size_t index, void(*ft_free) (void *elem))
+int	del_elem_vector(t_vector *vector, size_t i, void (*ft_free) (void *elem))
 {
-	if (index > vector->size)
+	if (i > vector->size)
 		return (1);
-	ft_bzero(vector->elements + index * vector->elem_size, vector->elem_size);
-	while (index < vector->size)
+	ft_bzero(vector->elements + i * vector->elem_size, vector->elem_size);
+	while (i < vector->size)
 	{
-		ft_memcpy(vector->elements + index * vector->elem_size, \
-				vector->elements + (index + 1) * vector->elem_size, \
+		ft_memcpy(vector->elements + i * vector->elem_size, \
+				vector->elements + (i + 1) * vector->elem_size, \
 				vector->elem_size);
-		index++;
+		i++;
 	}
-	if (get_elem_vector(vector, index) != NULL)
+	if (get_elem_vector(vector, i) != NULL)
 		if (ft_free != NULL)
-			ft_free(vector->elements + index * vector->elem_size);
+			ft_free(vector->elements + i * vector->elem_size);
 	vector->size--;
 	return (0);
 }
