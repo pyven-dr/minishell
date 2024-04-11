@@ -12,18 +12,22 @@
 
 #include "exec.h"
 
-int	env(char **env)
+int	env(t_vector *env)
 {
-	int	i;
+	int i = 0;
+	t_env	*line;
 
-	i = 0;
-	if (env == NULL)
-		return (0);
-	while (env[i] != NULL)
+	line = get_elem_vector(env, i);
+	while (line != NULL)
 	{
-		if (ft_putendl_fd(env[i], STDOUT_FILENO) == 1)
+		if (ft_putstr_fd(line->name, STDOUT_FILENO) == 1)
+			return (1);
+		if (ft_putchar_fd('=', STDOUT_FILENO) == 1)
+			return (1);
+		if (ft_putendl_fd(line->value, STDOUT_FILENO == 1))
 			return (1);
 		i++;
+		line = get_elem_vector(env, i);
 	}
 	return (0);
 }

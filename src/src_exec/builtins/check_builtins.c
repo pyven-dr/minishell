@@ -21,7 +21,7 @@ int	check_builtins(char **cmd, t_utils *utils)
 		return (pwd());
 	else if (ft_strcmp(cmd[0], "exit") == 0)
 		exit_builtin(cmd, utils);
-	//else if (ft_strcmp(cmd[0], "env") == 0)
-		//env(utils->env);
+	else if (ft_strcmp(cmd[0], "env") == 0)
+		env(utils->env_vector);
 	return (-127);
 }
