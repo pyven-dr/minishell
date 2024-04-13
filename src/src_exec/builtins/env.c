@@ -14,9 +14,10 @@
 
 int	env(t_vector *env)
 {
-	int i = 0;
+	int		i;
 	t_env	*line;
 
+	i = 0;
 	line = get_elem_vector(env, i);
 	while (line != NULL)
 	{
