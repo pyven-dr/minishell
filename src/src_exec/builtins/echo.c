@@ -38,7 +38,7 @@ int	echo(char **args)
 
 	i = 1;
 	nl = 1;
-	while (chech_n(args[i]) == 0)
+	while (args[i] != NULL && chech_n(args[i]) == 0)
 	{
 		nl = 0;
 		i++;
