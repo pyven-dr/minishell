@@ -6,7 +6,7 @@
 /*   By: pyven-dr <pyven-dr@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 16:37:03 by pyven-dr          #+#    #+#             */
-/*   Updated: 2024/04/09 16:37:03 by pyven-dr         ###   ########.fr       */
+/*   Updated: 2024/04/13 20:00:41 by pyven-dr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	del_elem_vector(t_vector *vector, size_t i, void (*ft_free) (void *elem))
 {
 	if (i > vector->size)
 		return (1);
+	if (ft_free != NULL)
+		ft_free(vector->elements + i * vector->elem_size);
 	ft_bzero(vector->elements + i * vector->elem_size, vector->elem_size);
 	while (i < vector->size)
 	{
@@ -24,9 +26,6 @@ int	del_elem_vector(t_vector *vector, size_t i, void (*ft_free) (void *elem))
 				vector->elem_size);
 		i++;
 	}
-	if (get_elem_vector(vector, i) != NULL)
-		if (ft_free != NULL)
-			ft_free(vector->elements + i * vector->elem_size);
 	vector->size--;
 	return (0);
 }
