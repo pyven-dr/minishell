@@ -34,7 +34,8 @@ EXEC_SRC = exec.c \
 		   close_fds.c \
 		   find_root.c \
 		   init_env.c \
-		   free_env.c
+		   free_env.c \
+		   ft_getenv.c
 
 FIND_CMD_SRC = check_absolute_path.c \
 			   find_command.c \
@@ -64,6 +65,7 @@ BUILTINS_SRC = echo.c \
 			   exit.c \
 			   nb_args.c \
 			   env.c \
+			   unset.c \
 
 SRC = $(addprefix src_exec/find_command/, $(FIND_CMD_SRC)) \
 	  $(addprefix src_exec/heredocs/, $(HEREDOCS_SRC)) \

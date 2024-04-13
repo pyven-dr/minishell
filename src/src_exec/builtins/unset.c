@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_builtins.c                                   :+:      :+:    :+:   */
+/*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pyven-dr <pyven-dr@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/07 05:08:16 by pyven-dr          #+#    #+#             */
-/*   Updated: 2024/04/13 19:50:26 by pyven-dr         ###   ########.fr       */
+/*   Created: 2024/04/13 19:19:08 by pyven-dr          #+#    #+#             */
+/*   Updated: 2024/04/13 20:05:04 by pyven-dr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-int	check_builtins(char **cmd, t_utils *utils)
+int	unset(char **args, t_utils *utils)
 {
-	if (ft_strcmp(cmd[0], "echo") == 0)
-		return (echo(cmd));
-	else if (ft_strcmp(cmd[0], "pwd") == 0)
-		return (pwd());
-	else if (ft_strcmp(cmd[0], "exit") == 0)
-		exit_builtin(cmd, utils);
-	else if (ft_strcmp(cmd[0], "env") == 0)
-		return (env(utils->env_vector));
-	else if (ft_strcmp(cmd[0], "unset") == 0)
-		return (unset(cmd, utils));
-	return (-127);
+	int	i;
+	int	pos;
+
+	i = 0;
+	while (args[i] != NULL)
+	{
+		pos = ft_getenv(args[i], utils->env_vector);
+		if (pos != -1)
+			del_elem_vector(utils->env_vector, pos, free_env_line);
+		i++;
+	}
+	return (0);
 }
