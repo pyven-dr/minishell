@@ -12,11 +12,11 @@
 
 #include "exec.h"
 
-int	dup_oldfd(t_utils *utils)
+int	dup_oldfd(t_utils *utils, int fd)
 {
 	int	oldfd;
 
-	oldfd = dup(STDIN_FILENO);
+	oldfd = dup(fd);
 	if (oldfd == -1)
 	{
 		perror("Dup error");

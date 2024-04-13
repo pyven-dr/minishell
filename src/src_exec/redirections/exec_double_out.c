@@ -25,7 +25,7 @@ int	exec_double_out(t_tree *node, t_utils *utils)
 		perror("Redirect in error");
 		return (-1);
 	}
-	oldfd = dup_oldfd(utils);
+	oldfd = dup_oldfd(utils, STDOUT_FILENO);
 	if (oldfd == -1)
 	{
 		close(newfd);
