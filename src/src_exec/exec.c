@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "exec.h"
-#include <dirent.h>
 
 int	exec(t_tree *node, t_utils *utils)
 {
