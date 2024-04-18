@@ -6,7 +6,7 @@
 /*   By: pyven-dr <pyven-dr@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 01:32:49 by pyven-dr          #+#    #+#             */
-/*   Updated: 2024/04/13 19:50:04 by pyven-dr         ###   ########.fr       */
+/*   Updated: 2024/04/18 12:31:30 by pyven-dr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,6 @@ int		pwd(void);
 int		exit_builtin(char **args, t_utils *utils);
 int		env(t_vector *env);
 int		unset(char **args, t_utils *utils);
+int		export(char **args, t_utils *utils);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: pyven-dr <pyven-dr@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 20:46:16 by pyven-dr          #+#    #+#             */
-/*   Updated: 2024/04/13 20:44:37 by pyven-dr         ###   ########.fr       */
+/*   Updated: 2024/04/18 12:18:48 by pyven-dr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,15 @@ int	env(t_vector *env)
 	line = get_elem_vector(env, i);
 	while (line != NULL)
 	{
-		if (ft_putstr_fd(line->name, STDOUT_FILENO) == 1)
-			return (1);
-		if (ft_putchar_fd('=', STDOUT_FILENO) == 1)
-			return (1);
-		if (ft_putendl_fd(line->value, STDOUT_FILENO == 1))
-			return (1);
+		if (line->equal == 1)
+		{
+			if (ft_putstr_fd(line->name, STDOUT_FILENO) == 1)
+				return (1);
+			if (ft_putchar_fd('=', STDOUT_FILENO) == 1)
+				return (1);
+			if (ft_putendl_fd(line->value, STDOUT_FILENO == 1))
+				return (1);
+		}
 		i++;
 		line = get_elem_vector(env, i);
 	}

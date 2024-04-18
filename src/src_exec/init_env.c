@@ -6,7 +6,7 @@
 /*   By: pyven-dr <pyven-dr@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 17:21:30 by pyven-dr          #+#    #+#             */
-/*   Updated: 2024/04/10 17:21:30 by pyven-dr         ###   ########.fr       */
+/*   Updated: 2024/04/18 12:20:21 by pyven-dr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static int	fill_env(char *line, t_vector *env)
 	int		i;
 
 	i = 0;
+	res.equal = 1;
 	while (line[i] != '=')
 		i++;
 	line[i] = '\0';

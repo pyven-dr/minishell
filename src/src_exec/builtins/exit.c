@@ -6,7 +6,7 @@
 /*   By: pyven-dr <pyven-dr@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 19:04:50 by pyven-dr          #+#    #+#             */
-/*   Updated: 2024/04/08 19:04:50 by pyven-dr         ###   ########.fr       */
+/*   Updated: 2024/04/18 12:40:27 by pyven-dr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,5 @@ int	exit_builtin(char **args, t_utils *utils)
 	free_utils(args, utils);
 	if (write(2, "exit\n", 5) == -1)
 		exit(1);
-	exit(exit_status);
+	exit(exit_status); //exit status need to be last executed command if no args
 }
