@@ -6,7 +6,7 @@
 /*   By: pyven-dr <pyven-dr@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 20:26:48 by pyven-dr          #+#    #+#             */
-/*   Updated: 2024/04/18 12:41:29 by pyven-dr         ###   ########.fr       */
+/*   Updated: 2024/04/18 18:00:57 by pyven-dr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,28 @@ int	display_env(t_vector *env)
 	line = get_elem_vector(env, i);
 	while (line != NULL)
 	{
-		if (ft_putstr_fd("declare -x ", STDOUT_FILENO) == 1)
-			return (1);	
-		if (ft_putstr_fd(line->name, STDOUT_FILENO) == 1)
-			return (1);
-		if (ft_putchar_fd('=', STDOUT_FILENO) == 1)
-			return (1);
-		if (ft_putendl_fd(line->value, STDOUT_FILENO == 1))
-			return (1);
+		if (ft_printf(STDOUT_FILENO, "declare -x %s=%s\n", line->name, line->value) == -1)
+			return(1);
 		i++;
 		line = get_elem_vector(env, i);
+	}
+	return (0);
+}
+
+int	check_arg(char *arg)
+{
+	int	i;
+
+	i = 1;
+	if (ft_isalpha(arg[i]) == 0 && arg[i] != '_')
+		return (1);
+	while (arg[i] != '\0')
+	{
+		if (ft_isalnum(arg[i]) == 0 && arg[i] != '_')
+			return (1);
+		if(arg[i] == '=')
+			return (0);
+		i++;
 	}
 	return (0);
 }
@@ -38,10 +50,19 @@ int	display_env(t_vector *env)
 int	export(char **args, t_utils *utils)
 {
 	int	arg_nb;
-	
+	int	i;
+
+	i = 0;
 	arg_nb = nb_args(args);
 	if (arg_nb == 1)
 		if (display_env(utils->env_vector) == 1)
 			return (1);
+	while (args[i] != NULL)
+	{
+		if (check_arg(args[i]) == 1)
+		{
+		}
+		i++;
+	}
 	return (0);
 }

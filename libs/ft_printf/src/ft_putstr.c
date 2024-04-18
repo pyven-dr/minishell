@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pyven-dr <pyven-dr@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/08 20:46:16 by pyven-dr          #+#    #+#             */
-/*   Updated: 2024/04/18 18:01:01 by pyven-dr         ###   ########.fr       */
+/*   Created: 2023/11/20 17:12:35 by pyven-dr          #+#    #+#             */
+/*   Updated: 2024/04/18 17:58:46 by pyven-dr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "ft_printf.h"
 
-int	env(t_vector *env)
+int	ft_putstr(int fd, char *s, int *i)
 {
-	int		i;
-	t_env	*line;
+	size_t	len;
 
-	i = 0;
-	line = get_elem_vector(env, i);
-	while (line != NULL)
+	if (s == NULL)
 	{
-		if (line->equal == 1)
-			if (ft_printf(STDOUT_FILENO, "%s=%s\n", line->name, line->value) == -1)
-				return (1);
-		i++;
-		line = get_elem_vector(env, i);
+		if (write(fd, "(null)", 6) == -1)
+			return (-1);
+		*i += 6;
+		return (0);
 	}
+	len = ft_strlen(s);
+	if (write(fd, s, len) == -1)
+		return (-1);
+	*i += len;
 	return (0);
 }

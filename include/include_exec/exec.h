@@ -6,7 +6,7 @@
 /*   By: pyven-dr <pyven-dr@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 01:32:49 by pyven-dr          #+#    #+#             */
-/*   Updated: 2024/04/18 12:31:30 by pyven-dr         ###   ########.fr       */
+/*   Updated: 2024/04/18 17:45:15 by pyven-dr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "minishell.h"
 # include "libft.h"
+# include "ft_printf.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>

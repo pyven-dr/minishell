@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   ft_putnbr_hex.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pyven-dr <pyven-dr@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/08 20:46:16 by pyven-dr          #+#    #+#             */
-/*   Updated: 2024/04/18 18:01:01 by pyven-dr         ###   ########.fr       */
+/*   Created: 2023/11/21 13:24:06 by pyven-dr          #+#    #+#             */
+/*   Updated: 2024/04/18 18:07:47 by pyven-dr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "ft_printf.h"
 
-int	env(t_vector *env)
+int	ft_putnbr_hex(int fd, unsigned int nbr, char *base, int *i)
 {
-	int		i;
-	t_env	*line;
-
-	i = 0;
-	line = get_elem_vector(env, i);
-	while (line != NULL)
+	if (nbr / 16 == 0)
 	{
-		if (line->equal == 1)
-			if (ft_printf(STDOUT_FILENO, "%s=%s\n", line->name, line->value) == -1)
-				return (1);
-		i++;
-		line = get_elem_vector(env, i);
+		if (write(fd, &base[nbr % 16], 1) == -1)
+			return (-1);
+		*i += 1;
+		return (0);
 	}
+	if (ft_putnbr_hex(fd, nbr / 16, base, &*i) == -1 || \
+		write(fd, &base[nbr % 16], 1) == -1)
+		return (-1);
+	*i += 1;
 	return (0);
 }

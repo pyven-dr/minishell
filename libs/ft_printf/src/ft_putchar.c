@@ -1,31 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pyven-dr <pyven-dr@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/08 20:46:16 by pyven-dr          #+#    #+#             */
-/*   Updated: 2024/04/18 18:01:01 by pyven-dr         ###   ########.fr       */
+/*   Created: 2023/11/20 17:05:05 by pyven-dr          #+#    #+#             */
+/*   Updated: 2024/04/18 17:58:25 by pyven-dr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "ft_printf.h"
 
-int	env(t_vector *env)
+int	ft_putchar(int fd, char c, int *i)
 {
-	int		i;
-	t_env	*line;
-
-	i = 0;
-	line = get_elem_vector(env, i);
-	while (line != NULL)
-	{
-		if (line->equal == 1)
-			if (ft_printf(STDOUT_FILENO, "%s=%s\n", line->name, line->value) == -1)
-				return (1);
-		i++;
-		line = get_elem_vector(env, i);
-	}
+	if (write(fd, &c, 1) == -1)
+		return (-1);
+	*i += 1;
 	return (0);
 }
