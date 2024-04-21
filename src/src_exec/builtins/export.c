@@ -6,7 +6,7 @@
 /*   By: pyven-dr <pyven-dr@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 20:26:48 by pyven-dr          #+#    #+#             */
-/*   Updated: 2024/04/18 18:52:55 by pyven-dr         ###   ########.fr       */
+/*   Updated: 2024/04/21 13:02:53 by pyven-dr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,33 +57,52 @@ int	check_arg(char *arg)
 	return (0);
 }
 
-int	add_env(char *arg, t_vector *env_vector)
+int	get_env_line(char *arg, t_env *env)
 {
-	t_env	env;
 	int		i;
-
+	
 	i = 0;
-	env.equal = 0;
+	env->equal = 0;
 	while (arg[i] != '\0' && arg[i] != '=')
 		i++;
 	if (arg[i] == '=')
 	{
-		env.equal = 1;
+		env->equal = 1;
 		arg[i] = '\0';
 	}
-	i++;
-	env.name = ft_strdup(arg);
-	if (env.name == NULL)
+	i++;            
+	env->name = ft_strdup(arg);
+	if (env->name == NULL)
 		return (1);
-	env.value = ft_strdup(&arg[i]);
-	if (env.value == NULL)
+	env->value = ft_strdup(&arg[i]);
+	if (env->value == NULL)
 	{
-		free(env.name);
+		free(env->name);
 		return (1);
 	}
 	arg[i - 1] = '=';
+	return (0);
+}
+
+int	add_env(char *arg, t_vector *env_vector)
+{
+	t_env	env;
+
+	if (get_env_line(arg, &env) == 1)
+		return (1);
 	add_vector(env_vector, &env, free_env_line);
 	return (0);
+}
+
+int	check_env(t_vector *env_vector, char *arg)
+{
+	t_env	env;
+	int		i;
+	
+	i = 0;
+	if (get_env_line(arg, &env) == 1)
+		return (1);
+		
 }
 
 int	export(char **args, t_utils *utils)
@@ -111,7 +130,8 @@ int	export(char **args, t_utils *utils)
 				return (1);
 		}
 		else
-			add_env(args[i], utils->env_vector);
+			if (add_env(args[i], utils->env_vector) == 1)
+				return (1);
 		i++;
 	}
 	return (return_val);
