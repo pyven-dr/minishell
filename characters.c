@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:26:56 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/04/02 01:46:58 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/04/22 20:35:24 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,34 @@ bool	is_quoted(t_quote *scope, char c)
 			scope->s_quote = true;
 		else if (scope->s_quote == true)
 			scope->s_quote = false;
+		return (true);
+	}
+	if (scope->d_quote == true || scope->s_quote == true)
+		return (true);
+	else
+		return (false);
+}
+
+bool	is_quoted_sup(t_quote *scope, char c, char **str)
+{
+	if (c == '"')
+	{
+		if (scope->d_quote == false && scope->s_quote == false)
+			scope->d_quote = true;
+		else if (scope->d_quote == true)
+			scope->d_quote = false;
+		if (scope->s_quote == false)
+			str++;
+		return (true);
+	}
+	if (c == '\'')
+	{
+		if (scope->s_quote == false && scope->d_quote == false)
+			scope->s_quote = true;
+		else if (scope->s_quote == true)
+			scope->s_quote = false;
+		if (scope->s_quote == false)
+			str++;
 		return (true);
 	}
 	if (scope->d_quote == true || scope->s_quote == true)

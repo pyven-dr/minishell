@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:08:58 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/04/07 22:16:25 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/04/22 20:35:49 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "minishell.h"
 # include <stdlib.h>
 # include <stddef.h>
-# include <stdbool.h>
+# include <dirent.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 
@@ -48,6 +48,7 @@ void		insert_node(t_tree *node, t_operand operand, char \
 bool		is_whitespace(char c);
 bool		is_special(char c);
 bool		is_quoted(t_quote *scope, char c);
+bool		is_quoted_sup(t_quote *scope, char c, char **str);
 t_operand	is_operand(char **line);
 char		*strdup_to_next_operand(char **line, t_parsing *pars);
 char		*strdup_to_next_space(char **line, t_parsing *pars);
@@ -60,8 +61,9 @@ void		fill_operator(t_parsing *pars, char **line);
 void		fill_cmd(t_parsing *pars, char **line);
 void		free_tree(t_tree **tree);
 void		clean_exit(t_parsing *pars, char **line, int exit_code);
+char		**get_name(char *line, char **env);
+char		*strdup_var(char **line);
 char		*ft_expand(char *line, char **env);
-char		*get_file(char *line, char **env);
 
 //libft functiuns
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
