@@ -6,7 +6,7 @@
 /*   By: pyven-dr <pyven-dr@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 20:26:48 by pyven-dr          #+#    #+#             */
-/*   Updated: 2024/04/21 13:02:53 by pyven-dr         ###   ########.fr       */
+/*   Updated: 2024/04/22 12:50:28 by pyven-dr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ int	get_env_line(char *arg, t_env *env)
 	{
 		env->equal = 1;
 		arg[i] = '\0';
+		i++;
 	}
-	i++;            
 	env->name = ft_strdup(arg);
 	if (env->name == NULL)
 		return (1);
@@ -80,7 +80,8 @@ int	get_env_line(char *arg, t_env *env)
 		free(env->name);
 		return (1);
 	}
-	arg[i - 1] = '=';
+	if (env->equal == 1)
+		arg[i - 1] = '=';
 	return (0);
 }
 
@@ -94,15 +95,39 @@ int	add_env(char *arg, t_vector *env_vector)
 	return (0);
 }
 
+void free_line(t_env *env)
+{
+	free(env->name);
+	free(env->value);
+}
+
 int	check_env(t_vector *env_vector, char *arg)
 {
 	t_env	env;
+	t_env	*line;
 	int		i;
 	
 	i = 0;
 	if (get_env_line(arg, &env) == 1)
 		return (1);
-		
+	line = get_elem_vector(env_vector, i);
+	while (line != NULL)
+	{
+		if (ft_strcmp(env.name, line->name) == 0)
+		{
+			if (env.equal == 0)
+				return (free_line(&env), 0);
+			free(line->value);
+			line->value = env.value;
+			line->equal = env.equal;
+			free(env.name);
+			return (0);
+		}
+		i++;
+		line = get_elem_vector(env_vector, i);
+	}
+	free_line(&env);
+	return (2);
 }
 
 int	export(char **args, t_utils *utils)
@@ -110,6 +135,7 @@ int	export(char **args, t_utils *utils)
 	int	arg_nb;
 	int	i;
 	int	return_val;
+	int	is_insert;
 
 	i = 1;
 	return_val = 0;
@@ -130,8 +156,14 @@ int	export(char **args, t_utils *utils)
 				return (1);
 		}
 		else
-			if (add_env(args[i], utils->env_vector) == 1)
+		{
+			is_insert = check_env(utils->env_vector, args[i]);
+			if (is_insert == 1)
 				return (1);
+			if (is_insert == 2)
+				if (add_env(args[i], utils->env_vector) == 1)
+					return (1);
+		}
 		i++;
 	}
 	return (return_val);
