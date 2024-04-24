@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:26:00 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/04/19 17:05:19 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/04/23 01:05:13 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static char	*replace_vars(char *line, char **env);
 char	**get_name(char *line, char **env)
 {
 	char	*s;
+	char	**ret;
 
 	if (!line)
 		return (NULL);

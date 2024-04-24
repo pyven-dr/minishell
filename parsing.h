@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:08:58 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/04/22 20:35:49 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/04/23 03:28:35 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ void		insert_node(t_tree *node, t_operand operand, char \
 bool		is_whitespace(char c);
 bool		is_special(char c);
 bool		is_quoted(t_quote *scope, char c);
-bool		is_quoted_sup(t_quote *scope, char c, char **str);
+bool		is_quoted_sup(t_quote *scope, char c);
+int			ft_strncmp_improved(const char *s1, char **s2, size_t n);
 t_operand	is_operand(char **line);
 char		*strdup_to_next_operand(char **line, t_parsing *pars);
 char		*strdup_to_next_space(char **line, t_parsing *pars);

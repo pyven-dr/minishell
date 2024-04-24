@@ -6,45 +6,46 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 13:31:26 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/04/22 23:06:43 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/04/23 05:06:40 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-#include "string.h"
 
 static char	*strdup_to_next_asterism(char **line);
 static char	*improved_strstr(char *big, char *little);
 static int	check_strstr(char **name, char **file, char **temp);
 
-char	**ft_wildcard(char *line)
-{
-	DIR				*current;
-	struct dirent	*file;
+// char	**ft_wildcard(char *line)
+// {
+// 	DIR				*current;
+// 	struct dirent	*file;
 
-	current = opendir(".");
-	if (!current)
-		printf("ALED");
-	file = readdir(current);
-	while (file)
-	{
+// 	current = opendir(".");
+// 	if (!current)
+// 		printf("ALED");
+// 	file = readdir(current);
+// 	while (file)
+// 	{
 		
-	}
-	closedir(current);
-}
+// 	}
+// 	closedir(current);
+// }
 
 bool	is_valid_name(char *name, char *file)
 {
-	size_t	i;
 	char	*temp;
 	int		ret;
 
-	i = 0;
 	if (*name != '*')
-		while (name[i] && name[i] != '*')
-			i++;
-	if (*name != '*' && ft_strncmp(name, file, i))
-			return (false);
+	{
+		temp = strdup_to_next_asterism(&name);
+		if (!temp)
+			printf("ALED\n");
+		if (ft_strncmp_improved(temp, &file, strlen(temp)))
+			return (free(temp), false);
+		free(temp);
+	}
 	while (1)
 	{
 		while (*name && *name == '*')
@@ -55,17 +56,15 @@ bool	is_valid_name(char *name, char *file)
 		if (!temp)
 			printf("ALED\n");
 		ret = check_strstr(&name, &file, &temp);
-		if (ret == 0)
-			return (false);
-		else if (ret == 1)
-			return (true);
+		if (ret != 2)
+			return (ret);
 	}
 }
 
 static int	check_strstr(char **name, char **file, char **temp)
 {
 	*file = improved_strstr(*file, *temp);
-	if (!file)
+	if (!*file)
 		return (free(*temp), 0);
 	else if (!**file && !**name)
 		return (free(*temp), 1);
@@ -107,14 +106,14 @@ static char	*strdup_to_next_asterism(char **line)
 	i = 0;
 	j = 0;
 	head = *line;
-	while ((*line)[i] && (is_quoted_sup(&scope, (*line)[i], line) || (*line)[i] != '*'))
+	while ((*line)[i] && (is_quoted(&scope, (*line)[i]) || (*line)[i] != '*'))
 		i++;
 	str = malloc((i + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
 	i = 0;
 	*line = head;
-	while (**line && (is_quoted_sup(&scope, **line, line) || **line != '*'))
+	while (**line && (is_quoted(&scope, **line) || **line != '*'))
 	{
 		str[i] = **line;
 		i++;
