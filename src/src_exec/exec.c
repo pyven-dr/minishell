@@ -6,7 +6,7 @@
 /*   By: pyven-dr <pyven-dr@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:01:47 by pyven-dr          #+#    #+#             */
-/*   Updated: 2024/03/20 00:01:47 by pyven-dr         ###   ########.fr       */
+/*   Updated: 2024/04/25 15:31:28 by pyven-dr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	exec(t_tree *node, t_utils *utils)
 			free(split_cmd);
 			return (ret_value);
 		}
-		split_cmd[0] = get_cmd_path(split_cmd[0]);
+		split_cmd[0] = get_cmd_path(split_cmd[0], utils->env_vector);
 		if (split_cmd[0] == NULL)
 		{
 			ft_putendl_fd("Command not found", 2);
