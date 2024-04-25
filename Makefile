@@ -60,18 +60,20 @@ PIPES_SRC = create_pipe.c \
 			redirect_fd.c \
 			exec_node_pipe.c
 
-BUILTINS_SRC = echo.c \
+EXPORT_SRC = check_arg_env.c \
+			 display_env.c \
+			 export.c \
+			 get_env_line.c \
+			 inset_env.c
+
+BUILTINS_SRC = $(addprefix export/, $(EXPORT_SRC)) \
+			   echo.c \
 			   check_builtins.c \
 			   pwd.c \
 			   exit.c \
 			   nb_args.c \
 			   env.c \
 			   unset.c \
-			   export.c \
-			   get_env_line.c \
-			   display_env.c \
-			   check_arg_env.c \
-			   inset_env.c \
 
 SRC = $(addprefix src_exec/find_command/, $(FIND_CMD_SRC)) \
 	  $(addprefix src_exec/heredocs/, $(HEREDOCS_SRC)) \

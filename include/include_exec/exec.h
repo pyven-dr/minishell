@@ -6,7 +6,7 @@
 /*   By: pyven-dr <pyven-dr@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 01:32:49 by pyven-dr          #+#    #+#             */
-/*   Updated: 2024/04/25 15:03:39 by pyven-dr         ###   ########.fr       */
+/*   Updated: 2024/04/25 15:33:52 by pyven-dr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int		ft_getenv(char *name, t_vector *env_vector);
 
 char	*check_absolute_path(char *cmd);
 char	*find_command(char **path, char *command);
-char	*get_cmd_path(char *command);
+char	*get_cmd_path(char *command, t_vector *env_vector);
 
 // Operators //
 
