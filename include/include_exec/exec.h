@@ -6,7 +6,7 @@
 /*   By: pyven-dr <pyven-dr@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 01:32:49 by pyven-dr          #+#    #+#             */
-/*   Updated: 2024/04/18 17:45:15 by pyven-dr         ###   ########.fr       */
+/*   Updated: 2024/04/25 15:03:39 by pyven-dr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,10 @@ int		exit_builtin(char **args, t_utils *utils);
 int		env(t_vector *env);
 int		unset(char **args, t_utils *utils);
 int		export(char **args, t_utils *utils);
+int		get_env_line(char *arg, t_env *env);
+int		display_env(t_vector *env);
+int		check_arg_env(char *arg);
+int		add_env(char *arg, t_vector *env_vector);
+int		replace_env(t_vector *env_vector, char *arg);
 
 #endif

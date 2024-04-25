@@ -68,6 +68,10 @@ BUILTINS_SRC = echo.c \
 			   env.c \
 			   unset.c \
 			   export.c \
+			   get_env_line.c \
+			   display_env.c \
+			   check_arg_env.c \
+			   inset_env.c \
 
 SRC = $(addprefix src_exec/find_command/, $(FIND_CMD_SRC)) \
 	  $(addprefix src_exec/heredocs/, $(HEREDOCS_SRC)) \
