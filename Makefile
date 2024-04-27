@@ -66,7 +66,11 @@ EXPORT_SRC = check_arg_env.c \
 			 get_env_line.c \
 			 inset_env.c
 
+CD_SRC = cd.c \
+		 check_args.c \
+
 BUILTINS_SRC = $(addprefix export/, $(EXPORT_SRC)) \
+			   $(addprefix cd/, $(CD_SRC)) \
 			   echo.c \
 			   check_builtins.c \
 			   pwd.c \
