@@ -68,6 +68,8 @@ EXPORT_SRC = check_arg_env.c \
 
 CD_SRC = cd.c \
 		 check_args.c \
+		 cdpath.c \
+		 init_cdpath.c \
 
 BUILTINS_SRC = $(addprefix export/, $(EXPORT_SRC)) \
 			   $(addprefix cd/, $(CD_SRC)) \
@@ -118,7 +120,7 @@ $(NAME): $(OBJ) $(LIBFT_DIR)/$(LIBFT) $(FT_PRINTF_DIR)/$(FT_PRINTF)
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c $(LIBFT_DIR)/$(LIBFT) $(FT_PRINTF_DIR)/$(FT_PRINTF)
 	mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) $(DFLAGS) $(IFLAGS) -c $< -o $@ -lreadline
+	$(CC) $(CFLAGS) $(DFLAGS) $(IFLAGS) -c $< -o $@
 
 $(LIBFT_DIR)/$(LIBFT): FORCE
 	$(MAKE) -C $(LIBFT_DIR) $(LIBFT)

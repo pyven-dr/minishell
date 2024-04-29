@@ -17,7 +17,7 @@ int	check_first_component(char *directory)
 	int	i;
 
 	i = 0;
-	while (directory[i] != '\0' && directory[i] == '.')
+	while (directory[i] == '.')
 		i++;
 	if (i == 2 || i == 1)
 		return (0);
@@ -27,16 +27,15 @@ int	check_first_component(char *directory)
 int	cd(char **args, t_utils *utils)
 {
 	char	*directory;
-	char	*curpath;
+	char	*curpath = NULL;
 
 	directory = check_args_cd(args, utils);
 	if (directory == NULL)
 		return (1);
-	if (directory[0] == '/')
-		curpath = directory;
-	else if (check_first_component(directory) == 0)
+	if (directory[0] == '/' || check_first_component(directory) == 0)
 		curpath = directory;
 	else
-		
+		split_cdpath(utils);
+	printf("%s\n", curpath);
 	return (0);
 }
