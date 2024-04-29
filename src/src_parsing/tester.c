@@ -1,4 +1,5 @@
 #include "parsing.h"
+<<<<<<< HEAD
 #include "exec.h"
 
 int main(int argc, char **argv, char **envp)
@@ -34,6 +35,20 @@ int main(int argc, char **argv, char **envp)
 				;
 		}
 		del_vector(utils.fds_vector, NULL);
+=======
+
+int main(void)
+{
+    char    *str;
+	int		i = 0;
+	t_tree	*tree;
+	
+	while (i < 1)
+	{
+    	str = readline("minishell$");
+		tree = parse(str);
+		print_tree(tree, 0);
+>>>>>>> parsing
 		free_tree(&tree);
 		i++;
 	}
