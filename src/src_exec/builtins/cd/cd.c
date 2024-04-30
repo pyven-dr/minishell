@@ -16,15 +16,20 @@ char	*add_pwd(char *curpath)
 {
 	char	*pwd;
 	char	*new_curpath;
+	char	*temp_curpath;
 
 	if (curpath[0] == '/')
 		return (curpath);
+	temp_curpath = ft_strjoin("/", curpath);
+	free(curpath);
+	if (temp_curpath == NULL)
+		return (NULL);
 	pwd = getcwd(NULL, 0);
 	if (pwd == NULL)
 		return (NULL);
-	new_curpath = ft_strjoin(pwd, curpath);
+	new_curpath = ft_strjoin(pwd, temp_curpath);
 	free(pwd);
-	free(curpath);
+	free(temp_curpath);
 	if (new_curpath == NULL)
 		return (NULL);
 	return (new_curpath);
@@ -57,6 +62,8 @@ int	cd(char **args, t_utils *utils)
 	if (curpath == NULL)
 		return (1);
 	curpath = add_pwd(curpath);
+	if (curpath == NULL)
+		return (1);
 	printf("curpath = %s\n", curpath);
 	free(curpath);
 	return (0);

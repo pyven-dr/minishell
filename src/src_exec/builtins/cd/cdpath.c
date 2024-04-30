@@ -45,6 +45,7 @@ char	*check_cdpath(t_utils *utils, char *directory)
 	char	*path;
 
 	i = 0;
+	cdpath = NULL;
 	return_val = split_cdpath(&cdpath, utils);
 	if (return_val == 1)
 		return (NULL);
@@ -56,10 +57,11 @@ char	*check_cdpath(t_utils *utils, char *directory)
 		if (return_val == 0)
 		{
 			path = ft_strjoin(cdpath[i], directory);
-			free_cdpath(cdpath);
-			return (path);
+			return (free_cdpath(cdpath), path);
 		}
 		i++;
 	}
+	if (cdpath != NULL)
+		free_cdpath(cdpath);
 	return (ft_strdup(directory));
 }
