@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 00:25:13 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/04/30 00:25:14 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/04/30 22:37:18 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static size_t	get_size_tab(t_vector *double_tabs);
 static char	**get_all_values(t_vector *double_tabs);
-static char	**split_all_value(t_vector *wildcard);
+static char	**split_all_values(t_vector *wildcard);
 
 char	**expand(char *line, t_vector *env)
 {
@@ -35,10 +35,10 @@ char	**expand(char *line, t_vector *env)
 	wildcard = ft_wildcard(expanded_line);
 	if (!wildcard)
 		return (NULL);
-	return (get_all_values(wildcard));
+	return (split_all_values(wildcard));
 }
 
-static char	**split_all_value(t_vector *wildcard)
+static char	**split_all_values(t_vector *wildcard)
 {
 	char		**tab;
 	size_t		i;
@@ -53,7 +53,7 @@ static char	**split_all_value(t_vector *wildcard)
 		tab = ft_split_quoted(get_elem_vector(wildcard, i));
 		if (!tab)
 			return (NULL);
-		if (add_vector(double_tabs, tab, free_tab))
+		if (add_vector(double_tabs, (void *)tab, free_tab))
 			return (NULL);
 		i++;
 	}

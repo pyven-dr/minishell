@@ -31,6 +31,7 @@ PARSING_SRC = characters.c \
 			  remove_quote.c \
 			  wildcard.c \
 			  utils.c \
+			  tester.c \
 
 EXEC_SRC = exec.c \
 	  	   exec_cmd.c \
