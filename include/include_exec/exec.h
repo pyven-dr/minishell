@@ -22,6 +22,7 @@
 # include <errno.h>
 # include <sys/wait.h>
 # include <fcntl.h>
+# include <sys/stat.h>
 
 typedef struct s_utils
 {
@@ -97,6 +98,7 @@ int		replace_env(t_vector *env_vector, char *arg);
 
 int		cd(char **args, t_utils *utils);
 char	*check_args_cd(char **args, t_utils *utils);
-char	**split_cdpath(t_utils *utils);
+int		split_cdpath(char ***cdpath_split, t_utils *utils);
+char	*check_cdpath(t_utils *utils, char *directory);
 
 #endif

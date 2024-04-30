@@ -31,7 +31,7 @@ static int	fill_cdpath(t_vector *cdpath, char *base_cdpath)
 	i = 0;
 	while (base_cdpath[i] != '\0')
 	{
-		if (base_cdpath[i] == ':' && base_cdpath[i - 1] != '/')
+		if (base_cdpath[i] == ':' && (i == 0 || base_cdpath[i - 1] != '/'))
 			if (add_vector(cdpath, "/", NULL) == -1)
 				return (-1);
 		if (add_vector(cdpath, &base_cdpath[i], NULL) == -1)
@@ -55,42 +55,47 @@ static t_vector	*init_cdpath(t_utils *utils)
 		return (NULL);
 	base_cdpath = get_cdpath(utils->env_vector);
 	if (base_cdpath == NULL)
-		return (NULL);
+		return (cdpath);
 	if (base_cdpath[0] == ':')
 		if (add_vector(cdpath, ".", NULL) == -1)
-			return (NULL);
+			return (del_vector(cdpath, NULL), NULL);
 	i = fill_cdpath(cdpath, base_cdpath);
 	if (i == -1)
-		return (NULL);
+		return (del_vector(cdpath, NULL), NULL);
 	if (base_cdpath[i - 1] == ':')
 		if (add_vector(cdpath, ".", NULL) == -1)
-			return (NULL);
+			return (del_vector(cdpath, NULL), NULL);
 	if (base_cdpath[i - 1] != '/')
 		if (add_vector(cdpath, "/", NULL) == -1)
-			return (NULL);
+			return (del_vector(cdpath, NULL), NULL);
 	return (cdpath);
 }
 
-char	**split_cdpath(t_utils *utils)
+int	split_cdpath(char ***cdpath_split, t_utils *utils)
 {
 	char		*cdpath;
-	//char		**split_cdpath;
 	t_vector	*vector;
-	size_t 		i;
-	char 		letter;
+	size_t		i;
+	char		letter;
 
 	i = 0;
 	vector = init_cdpath(utils);
+	if (vector == NULL)
+		return (1);
+	if (vector->size == 0)
+		return (del_vector(vector, NULL), 2);
 	cdpath = ft_calloc(vector->size + 1, sizeof(char));
 	while (i < vector->size)
 	{
-		letter = *(char*)get_elem_vector(vector, i);
+		letter = *(char *)get_elem_vector(vector, i);
 		cdpath[i] = letter;
 		i++;
 	}
+	del_vector(vector, NULL);
 	printf("%s\n", cdpath);
-	//split_cdpath = ft_split(cdpath, ':');
-	//if (split_cdpath == NULL)
-		return (NULL);
-	//return (split_cdpath);
+	*cdpath_split = ft_split(cdpath, ':');
+	free(cdpath);
+	if (*cdpath_split == NULL)
+		return (1);
+	return (0);
 }

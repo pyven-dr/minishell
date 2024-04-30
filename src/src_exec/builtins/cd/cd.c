@@ -12,6 +12,24 @@
 
 #include "exec.h"
 
+char	*add_pwd(char *curpath)
+{
+	char	*pwd;
+	char	*new_curpath;
+
+	if (curpath[0] == '/')
+		return (curpath);
+	pwd = getcwd(NULL, 0);
+	if (pwd == NULL)
+		return (NULL);
+	new_curpath = ft_strjoin(pwd, curpath);
+	free(pwd);
+	free(curpath);
+	if (new_curpath == NULL)
+		return (NULL);
+	return (new_curpath);
+}
+
 int	check_first_component(char *directory)
 {
 	int	i;
@@ -27,15 +45,19 @@ int	check_first_component(char *directory)
 int	cd(char **args, t_utils *utils)
 {
 	char	*directory;
-	char	*curpath = NULL;
+	char	*curpath;
 
 	directory = check_args_cd(args, utils);
 	if (directory == NULL)
 		return (1);
 	if (directory[0] == '/' || check_first_component(directory) == 0)
-		curpath = directory;
+		curpath = ft_strdup(directory);
 	else
-		split_cdpath(utils);
-	printf("%s\n", curpath);
+		curpath = check_cdpath(utils, directory);
+	if (curpath == NULL)
+		return (1);
+	curpath = add_pwd(curpath);
+	printf("curpath = %s\n", curpath);
+	free(curpath);
 	return (0);
 }
