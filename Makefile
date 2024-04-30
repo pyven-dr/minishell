@@ -25,7 +25,12 @@ PARSING_SRC = characters.c \
 			  clear.c \
 			  fill_file.c \
 			  paranthesis.c \
-			  tester.c
+			  expand.c \
+			  ft_split_quoted.c \
+			  get_name.c \
+			  remove_quote.c \
+			  wildcard.c \
+			  utils.c \
 
 EXEC_SRC = exec.c \
 	  	   exec_cmd.c \
@@ -114,7 +119,7 @@ $(NAME): $(OBJ) $(LIBFT_DIR)/$(LIBFT) $(FT_PRINTF_DIR)/$(FT_PRINTF)
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c $(LIBFT_DIR)/$(LIBFT) $(FT_PRINTF_DIR)/$(FT_PRINTF)
 	mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) $(DFLAGS) $(IFLAGS) -c $< -o $@ -lreadline
+	$(CC) $(CFLAGS) $(DFLAGS) $(IFLAGS) -c $< -o $@
 
 $(LIBFT_DIR)/$(LIBFT): FORCE
 	$(MAKE) -C $(LIBFT_DIR) $(LIBFT)

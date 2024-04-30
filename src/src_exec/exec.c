@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pyven-dr <pyven-dr@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:01:47 by pyven-dr          #+#    #+#             */
-/*   Updated: 2024/04/25 15:31:28 by pyven-dr         ###   ########.fr       */
+/*   Updated: 2024/04/30 02:17:44 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
+#include "parsing.h"
 
 int	exec(t_tree *node, t_utils *utils)
 {
@@ -19,7 +20,7 @@ int	exec(t_tree *node, t_utils *utils)
 
 	if (node->operand == CMD)
 	{
-		split_cmd = ft_split(node->name, ' '); //Temporary split waiting for expand
+		split_cmd = expand(node->name, utils->env_vector);
 		ret_value = check_builtins(split_cmd, utils);
 		if (ret_value != -127)
 		{

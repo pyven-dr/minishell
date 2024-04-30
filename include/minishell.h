@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 14:02:22 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/04/30 00:06:41 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/04/30 02:12:18 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,5 @@ typedef struct s_is_quoted
 	char	*s;
 	bool	is_quoted;
 }	t_quoted;
-
-
-char	*ft_expand(char *line, char **env);
 
 #endif

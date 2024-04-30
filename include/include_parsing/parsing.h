@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:08:58 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/04/30 00:03:40 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/04/30 02:12:24 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PARSING_H
 
 # include "minishell.h"
+# include "libft.h"
 # include <stdlib.h>
 # include <stddef.h>
 # include <dirent.h>
@@ -62,15 +63,15 @@ void		fill_operator(t_parsing *pars, char **line);
 void		fill_cmd(t_parsing *pars, char **line);
 void		free_tree(t_tree **tree);
 void		clean_exit(t_parsing *pars, char **line, int exit_code);
-char		**get_name(char *line, char **env);
+char		*get_name(char *line, t_vector *env);
 char		*strdup_var(char **line);
-char		*ft_expand(char *line, char **env);
+char		*ft_strjoin_free(char *s1, char *s2);
+char		*remove_quote(char *s);
+char		**ft_split_quoted(char *s);
+bool		there_is_a_wildcard(char *s);
+void		free_tab(char **tab);
+char		**expand(char *line, t_vector *env);
 
-//libft functiuns
-int			ft_strncmp(const char *s1, const char *s2, size_t n);
-size_t		ft_strlen(char *s);
-char		*ft_strjoin(char *s1, char *s2);
-char		*ft_strdup(char *s);
 #include <stdio.h>
 #include <unistd.h>
 void	print_node(t_tree *node);
