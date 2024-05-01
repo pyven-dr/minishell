@@ -87,7 +87,7 @@ int		unset(char **args, t_utils *utils);
 
 // Export //
 
-int		export(char **args, t_utils *utils);
+int		export(char **arg, t_utils *utils);
 int		get_env_line(char *arg, t_env *env);
 int		display_env(t_vector *env);
 int		check_arg_env(char *arg);

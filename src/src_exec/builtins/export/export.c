@@ -25,7 +25,7 @@ static int	insert_in_env(char *arg, t_vector *env_vector)
 	return (0);
 }
 
-int	export(char **args, t_utils *utils)
+int	export(char **arg, t_utils *utils)
 {
 	int	arg_nb;
 	int	i;
@@ -33,20 +33,20 @@ int	export(char **args, t_utils *utils)
 
 	i = 1;
 	return_val = 0;
-	arg_nb = nb_args(args);
+	arg_nb = nb_args(arg);
 	if (arg_nb == 1)
 		return (display_env(utils->env_vector));
-	while (args[i] != NULL)
+	while (arg[i] != NULL)
 	{
-		if (check_arg_env(args[i]) == 1)
+		if (check_arg_env(arg[i]) == 1)
 		{
 			return_val = 1;
-			if (ft_printf(2, "export: '%s': not a valid identifier\n", \
-				args[i]) == -1)
+			if (ft_printf(2, \
+			"minishell: export: '%s': not a valid identifier\n", arg[i]) == -1)
 				return (1);
 		}
 		else
-			if (insert_in_env(args[i], utils->env_vector) == 1)
+			if (insert_in_env(arg[i], utils->env_vector) == 1)
 				return (1);
 		i++;
 	}
