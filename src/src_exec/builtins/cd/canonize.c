@@ -50,5 +50,8 @@ char	*canonize(char *curpath, char *directory)
 	curpath = add_fisrt_slash(curpath, start_slash);
 	if (curpath == NULL)
 		return (NULL);
+	curpath = check_pathmax(curpath, directory);
+	if (curpath == NULL)
+		return (NULL);
 	return (curpath);
 }

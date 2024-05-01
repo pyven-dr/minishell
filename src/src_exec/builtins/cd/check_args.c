@@ -21,7 +21,7 @@ static char	*get_home(t_utils *utils)
 	home_pos = ft_getenv("HOME", utils->env_vector);
 	if (home_pos == -1)
 	{
-		ft_printf(2, "cd: HOME not set\n");
+		ft_printf(2, "minishell: cd: HOME not set\n");
 		return (NULL);
 	}
 	home = get_elem_vector(utils->env_vector, home_pos);
@@ -41,7 +41,7 @@ char	*check_args_cd(char **args, t_utils *utils)
 	nb = nb_args(args);
 	if (nb > 2)
 	{
-		ft_printf(STDERR_FILENO, "cd: too many arguments\n");
+		ft_printf(STDERR_FILENO, "minishell: cd: too many arguments\n");
 		return (NULL);
 	}
 	if (nb == 1)

@@ -75,7 +75,8 @@ CD_SRC = cd.c \
 		 remove_dotdot.c \
 		 join_path.c \
 		 check_file.c \
-		 add_first_slash.c
+		 add_first_slash.c \
+		 check_pathmax.c
 
 BUILTINS_SRC = $(addprefix export/, $(EXPORT_SRC)) \
 			   $(addprefix cd/, $(CD_SRC)) \
