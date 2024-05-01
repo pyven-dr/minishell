@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 00:58:12 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/04/02 02:03:24 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/05/01 20:17:03 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,12 @@ void	clean_exit(t_parsing *pars, char **line, int exit_code)
 		exit_code = 2;
 	}
 	exit(exit_code);
+}
+
+void	free_value(void *value)
+{
+	char	**line;
+	
+	line = value;
+	free(*line);
 }

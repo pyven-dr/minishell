@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 16:17:22 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/04/25 18:05:59 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/05/01 20:16:07 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,6 @@ char	*remove_quote(char *s)
 			i++;
 	}
 	free (s);
-	str[i] = s[i];
+	str[i] = '\0';
 	return (str);
 }

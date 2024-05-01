@@ -17,7 +17,8 @@ IFLAGS = \
 		 -I $(LIBFT_DIR)/$(INCLUDE_DIR) \
 		 -I $(FT_PRINTF_DIR)/$(INCLUDE_DIR)
 
-PARSING_SRC = characters.c \
+PARSING_SRC = tester.c \
+			  characters.c \
 			  fill_cmd.c \
 			  fill_operand.c \
 			  parsing.c \
@@ -31,7 +32,6 @@ PARSING_SRC = characters.c \
 			  remove_quote.c \
 			  wildcard.c \
 			  utils.c \
-			  tester.c \
 
 EXEC_SRC = exec.c \
 	  	   exec_cmd.c \

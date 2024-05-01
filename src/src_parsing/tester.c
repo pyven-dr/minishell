@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tester.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sabitbol <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 22:34:51 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/04/30 22:35:01 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/04/30 23:08:49 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int main(int argc, char **argv, char **envp)
 				;
 		}
 		del_vector(utils.fds_vector, NULL);
-		free_tree(&tree);
+		//free_tree(&tree);
 		i++;
 	}
 }

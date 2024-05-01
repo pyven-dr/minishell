@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:08:58 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/04/30 22:25:53 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/05/01 20:17:29 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ bool		there_is_a_wildcard(char *s);
 void		free_tab(void *content);
 char		**expand(char *line, t_vector *env);
 t_vector	*ft_wildcard(char *line);
+void		free_value(void *value);
 
 #include <stdio.h>
 #include <unistd.h>

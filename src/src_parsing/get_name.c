@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:26:00 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/04/30 02:16:01 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/05/01 20:19:06 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ static char	*ft_expand(char *line, t_vector *env)
 	if (!line)
 		return (NULL);
 	i = ft_getenv(line, env);
+	if (i == -1)
+		return (NULL);
 	name = get_elem_vector(env, i);
 	free(line);
 	return (name->value);
@@ -49,14 +51,14 @@ char	*strdup_var(char **line)
 
 	i = 0;
 	while ((*line)[i] && !is_special((*line)[i]) && (*line)[i] != '$' \
-	&& !is_whitespace((*line)[i]))
+	&& !is_whitespace((*line)[i]) && (*line)[i] != '*')
 		i++;
 	s = malloc(sizeof(char) * (i + 1));
 	if (!s)
 		return (NULL);
 	i = 0;
 	while (**line && !is_special(**line) && **line != '$' \
-	&& !is_whitespace(**line))
+	&& !is_whitespace(**line) && **line != '*')
 	{
 		s[i] = **line;
 		i++;
@@ -120,7 +122,8 @@ static char	*replace_vars(char *line, t_vector *env)
 				return (write(2, ERR_MALLOC, 25), NULL);
 			line += i + 1;
 			var = ft_expand(strdup_var(&line), env);
-			s = ft_strjoin_free(s, var);
+			if (var != NULL)
+				s = ft_strjoin_free(s, var);
 			if (!s)
 				return (write(2, ERR_MALLOC, 25), NULL);
 			i = -1;
