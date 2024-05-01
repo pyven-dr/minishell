@@ -70,6 +70,11 @@ CD_SRC = cd.c \
 		 check_args.c \
 		 cdpath.c \
 		 init_cdpath.c \
+		 canonize.c \
+		 remove_dot.c \
+		 remove_dotdot.c \
+		 join_path.c \
+		 check_file.c \
 
 BUILTINS_SRC = $(addprefix export/, $(EXPORT_SRC)) \
 			   $(addprefix cd/, $(CD_SRC)) \

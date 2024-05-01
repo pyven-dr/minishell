@@ -64,6 +64,7 @@ int	cd(char **args, t_utils *utils)
 	curpath = add_pwd(curpath);
 	if (curpath == NULL)
 		return (1);
+	curpath = canonize(curpath, directory);
 	printf("curpath = %s\n", curpath);
 	free(curpath);
 	return (0);

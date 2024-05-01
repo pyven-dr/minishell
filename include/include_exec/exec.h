@@ -100,5 +100,11 @@ int		cd(char **args, t_utils *utils);
 char	*check_args_cd(char **args, t_utils *utils);
 int		split_cdpath(char ***cdpath_split, t_utils *utils);
 char	*check_cdpath(t_utils *utils, char *directory);
+char	*canonize(char *curpath, char *directory);
+void	remove_dot(char ***components, int nb_components);
+int		remove_dotdot(char ***components, int nb_components, char *directory);
+char	*join_path(char **components, int last, int nb_components);
+int		check_file(char **components, int last, int nb_components,\
+					char *directory);
 
 #endif
