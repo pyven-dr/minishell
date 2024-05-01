@@ -92,7 +92,6 @@ int	split_cdpath(char ***cdpath_split, t_utils *utils)
 		i++;
 	}
 	del_vector(vector, NULL);
-	printf("%s\n", cdpath);
 	*cdpath_split = ft_split(cdpath, ':');
 	free(cdpath);
 	if (*cdpath_split == NULL)

@@ -12,7 +12,7 @@
 
 #include "exec.h"
 
-static int	check_path(char *elem, char *path)
+static int	check_path(char *elem, char *path, int *print_path)
 {
 	struct stat	file;
 	char		*join_path;
@@ -24,11 +24,15 @@ static int	check_path(char *elem, char *path)
 	{
 		free(join_path);
 		if (S_ISDIR(file.st_mode) != 0)
+		{
+			if (ft_strcmp(elem, "./") != 0)
+				*print_path = 1;
 			return (0);
-		return (2);
+		}
+		return (3);
 	}
 	free(join_path);
-	return (2);
+	return (3);
 }
 
 static void	free_cdpath(char **cdpath)
@@ -37,7 +41,7 @@ static void	free_cdpath(char **cdpath)
 	free(cdpath);
 }
 
-char	*check_cdpath(t_utils *utils, char *directory)
+char	*check_cdpath(t_utils *utils, char *directory, int *print_path)
 {
 	char	**cdpath;
 	int		i;
@@ -51,7 +55,7 @@ char	*check_cdpath(t_utils *utils, char *directory)
 		return (NULL);
 	while (return_val != 2 && cdpath[i] != NULL)
 	{
-		return_val = check_path(cdpath[i], directory);
+		return_val = check_path(cdpath[i], directory, print_path);
 		if (return_val == 1)
 			return (free_cdpath(cdpath), NULL);
 		if (return_val == 0)

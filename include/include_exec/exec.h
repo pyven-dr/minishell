@@ -99,7 +99,7 @@ int		replace_env(t_vector *env_vector, char *arg);
 int		cd(char **args, t_utils *utils);
 char	*check_args_cd(char **args, t_utils *utils);
 int		split_cdpath(char ***cdpath_split, t_utils *utils);
-char	*check_cdpath(t_utils *utils, char *directory);
+char	*check_cdpath(t_utils *utils, char *directory, int *print_path);
 char	*canonize(char *curpath, char *directory);
 void	remove_dot(char ***components, int nb_components);
 int		remove_dotdot(char ***components, int nb_components, char *directory);
@@ -111,5 +111,7 @@ char	*check_pathmax(char *curpath, char *directory);
 char	*add_pwd(char *curpath);
 int		change_env(char *pwd, char *oldpwd, t_utils *utils);
 int		change_dir(char *curpath, t_utils *utils);
+int		check_curpath(char *curpath, char *directory);
+char	*get_curpath(char *directory, t_utils *utils, int *print_path);
 
 #endif

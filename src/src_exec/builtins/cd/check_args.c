@@ -41,7 +41,7 @@ char	*check_args_cd(char **args, t_utils *utils)
 	nb = nb_args(args);
 	if (nb > 2)
 	{
-		ft_printf(STDERR_FILENO, "minishell: cd: too many arguments\n");
+		ft_printf(2, "minishell: cd: too many arguments\n");
 		return (NULL);
 	}
 	if (nb == 1)
