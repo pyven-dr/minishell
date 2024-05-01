@@ -25,7 +25,7 @@ static char	*add_slash_pwd(char *pwd)
 static char	*symplify_path(char *curpath, char *directory)
 {
 	char	*pwd;
-	char 	*pwd_pos;
+	char	*pwd_pos;
 	char	*temp;
 
 	pwd = getcwd(NULL, 0);

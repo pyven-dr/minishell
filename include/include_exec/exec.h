@@ -108,5 +108,8 @@ int		check_file(char **components, int last, int nb_components, \
 					char *directory);
 char	*add_fisrt_slash(char *curpath, int start_slash);
 char	*check_pathmax(char *curpath, char *directory);
+char	*add_pwd(char *curpath);
+int		change_env(char *pwd, char *oldpwd, t_utils *utils);
+int		change_dir(char *curpath, t_utils *utils);
 
 #endif
