@@ -72,7 +72,24 @@ EXPORT_SRC = check_arg_env.c \
 			 get_env_line.c \
 			 inset_env.c
 
+CD_SRC = cd.c \
+		 check_args.c \
+		 cdpath.c \
+		 init_cdpath.c \
+		 canonize.c \
+		 remove_dot.c \
+		 remove_dotdot.c \
+		 join_path.c \
+		 check_file.c \
+		 add_first_slash.c \
+		 check_pathmax.c \
+		 add_pwd.c \
+		 change_env.c \
+		 change_dir.c \
+		 get_curpath.c
+
 BUILTINS_SRC = $(addprefix export/, $(EXPORT_SRC)) \
+			   $(addprefix cd/, $(CD_SRC)) \
 			   echo.c \
 			   check_builtins.c \
 			   pwd.c \

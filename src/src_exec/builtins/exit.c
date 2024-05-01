@@ -43,7 +43,7 @@ int	exit_builtin(char **args, t_utils *utils)
 
 	if (nb_args(args) > 2)
 	{
-		ft_putstr_fd("exit: too many arguments\n", 2);
+		ft_putstr_fd("minishell: exit: too many arguments\n", 2);
 		return (1);
 	}
 	if (nb_args(args) == 1)
@@ -55,7 +55,7 @@ int	exit_builtin(char **args, t_utils *utils)
 	}
 	if (check_arg(args[1]) == 1)
 	{
-		ft_putstr_fd("exit: numeric argument required\n", 2);
+		ft_putstr_fd("minishell: exit: numeric argument required\n", 2);
 		exit(2);
 	}
 	exit_status = ft_atoi(args[1]);
