@@ -23,7 +23,7 @@ int	check_file(char **components, int last, int nb_components, char *directory)
 	if (stat(path, &file) == -1)
 	{
 		free(path);
-		ft_printf(2, "minishell: cd: %s: No such file or directory\n",\
+		ft_printf(2, "minishell: cd: %s: No such file or directory\n", \
 					directory);
 		return (1);
 	}

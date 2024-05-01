@@ -12,29 +12,13 @@
 
 #include "exec.h"
 
-char	*add_fisrt_slash(char *curpath, int start_slash)
+static void	free_components(char **components, int nb_components)
 {
-	char	*temp;
-
-	if (start_slash == 1)
-	{
-		temp = curpath;
-		curpath = ft_strjoin("/", temp);
-		free(temp);
-		if (curpath == NULL)
-			return (NULL);
-	}
-	return (curpath);
-}
-
-void	free_components(char **components, int nb_components)
-{
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < nb_components)
 	{
-		printf("%s\n",components[i]);
 		free(components[i]);
 		i++;
 	}

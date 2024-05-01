@@ -12,11 +12,27 @@
 
 #include "exec.h"
 
+char	*join_components(char *component, char *path)
+{
+	char	*temp;
+
+	temp = path;
+	path = ft_strjoin(temp, "/");
+	free(temp);
+	if (path == NULL)
+		return (NULL);
+	temp = path;
+	path = ft_strjoin(temp, component);
+	free(temp);
+	if (path == NULL)
+		return (NULL);
+	return (path);
+}
+
 char	*join_path(char **components, int last, int nb_components)
 {
 	int		i;
 	char	*path;
-	char	*temp;
 
 	i = 0;
 	path = NULL;
@@ -24,14 +40,7 @@ char	*join_path(char **components, int last, int nb_components)
 	{
 		if (components[i] != NULL)
 		{
-			temp = path;
-			path = ft_strjoin(temp, "/");
-			free(temp);
-			if (path == NULL)
-				return (NULL);
-			temp = path;
-			path = ft_strjoin(temp, components[i]);
-			free(temp);
+			path = join_components(components[i], path);
 			if (path == NULL)
 				return (NULL);
 		}

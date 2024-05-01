@@ -104,7 +104,8 @@ char	*canonize(char *curpath, char *directory);
 void	remove_dot(char ***components, int nb_components);
 int		remove_dotdot(char ***components, int nb_components, char *directory);
 char	*join_path(char **components, int last, int nb_components);
-int		check_file(char **components, int last, int nb_components,\
+int		check_file(char **components, int last, int nb_components, \
 					char *directory);
+char	*add_fisrt_slash(char *curpath, int start_slash);
 
 #endif

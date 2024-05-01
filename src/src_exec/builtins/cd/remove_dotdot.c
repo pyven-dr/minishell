@@ -22,8 +22,8 @@ static int	check_dotdot(char **component, int index_component)
 		index_component--;
 	if (component[index_component - 1] != NULL)
 	{
-	if (ft_strcmp(component[index_component - 1], "..") == 0)
-		return (1);
+		if (ft_strcmp(component[index_component - 1], "..") == 0)
+			return (1);
 	}
 	return (0);
 }
@@ -37,17 +37,17 @@ int	remove_dotdot(char ***components, int nb_components, char *directory)
 	{
 		if ((*components)[i] != NULL)
 		{
-		if (check_dotdot(*components, i) == 0)
-		{
-			if (check_file(*components, i, nb_components, directory) == 1)
-				return (1);
-			free((*components)[i]);
-			(*components)[i] = NULL;
-			while ((*components)[i - 1] == NULL && i - 1 > 0)
-				i--;
-			free((*components)[i - 1]);
-			(*components)[i - 1] = NULL;
-		}
+			if (check_dotdot(*components, i) == 0)
+			{
+				if (check_file(*components, i, nb_components, directory) == 1)
+					return (1);
+				free((*components)[i]);
+				(*components)[i] = NULL;
+				while ((*components)[i - 1] == NULL && i - 1 > 0)
+					i--;
+				free((*components)[i - 1]);
+				(*components)[i - 1] = NULL;
+			}
 		}
 		i++;
 	}
