@@ -46,7 +46,7 @@ int main(int argc, char **argv, char **envp)
 				;
 		}
 		del_vector(utils.fds_vector, NULL);
-		//free_tree(&tree);
+		free_tree(&tree);
 		i++;
 	}
 }
