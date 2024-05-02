@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 18:40:08 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/04/24 19:10:26 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/05/02 02:16:23 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	**ft_split_quoted(char *s)
 			if (!tab[i++])
 				return (free_all(tab), free(tab), NULL);
 		}
-		while (*s &&  (is_quoted(&scope, *s) || !is_whitespace(*s)))
+		while (*s && (is_quoted(&scope, *s) || !is_whitespace(*s)))
 			s++;
 	}
 	tab[i] = NULL;
@@ -59,7 +59,7 @@ static size_t	count_words(char *s)
 			s++;
 		if (*s)
 			count++;
-		while (*s &&  (is_quoted(&scope, *s) || !is_whitespace(*s)))
+		while (*s && (is_quoted(&scope, *s) || !is_whitespace(*s)))
 			s++;
 	}
 	return (count);
@@ -74,13 +74,13 @@ static char	*do_word(char *s)
 	scope.d_quote = false;
 	scope.s_quote = false;
 	i = 0;
-	while (s[i] &&  (is_quoted(&scope, s[i]) || !is_whitespace(s[i])))
+	while (s[i] && (is_quoted(&scope, s[i]) || !is_whitespace(s[i])))
 		i++;
 	str = malloc((i + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
 	i = 0;
-	while (s[i] &&  (is_quoted(&scope, s[i]) || !is_whitespace(s[i])))
+	while (s[i] && (is_quoted(&scope, s[i]) || !is_whitespace(s[i])))
 	{
 		str[i] = s[i];
 		i++;

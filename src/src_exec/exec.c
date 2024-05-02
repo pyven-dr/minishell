@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:01:47 by pyven-dr          #+#    #+#             */
-/*   Updated: 2024/04/30 23:12:39 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/05/02 01:50:19 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	exec(t_tree *node, t_utils *utils)
 	if (node->operand == CMD)
 	{
 		split_cmd = expand(node->name, utils->env_vector);
+		if (!split_cmd)
+			printf("ALED");
 		ret_value = check_builtins(split_cmd, utils);
 		if (ret_value != -127)
 		{

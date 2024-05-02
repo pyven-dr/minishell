@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:26:00 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/05/01 20:19:06 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/05/02 02:32:38 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "error.h"
 #include "exec.h"
 
-static char	*replace_vars(char *line, t_vector *env);
+static char	*replace_vars(char *line, t_vector *env, char *s);
 static char	*ft_expand(char *line, t_vector *env);
 
 char	*get_name(char *line, t_vector *env)
@@ -23,7 +23,11 @@ char	*get_name(char *line, t_vector *env)
 
 	if (!line)
 		return (NULL);
-	s = replace_vars(line, env);
+	s = malloc(1 * sizeof(char));
+	if (!s)
+		return (write(2, ERR_MALLOC, 25), NULL);
+	s[0] = '\0';
+	s = replace_vars(line, env, s);
 	if (!s)
 		return (NULL);
 	return (s);
@@ -95,23 +99,16 @@ char	*ft_strjoin_free(char *s1, char *s2)
 	return (free(s1), str);
 }
 
-static char	*replace_vars(char *line, t_vector *env)
+static char	*replace_vars(char *line, t_vector *env, char *s)
 {
-	char	*s;
-	char	*head;
 	char	*var;
-	int		i;
+	size_t	i;
 	t_quote	scope;
 
+	i = -1;
 	scope.s_quote = false;
 	scope.d_quote = false;
-	i = 0;
-	head = line;
-	s = malloc(1 * sizeof(char));
-	if (!s)
-		return (write(2, ERR_MALLOC, 25), NULL);
-	s[0] = '\0';
-	while (line[i])
+	while (line[++i])
 	{
 		is_quoted(&scope, line[i]);
 		if (!scope.s_quote && line[i] == '$' && line[i + 1] != '\0')
@@ -119,21 +116,15 @@ static char	*replace_vars(char *line, t_vector *env)
 			line[i] = '\0';
 			s = ft_strjoin_free(s, line);
 			if (!s)
-				return (write(2, ERR_MALLOC, 25), NULL);
+				return (NULL);
 			line += i + 1;
 			var = ft_expand(strdup_var(&line), env);
 			if (var != NULL)
 				s = ft_strjoin_free(s, var);
 			if (!s)
-				return (write(2, ERR_MALLOC, 25), NULL);
+				return (NULL);
 			i = -1;
 		}
-		i++;
 	}
-	s = ft_strjoin_free(s, line);
-	if (!s)
-		return (write(2, ERR_MALLOC, 25), NULL);
-	line = head;
-	free(line);
-	return (s);
+	return (s = ft_strjoin_free(s, line), s);
 }

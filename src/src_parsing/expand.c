@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 00:25:13 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/05/01 20:16:39 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/05/02 02:16:03 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static char	**split_all_values(char **tab_splitted)
 	char		**tab;
 	size_t		i;
 	t_vector	*double_tabs;
- 
+
 	i = 0;
 	double_tabs = new_vector(1, sizeof(char **));
 	if (!double_tabs)
@@ -96,24 +96,21 @@ static char	**get_all_values(t_vector *double_tabs)
 	if (!return_tab)
 		return (NULL);
 	i = 0;
-	j = 0;
+	j = -1;
 	k = 0;
 	tab = get_elem_vector(double_tabs, i);
 	while (tab)
 	{
-		while ((*tab)[j])
+		while ((*tab)[++j])
 		{
 			return_tab[k] = remove_quote((*tab)[j]);
-			j++;
 			k++;
 		}
-		j = 0;
-		i++;
-		tab = get_elem_vector(double_tabs, i);
+		j = -1;
+		tab = get_elem_vector(double_tabs, ++i);
 	}
-	return_tab[k] = NULL;
 	del_vector(double_tabs, &free_value);
-	return (return_tab);
+	return (return_tab[k] = NULL, return_tab);
 }
 
 static size_t	get_size_tab(t_vector *double_tabs)
@@ -130,7 +127,7 @@ static size_t	get_size_tab(t_vector *double_tabs)
 	while (tab)
 	{
 		while ((*tab)[j])
-		 	j++;
+			j++;
 		count += j;
 		j = 0;
 		i++;

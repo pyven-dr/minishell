@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 16:17:22 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/05/01 20:16:07 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/05/02 02:16:55 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ char	*remove_quote(char *s)
 	head = s;
 	scope.s_quote = false;
 	scope.d_quote = false;
-
 	str = malloc((count_size(s) + 1) * sizeof(char));
 	if (!str)
 		return (NULL);

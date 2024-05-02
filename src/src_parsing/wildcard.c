@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 13:31:26 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/05/01 17:52:56 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/05/02 02:18:06 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ t_vector	*ft_wildcard(char *line)
 		}
 		file = readdir(current);
 	}
-	closedir(current);
-	return (result);
+	return (closedir(current), result);
 }
 
 static bool	is_valid_name(char *name, char *file)
@@ -52,7 +51,7 @@ static bool	is_valid_name(char *name, char *file)
 	char	*temp;
 	int		ret;
 
-if (*name != '*')
+	if (*name != '*')
 	{
 		temp = strdup_to_next_asterism(&name);
 		if (!temp)
@@ -64,7 +63,7 @@ if (*name != '*')
 	while (1)
 	{
 		while (*name && *name == '*')
-				name++;
+			name++;
 		if (!*name)
 			return (true);
 		temp = strdup_to_next_asterism(&name);
