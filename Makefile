@@ -15,7 +15,6 @@ IFLAGS = \
 		 -I $(INCLUDE_DIR)/$(EXEC_INCLUDE_DIR) \
 		 -I $(INCLUDE_DIR)/$(PARSING_INCLUDE_DIR) \
 		 -I $(LIBFT_DIR)/$(INCLUDE_DIR) \
-		 -I $(FT_PRINTF_DIR)/$(INCLUDE_DIR)
 
 PARSING_SRC = tester.c \
 			  characters.c \
@@ -131,26 +130,22 @@ NAME = minishell
 .PHONY: all
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT_DIR)/$(LIBFT) $(FT_PRINTF_DIR)/$(FT_PRINTF)
-	$(CC) -o $(NAME) $(CFLAGS) $(OBJ) $(LIBFT_DIR)/$(LIBFT) $(FT_PRINTF_DIR)/$(FT_PRINTF) -lreadline
+$(NAME): $(OBJ) $(LIBFT_DIR)/$(LIBFT)
+	$(CC) -o $(NAME) $(CFLAGS) $(OBJ) $(LIBFT_DIR)/$(LIBFT) -lreadline
 
 -include $(DEP)
 
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c $(LIBFT_DIR)/$(LIBFT) $(FT_PRINTF_DIR)/$(FT_PRINTF)
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c $(LIBFT_DIR)/$(LIBFT)
 	mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(DFLAGS) $(IFLAGS) -c $< -o $@
 
 $(LIBFT_DIR)/$(LIBFT): FORCE
 	$(MAKE) -C $(LIBFT_DIR) $(LIBFT)
 
-$(FT_PRINTF_DIR)/$(FT_PRINTF): FORCE
-	$(MAKE) -C $(FT_PRINTF_DIR) $(FT_PRINTF)
-
 .PHONY: clean
 clean:
 	$(RM) -r $(BUILD_DIR)
 	@$(MAKE) -C $(LIBFT_DIR) fclean
-	@$(MAKE) -C $(FT_PRINTF_DIR) fclean
 
 .PHONY: fclean
 fclean: clean
