@@ -55,13 +55,20 @@ WRITE_SRC = ft_putchar_fd.c \
 	 		ft_putendl_fd.c \
 	 		ft_putnbr_fd.c
 
+FT_PRINTF_SRC = ft_printf_int.c \
+                ft_putchar.c \
+                ft_putstr.c \
+                ft_printf.c \
+                fill_buffer.c
+
 SRC = get_next_line.c \
 	  $(addprefix vector/, $(VECTOR_SRC)) \
 	  $(addprefix list/, $(LIST_SRC)) \
 	  $(addprefix memory/, $(MEM_SRC)) \
 	  $(addprefix string/, $(STR_SRC)) \
 	  $(addprefix characters/, $(CHAR_SRC)) \
-	  $(addprefix write/, $(WRITE_SRC))
+	  $(addprefix write/, $(WRITE_SRC)) \
+	  $(addprefix ft_printf/, $(FT_PRINTF_SRC))
 
 
 SRC_DIR = src

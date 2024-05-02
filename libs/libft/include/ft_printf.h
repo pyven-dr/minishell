@@ -16,14 +16,12 @@
 # include <unistd.h>
 # include <stdarg.h>
 # include <stdlib.h>
+# include "libft.h"
 
 int		ft_printf(int fd, const	char *format, ...);
-int		ft_putchar(int fd, char c, int *i);
-int		ft_putstr(int fd, char *s, int *i);
-int		ft_printf_int(int fd, int n, int *i);
-int		ft_printf_unsigned(int fd, unsigned int n, int *i);
-int		ft_putnbr_hex(int fd, unsigned int nbr, char *base, int *i);
-int		ft_print_adress(int fd, unsigned long adress, int *i, char *base);
-size_t	ft_strlen(const char *s);
+int		ft_putchar(char c, t_vector *buffer);
+int		ft_putstr(char *s, t_vector *buffer);
+int		ft_printf_int(int n, t_vector *buffer);
+int		fill_buffer(t_vector *buffer, const char *format, va_list ap);
 
 #endif

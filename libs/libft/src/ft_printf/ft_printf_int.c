@@ -12,9 +12,9 @@
 
 #include "ft_printf.h"
 
-static int	add_i(int n)
+static int	get_lenght(int n)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
 	if (n < 0)
@@ -29,32 +29,33 @@ static int	add_i(int n)
 	return (i);
 }
 
-static int	ft_putnbr(int fd, long n)
+static int	ft_putnbr(long n, t_vector *buffer)
 {
 	char	nb;
 
 	if (n < 0)
 	{
-		if (write(fd, "-", 1) == -1)
+		if (add_vector(buffer, "-", NULL) == -1)
 			return (-1);
 		n = -n;
 	}
 	nb = 48 + (n % 10);
 	if (n / 10 == 0)
 	{
-		if (write(fd, &nb, 1) == -1)
+		if (add_vector(buffer, &nb, NULL) == -1)
 			return (-1);
 		return (0);
 	}
-	if (ft_putnbr(fd, n / 10) == -1)
+	if (ft_putnbr(n / 10, buffer) == -1)
 		return (-1);
-	if (write(fd, &nb, 1) == -1)
+	if (add_vector(buffer, &nb, NULL) == -1)
 		return (-1);
 	return (0);
 }
 
-int	ft_printf_int(int fd, int n, int *i)
+int	ft_printf_int(int n, t_vector *buffer)
 {
-	*i += add_i(n);
-	return (ft_putnbr(fd, n));
+	if (ft_putnbr(n, buffer) == -1)
+		return (-1);
+	return (get_lenght(n));
 }

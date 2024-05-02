@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_hex.c                                    :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pyven-dr <pyven-dr@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/21 13:24:06 by pyven-dr          #+#    #+#             */
-/*   Updated: 2024/04/18 18:07:47 by pyven-dr         ###   ########.fr       */
+/*   Created: 2023/11/20 17:12:35 by pyven-dr          #+#    #+#             */
+/*   Updated: 2024/04/18 17:58:46 by pyven-dr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putnbr_hex(int fd, unsigned int nbr, char *base, int *i)
+int	ft_putstr(char *s, t_vector *buffer)
 {
-	if (nbr / 16 == 0)
+	int	i;
+
+	i = 0;
+	while (s[i] != '\0')
 	{
-		if (write(fd, &base[nbr % 16], 1) == -1)
+		if (add_vector(buffer, &s[i], NULL) == -1)
 			return (-1);
-		*i += 1;
-		return (0);
+		i++;
 	}
-	if (ft_putnbr_hex(fd, nbr / 16, base, &*i) == -1 || \
-		write(fd, &base[nbr % 16], 1) == -1)
-		return (-1);
-	*i += 1;
-	return (0);
+	return ((int)ft_strlen(s));
 }
