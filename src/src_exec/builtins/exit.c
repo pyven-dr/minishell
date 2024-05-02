@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "exec.h"
+#include "parsing.h"
 
 static int	check_arg(char *arg)
 {
@@ -30,8 +31,7 @@ static int	check_arg(char *arg)
 
 static void	free_utils(char **args, t_utils *utils)
 {
-	free_cmd(args);
-	free(args);
+	free_tab(args);
 	del_vector(utils->env_vector, free_env_line);
 	del_vector(utils->fds_vector, NULL);
 }

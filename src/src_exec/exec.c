@@ -26,8 +26,7 @@ int	exec(t_tree *node, t_utils *utils)
 		ret_value = check_builtins(split_cmd, utils);
 		if (ret_value != -127)
 		{
-			free_cmd(split_cmd);
-			free(split_cmd);
+			free_tab(split_cmd);
 			return (ret_value);
 		}
 		split_cmd[0] = get_cmd_path(split_cmd[0], utils->env_vector);

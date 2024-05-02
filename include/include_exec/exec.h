@@ -42,6 +42,7 @@ void	free_env(t_vector *env);
 int		init_env(t_utils *utils, char **envp);
 void	free_env_line(void *line);
 int		ft_getenv(char *name, t_vector *env_vector);
+char	**create_env(t_vector *env_vector);
 
 // Find command //
 

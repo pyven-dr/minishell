@@ -39,6 +39,7 @@ char	**create_env(t_vector *env_vector)
 		i++;
 		env = get_elem_vector(env_vector, i);
 	}
+	tab[i] = NULL;
 	return (tab);
 }
 

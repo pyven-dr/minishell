@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "exec.h"
+#include "parsing.h"
 
 static int	check_path(char *elem, char *path, int *print_path)
 {
@@ -35,12 +36,6 @@ static int	check_path(char *elem, char *path, int *print_path)
 	return (3);
 }
 
-static void	free_cdpath(char **cdpath)
-{
-	free_cmd(cdpath);
-	free(cdpath);
-}
-
 char	*check_cdpath(t_utils *utils, char *directory, int *print_path)
 {
 	char	**cdpath;
@@ -57,15 +52,15 @@ char	*check_cdpath(t_utils *utils, char *directory, int *print_path)
 	{
 		return_val = check_path(cdpath[i], directory, print_path);
 		if (return_val == 1)
-			return (free_cdpath(cdpath), NULL);
+			return (free_tab(cdpath), NULL);
 		if (return_val == 0)
 		{
 			path = ft_strjoin(cdpath[i], directory);
-			return (free_cdpath(cdpath), path);
+			return (free_tab(cdpath), path);
 		}
 		i++;
 	}
 	if (cdpath != NULL)
-		free_cdpath(cdpath);
+		free_tab(cdpath);
 	return (ft_strdup(directory));
 }

@@ -11,10 +11,12 @@
 /* ************************************************************************** */
 
 #include "exec.h"
+#include "parsing.h"
 
 int	exec_cmd(char **cmd, t_utils *utils)
 {
 	pid_t	id;
+	char	**env;
 
 	id = fork();
 	if (id < 0)
@@ -24,16 +26,17 @@ int	exec_cmd(char **cmd, t_utils *utils)
 	}
 	if (id == 0)
 	{
+		env = create_env(utils->env_vector);
+		if (env == NULL)
+			exit(1);
 		close_fds(utils);
-		execve(cmd[0], cmd, NULL);
+		execve(cmd[0], cmd, env);
 		perror("Execve error");
-		free_cmd(cmd);
-		free(cmd);
+		free_tab(cmd);
 		if (errno == EACCES)
 			exit(126);
 		exit(1);
 	}
-	free_cmd(cmd);
-	free(cmd);
+	free_tab(cmd);
 	return (id);
 }
