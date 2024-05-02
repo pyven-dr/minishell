@@ -22,7 +22,7 @@ int	exec(t_tree *node, t_utils *utils)
 	{
 		split_cmd = expand(node->name, utils->env_vector);
 		if (!split_cmd)
-			printf("ALED");
+			return (1);
 		ret_value = check_builtins(split_cmd, utils);
 		if (ret_value != -127)
 		{
@@ -32,7 +32,6 @@ int	exec(t_tree *node, t_utils *utils)
 		split_cmd[0] = get_cmd_path(split_cmd[0], utils->env_vector);
 		if (split_cmd[0] == NULL)
 		{
-			ft_putendl_fd("Command not found", 2);
 			free_cmd(split_cmd + 1);
 			free(split_cmd);
 			return (-127);

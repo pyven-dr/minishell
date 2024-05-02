@@ -36,9 +36,9 @@ char	*get_cmd_path(char *command, t_vector *env_vector)
 	path = get_path(env_vector);
 	if (path == NULL)
 	{
+		ft_printf(2, "minishell: %s: No such file or directory\n", command);
 		command_path = check_absolute_path(command);
-		free(command);
-		return (command_path);
+		return (free(command), command_path);
 	}
 	splitted_path = ft_split(path, ':');
 	if (splitted_path == NULL)
@@ -48,7 +48,7 @@ char	*get_cmd_path(char *command, t_vector *env_vector)
 	if (command_path == NULL && command != NULL)
 		command_path = find_command(splitted_path, command);
 	else if (command_path == NULL)
-		ft_putstr_fd("'': command not found\n", STDERR_FILENO);
+		ft_putstr_fd("'': command not found\n", 2);
 	free(command);
 	free_cmd(splitted_path);
 	free(splitted_path);
