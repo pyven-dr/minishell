@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 22:34:51 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/05/02 02:22:04 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/05/02 03:48:04 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	main(int argc, char **argv, char **envp)
 		str = readline("minishell$> ");
 		add_history(str);
 		tree = parse(str);
+		if (!tree)
+			continue ;
 		utils.root = tree;
 		utils.fds_vector = new_vector(10, sizeof(int));
 		if (utils.fds_vector == NULL)
