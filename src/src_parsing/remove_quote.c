@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 16:17:22 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/05/02 02:16:55 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/05/03 16:27:28 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,13 @@ char	*remove_quote(char *s)
 	char	*str;
 	char	*head;
 
-	head = s;
 	scope.s_quote = false;
 	scope.d_quote = false;
 	str = malloc((count_size(s) + 1) * sizeof(char));
 	if (!str)
-		return (NULL);
-	s = head;
+		return (free(s), NULL);
 	i = 0;
+	head = s;
 	while (s[i])
 	{
 		while ((s[i] == '\'' || s[i] == '"') && !is_quoted_sup(&scope, s[i]))
@@ -67,7 +66,28 @@ char	*remove_quote(char *s)
 		if (s[i])
 			i++;
 	}
+	s = head;
 	free (s);
 	str[i] = '\0';
 	return (str);
+}
+
+char	**remove_quote_from_tab(char **tab)
+{
+	size_t	i;
+
+	i = 0;
+	while (tab[i])
+	{
+		tab[i] = remove_quote(tab[i]);
+		if (!tab[i])
+		{
+			while (i-- > 0)
+				free(tab[i]);
+			free(tab);
+			return (NULL);
+		}
+		i++;
+	}
+	return (tab);
 }

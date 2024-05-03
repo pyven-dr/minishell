@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:08:58 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/05/03 14:11:54 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/05/03 16:19:06 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ char		*get_name(char *line, t_vector *env);
 char		*strdup_var(char **line);
 char		*ft_strjoin_free(char *s1, char *s2);
 char		*remove_quote(char *s);
+char		**remove_quote_from_tab(char **tab);
 char		**ft_split_quoted(char *s);
 bool		there_is_a_wildcard(char *s);
 void		free_tab(void *content);

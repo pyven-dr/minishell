@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 00:25:13 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/05/03 14:21:30 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/05/03 16:18:42 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,9 @@ char	**expand(char *line, t_vector *env)
 	if (!there_is_a_wildcard(expanded_line))
 	{
 		tab = ft_split_quoted(expanded_line);
-		if (!tab)
-			return (NULL);
 		free(expanded_line);
-		//remove all quote from every case of the tab
+		if (tab)
+			tab = remove_quote_from_tab(tab);
 		return (tab);
 	}
 	tab = ft_split_quoted(expanded_line);
