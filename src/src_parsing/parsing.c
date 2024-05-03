@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:18:26 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/04/02 02:02:48 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/05/03 14:20:24 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,16 @@ t_tree	*parse(char *line)
 		if (*line == '(' || *line == ')')
 		{
 			if (*line == '(')
-				save_parenthesis(&pars, &line);
+			{
+				if (!save_parenthesis(&pars, &line))
+					return (NULL);
+			}
 			else
 			{
 				if (!pars.save || !pars.tree || ((pars.tree->operand == AND \
 				|| pars.tree->operand == OR || pars.tree->operand == PIPE) && \
 				!pars.tree->right))
-					clean_exit(&pars, &line, 2);
+					return (clean_continue(&pars, &line, 2));
 				saved_node = get_last_save(&pars);
 				if (saved_node)
 				{
@@ -57,14 +60,15 @@ t_tree	*parse(char *line)
 			pars.operand = is_operand(&line);
 			while (*line && is_whitespace(*line))
 				line++;
-			fill_tree(&pars, &line);
+			if (!fill_tree(&pars, &line))
+				return (NULL);
 		}
 	}
 	if (pars.save)
-		clean_exit(&pars, &line, 3);
+		return (clean_continue(&pars, &line, 3));
 	if (pars.tree && ((pars.tree->operand == AND || pars.tree->operand == OR \
 	|| pars.tree->operand == PIPE) && !pars.tree->right))
-		clean_exit(&pars, &line, 2);
+		return (clean_continue(&pars, &line, 2));
 	line = pars.head_line;
 	free(line);
 	if (pars.tree)

@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:08:58 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/05/02 03:59:05 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/05/03 14:11:54 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,13 @@ int			ft_strncmp_improved(const char *s1, char **s2, size_t n);
 t_operand	is_operand(char **line);
 char		*strdup_to_next_operand(char **line, t_parsing *pars);
 char		*strdup_to_next_space(char **line, t_parsing *pars);
-void		save_parenthesis(t_parsing *pars, char **line);
+bool		save_parenthesis(t_parsing *pars, char **line);
 t_tree		*get_last_save(t_parsing *pars);
-void		fill_tree(t_parsing *pars, char **line);
-void		fill_file(t_parsing *pars, char **line);
-void		fill_pipe(t_parsing *pars, char **line);
-void		fill_operator(t_parsing *pars, char **line);
-void		fill_cmd(t_parsing *pars, char **line);
+bool		fill_tree(t_parsing *pars, char **line);
+bool		fill_file(t_parsing *pars, char **line);
+bool		fill_pipe(t_parsing *pars, char **line);
+bool		fill_operator(t_parsing *pars, char **line);
+bool		fill_cmd(t_parsing *pars, char **line);
 void		free_tree(t_tree **tree);
 void		clean_exit(t_parsing *pars, char **line, int exit_code);
 char		*get_name(char *line, t_vector *env);
@@ -74,6 +74,7 @@ char		**expand(char *line, t_vector *env);
 t_vector	*ft_wildcard(char *line);
 void		free_value(void *value);
 void		free_save(t_parenthes **save);
+void		*clean_continue(t_parsing *pars, char **line, int code);
 
 #include <stdio.h>
 #include <unistd.h>

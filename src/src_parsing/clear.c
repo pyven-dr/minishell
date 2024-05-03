@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 00:58:12 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/05/02 04:09:30 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/05/03 15:21:39 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,23 @@ void	clean_exit(t_parsing *pars, char **line, int exit_code)
 void	free_value(void *value)
 {
 	char	**line;
-	
+
 	line = value;
 	free(*line);
+}
+
+void	*clean_continue(t_parsing *pars, char **line, int code)
+{
+	if (pars->tree)
+		while (pars->tree->parent)
+			pars->tree = pars->tree->parent;
+	free_save(&pars->save);
+	free_tree(&pars->tree);
+	*line = pars->head_line;
+	free(*line);
+	if (code == 2)
+		write(2, ERR_SYNTHAX, 26);
+	else if (code == 3)
+		write(2, ERR_UNCLOSED, 42);
+	return (NULL);
 }

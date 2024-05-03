@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 18:22:08 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/04/08 13:35:43 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/05/03 14:03:36 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	fill_cmd_2(t_parsing *pars, char **line, char *name);
 static char	*join_cmd(char *s1, char *s2);
 
-void	fill_cmd(t_parsing *pars, char **line)
+bool	fill_cmd(t_parsing *pars, char **line)
 {
 	char	*name;
 
@@ -23,7 +23,7 @@ void	fill_cmd(t_parsing *pars, char **line)
 	if (!name)
 		clean_exit(pars, line, 1);
 	else if (!*name)
-		clean_exit(pars, line, 2);
+		return (clean_continue(pars, line, 2));
 	if (!pars->tree)
 	{
 		pars->tree = new_node(NULL, pars->operand, name);
@@ -40,6 +40,7 @@ void	fill_cmd(t_parsing *pars, char **line)
 	}
 	else
 		fill_cmd_2(pars, line, name);
+	return (true);
 }
 
 static void	fill_cmd_2(t_parsing *pars, char **line, char *name)

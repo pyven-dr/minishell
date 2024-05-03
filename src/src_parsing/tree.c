@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:35:50 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/05/02 01:58:07 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/05/03 14:11:18 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,16 +78,16 @@ char **line, t_parsing *pars)
 	node->parent = node->parent->left;
 }
 
-void	fill_tree(t_parsing *pars, char **line)
+bool	fill_tree(t_parsing *pars, char **line)
 {
 	if (pars->operand == CMD)
-		fill_cmd(pars, line);
+		return (fill_cmd(pars, line));
 	else if (pars->operand == PIPE)
-		fill_pipe(pars, line);
+		return (fill_pipe(pars, line));
 	else if (pars->operand == AND || pars->operand == OR)
-		fill_operator(pars, line);
+		return (fill_operator(pars, line));
 	else
-		fill_file(pars, line);
+		return (fill_file(pars, line));
 }
 
 //---------------PRINT TREE FUNCTIUN----------------//
