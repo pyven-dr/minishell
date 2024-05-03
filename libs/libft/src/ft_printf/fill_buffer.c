@@ -14,39 +14,39 @@
 
 static int	conversion(t_vector *buffer, char arg, va_list ap)
 {
-	int	lenght;
+	int	length;
 
-	lenght = 0;
+	length = 0;
 	if (arg == 'c')
-		lenght = ft_putchar((char)va_arg(ap, int), buffer);
+		length = ft_putchar((char)va_arg(ap, int), buffer);
 	else if (arg == 's')
-		lenght = ft_putstr(va_arg(ap, char *), buffer);
+		length = ft_putstr(va_arg(ap, char *), buffer);
 	else if (arg == 'd' || arg == 'i')
-		lenght = ft_printf_int(va_arg(ap, int), buffer);
-	if (lenght == -1)
+		length = ft_printf_int(va_arg(ap, int), buffer);
+	if (length == -1)
 		buffer->capacity = 0;
-	return (lenght);
+	return (length);
 }
 
 int	fill_buffer(t_vector *buffer, const char *format, va_list ap)
 {
 	int	i;
-	int	lenght;
+	int	length;
 
 	i = 0;
-	lenght = 0;
+	length = 0;
 	while (format[i] != '\0')
 	{
 		if (format[i] == '%')
 		{
-			lenght += conversion(buffer, format[i + 1], ap);
+			length += conversion(buffer, format[i + 1], ap);
 			i++;
 		}
 		else
-			lenght += ft_putchar(format[i], buffer);
+			length += ft_putchar(format[i], buffer);
 		if (buffer->capacity == 0)
 			return (del_vector(buffer, NULL), -1);
 		i++;
 	}
-	return (lenght);
+	return (length);
 }
