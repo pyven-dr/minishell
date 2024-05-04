@@ -42,7 +42,8 @@ EXEC_SRC = exec.c \
 		   init_env.c \
 		   free_env.c \
 		   ft_getenv.c \
-		   create_env.c
+		   create_env.c \
+		   change_exit_val.c
 
 FIND_CMD_SRC = check_absolute_path.c \
 			   find_command.c \

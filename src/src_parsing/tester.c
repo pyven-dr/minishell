@@ -42,7 +42,8 @@ int	main(int argc, char **argv, char **envp)
 		if (tree != NULL)
 		{
 			make_all_heredocs(tree);
-			exec(tree, &utils);
+			if (change_exit_val(-check_id(exec(tree, &utils)), &utils) == 1)
+				return (1);
 			while (wait(NULL) >= 0)
 				;
 		}

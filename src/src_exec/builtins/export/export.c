@@ -43,11 +43,11 @@ int	export(char **arg, t_utils *utils)
 			return_val = 1;
 			if (ft_printf(2, \
 			"minishell: export: '%s': not a valid identifier\n", arg[i]) == -1)
-				return (1);
+				return (-1);
 		}
 		else
 			if (insert_in_env(arg[i], utils->env_vector) == 1)
-				return (1);
+				return (-1);
 		i++;
 	}
 	return (return_val);

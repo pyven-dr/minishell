@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   change_exit_val.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pyven-dr <pyven-dr@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/08 20:46:16 by pyven-dr          #+#    #+#             */
-/*   Updated: 2024/04/18 18:10:28 by pyven-dr         ###   ########.fr       */
+/*   Created: 2024/05/04 04:33:24 by pyven-dr          #+#    #+#             */
+/*   Updated: 2024/05/04 04:33:24 by pyven-dr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-int	env(t_vector *env)
+int	change_exit_val(int val, t_utils *utils)
 {
-	int		i;
-	t_env	*line;
+	char	*char_val;
+	int		exit_index;
+	t_env	*exit_env;
 
-	i = 0;
-	line = get_elem_vector(env, i);
-	while (line != NULL)
-	{
-		if (line->equal == 1)
-			if (ft_printf(STDOUT_FILENO, "%s=%s\n", \
-				line->name, line->value) == -1)
-				return (-1);
-		i++;
-		line = get_elem_vector(env, i);
-	}
+	char_val = ft_itoa(val);
+	if (char_val == NULL)
+		return (1);
+	exit_index = ft_getenv("?", utils->env_vector);
+	exit_env = get_elem_vector(utils->env_vector, exit_index);
+	free(exit_env->value);
+	exit_env->value = char_val;
 	return (0);
 }

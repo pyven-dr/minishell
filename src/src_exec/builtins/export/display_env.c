@@ -21,17 +21,20 @@ int	display_env(t_vector *env)
 	line = get_elem_vector(env, i);
 	while (line != NULL)
 	{
-		if (line->equal == 1)
+		if (ft_strcmp(line->name, "?") != 0)
 		{
-			if (ft_printf(STDOUT_FILENO, "declare -x %s=\"%s\"\n", \
-				line->name, line->value) == -1)
-				return (1);
-		}
-		else
-		{
-			if (ft_printf(STDOUT_FILENO, "declare -x %s\n", \
-				line->name) == -1)
-				return (1);
+			if (line->equal == 1)
+			{
+				if (ft_printf(STDOUT_FILENO, "declare -x %s=\"%s\"\n", \
+                line->name, line->value) == -1)
+					return (-1);
+			}
+			else
+			{
+				if (ft_printf(STDOUT_FILENO, "declare -x %s\n", \
+                line->name) == -1)
+					return (-1);
+			}
 		}
 		i++;
 		line = get_elem_vector(env, i);
