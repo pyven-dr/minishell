@@ -31,6 +31,8 @@ typedef struct s_utils
 	t_vector	*env_vector;
 }				t_utils;
 
+typedef int	(*t_exec_funcs)(t_tree *node, t_utils *utils);
+
 int		exec(t_tree *node, t_utils *utils);
 void	free_cmd(char **cmd);
 int		exec_cmd(char **cmd, t_utils *utils);

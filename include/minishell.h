@@ -17,10 +17,10 @@
 
 typedef enum e_operand
 {
+	CMD,
 	AND,
 	OR,
 	PIPE,
-	CMD,
 	SIMPLE_IN,
 	DOUBLE_IN,
 	SIMPLE_OUT,
