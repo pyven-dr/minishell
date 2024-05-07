@@ -6,11 +6,12 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 13:31:26 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/05/02 02:18:06 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/05/07 20:29:53 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+#include "error.h"
 
 static char	*strdup_to_next_asterism(char **line);
 static char	*improved_strstr(char *big, char *little);
@@ -26,20 +27,20 @@ t_vector	*ft_wildcard(char *line)
 
 	current = opendir(".");
 	if (!current)
-		printf("ALED");
+		return (NULL);
 	file = readdir(current);
 	result = new_vector(1, sizeof(char *));
 	if (!result)
-		return (NULL);
+		return (closedir(current), NULL);
 	while (file)
 	{
 		if (is_valid_name(line, file->d_name))
 		{
 			temp = ft_strdup(file->d_name);
 			if (!temp)
-				return (NULL);
+				return (closedir(current), NULL);
 			if (add_vector(result, &temp, free))
-				return (NULL);
+				return (closedir(current), free(temp), NULL);
 		}
 		file = readdir(current);
 	}
@@ -55,9 +56,9 @@ static bool	is_valid_name(char *name, char *file)
 	{
 		temp = strdup_to_next_asterism(&name);
 		if (!temp)
-			printf("ALED\n");
+			return (write(2, ERR_MALLOC, 25), false);
 		if (ft_strncmp_improved(temp, &file, strlen(temp)))
-			return (free(temp), false);
+			return (write(2, ERR_MALLOC, 25), free(temp), false);
 		free(temp);
 	}
 	while (1)
@@ -68,7 +69,7 @@ static bool	is_valid_name(char *name, char *file)
 			return (true);
 		temp = strdup_to_next_asterism(&name);
 		if (!temp)
-			printf("ALED\n");
+			return (write(2, ERR_MALLOC, 25), false);
 		ret = check_strstr(&name, &file, &temp);
 		if (ret != 2)
 			return (ret);
@@ -125,7 +126,7 @@ static char	*strdup_to_next_asterism(char **line)
 		i++;
 		(*line)++;
 	}
-	return (str[i] = '\0', str);
+	return (str[i] = '\0', printf("%s\n", str), str);
 }
 
 static char	*improved_strstr(char *big, char *little)
