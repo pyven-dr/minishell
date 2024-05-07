@@ -36,6 +36,16 @@ static void	free_utils(char **args, t_utils *utils)
 	del_vector(utils->fds_vector, NULL);
 }
 
+static int	get_exit_status(t_utils *utils)
+{
+	int		index;
+	t_env	*env;
+
+	index = ft_getenv("?", utils->env_vector);
+	env = get_elem_vector(utils->env_vector, index);
+	return (ft_atoi(env->value));
+}
+
 int	exit_builtin(char **args, t_utils *utils)
 {
 	char	exit_status;
@@ -47,19 +57,20 @@ int	exit_builtin(char **args, t_utils *utils)
 	}
 	if (nb_args(args) == 1)
 	{
+		exit_status = (char)get_exit_status(utils);
 		free_utils(args, utils);
 		if (write(2, "exit\n", 5) == -1)
 			exit(1);
-		exit(0);
+		exit(exit_status);
 	}
 	if (check_arg(args[1]) == 1)
 	{
 		ft_putstr_fd("minishell: exit: numeric argument required\n", 2);
 		exit(2);
 	}
-	exit_status = ft_atoi(args[1]);
+	exit_status = (char)ft_atoi(args[1]);
 	free_utils(args, utils);
 	if (write(2, "exit\n", 5) == -1)
 		exit(1);
-	exit(exit_status); //exit status need to be last executed command if no args
+	exit(exit_status);
 }

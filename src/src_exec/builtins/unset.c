@@ -20,9 +20,12 @@ int	unset(char **args, t_utils *utils)
 	i = 0;
 	while (args[i] != NULL)
 	{
-		pos = ft_getenv(args[i], utils->env_vector);
-		if (pos != -1)
-			del_elem_vector(utils->env_vector, pos, free_env_line);
+		if (ft_strcmp(args[i], "?") != 0)
+		{
+			pos = ft_getenv(args[i], utils->env_vector);
+			if (pos != -1)
+				del_elem_vector(utils->env_vector, pos, free_env_line);
+		}
 		i++;
 	}
 	return (0);
