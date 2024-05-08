@@ -36,7 +36,7 @@ typedef int	(*t_exec_funcs)(t_tree *node, t_utils *utils);
 int		exec(t_tree *node, t_utils *utils);
 void	free_cmd(char **cmd);
 int		exec_cmd(char **cmd, t_utils *utils);
-int		check_id(int id);
+int		check_id(int id, t_utils *utils);
 int		dup_fd(int fd1, int fd2);
 void	close_fds(t_utils *utils);
 t_tree	*find_root(t_tree *node);

@@ -12,7 +12,7 @@
 
 #include "exec.h"
 
-int	check_id(int id)
+int	check_id(int id, t_utils *utils)
 {
 	int	status;
 
@@ -23,7 +23,11 @@ int	check_id(int id)
 	{
 		waitpid(id, &status, 0);
 		if (WEXITSTATUS(status) != 0)
+		{
+			if (change_exit_val(WEXITSTATUS(status), utils) == 1)
+				return (-1);
 			return (WEXITSTATUS(status) * -1);
+		}
 	}
 	return (0);
 }

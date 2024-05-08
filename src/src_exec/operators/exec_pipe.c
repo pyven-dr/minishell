@@ -25,5 +25,5 @@ int	exec_pipe(t_tree *node, t_utils *utils)
 	close(pipe_fd[0]);
 	close(pipe_fd[1]);
 	waitpid(id_left, NULL, 0);
-	return (check_id(id_right));
+	return (check_id(id_right, utils));
 }

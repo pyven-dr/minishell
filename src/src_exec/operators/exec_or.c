@@ -17,8 +17,8 @@ int	exec_or(t_tree *node, t_utils *utils)
 	pid_t	id;
 
 	id = exec(node->left, utils);
-	if (check_id(id) == 0)
+	if (check_id(id, utils) == 0)
 		return (id);
 	id = exec(node->right, utils);
-	return (check_id(id));
+	return (check_id(id, utils));
 }

@@ -42,10 +42,9 @@ int	main(int argc, char **argv, char **envp)
 		if (tree != NULL)
 		{
 			make_all_heredocs(tree);
-			if (change_exit_val(-check_id(exec(tree, &utils)), &utils) == 1)
-				return (1);
-			while (wait(NULL) >= 0)
-				;
+			check_id(exec(tree, &utils), &utils);
+			//while (wait(NULL) >= 0)
+			//	;
 		}
 		del_vector(utils.fds_vector, NULL);
 		free_tree(&tree);
