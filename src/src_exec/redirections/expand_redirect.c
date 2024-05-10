@@ -1,42 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_cmd.c                                         :+:      :+:    :+:   */
+/*   expand_redirect.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pyven-dr <pyven-dr@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/20 00:28:24 by pyven-dr          #+#    #+#             */
-/*   Updated: 2024/03/20 00:28:24 by pyven-dr         ###   ########.fr       */
+/*   Created: 2024/05/10 18:48:30 by pyven-dr          #+#    #+#             */
+/*   Updated: 2024/05/10 18:48:30 by pyven-dr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include "parsing.h"
 
-int	exec_cmd(char **cmd, t_utils *utils)
+int	expand_redirect(t_tree *node, t_vector *env_vector)
 {
-	pid_t	id;
-	char	**env;
+	char	**expanded_node;
 
-	id = fork();
-	if (id < 0)
+	expanded_node = expand(node->name, env_vector);
+	if (expanded_node == NULL)
+		return (1);
+	if (nb_args(expanded_node) > 1)
 	{
-		perror("minishell: Fork error");
-		return (-1);
+		ft_putstr_fd("minishell: ambiguous redirect\n", 2);
+		free_tab(expanded_node);
+		return (1);
 	}
-	if (id == 0)
-	{
-		env = create_env(utils->env_vector);
-		if (env == NULL)
-			exit(1);
-		close_fds(utils);
-		execve(cmd[0], cmd, env);
-		perror("minishell: Execve error");
-		free_tab(cmd);
-		if (errno == EACCES)
-			exit(126);
-		exit(1);
-	}
-	free_tab(cmd);
-	return (id);
+	free(node->name);
+	node->name = ft_strdup(expanded_node[0]);
+	free_tab(expanded_node);
+	if (node->name == NULL)
+		return (1);
+	return (0);
 }

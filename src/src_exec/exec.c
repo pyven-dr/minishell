@@ -43,7 +43,7 @@ int	exec(t_tree *node, t_utils *utils)
 	if (node->operand == CMD)
 	{
 		split_cmd = expand(node->name, utils->env_vector);
-		if (!split_cmd)
+		if (split_cmd == NULL)
 			return (-1);
 		ret_value = check_builtins(split_cmd, utils);
 		if (ret_value != -127)

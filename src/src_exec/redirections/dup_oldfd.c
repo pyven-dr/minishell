@@ -19,7 +19,7 @@ int	dup_oldfd(t_utils *utils, int fd)
 	oldfd = dup(fd);
 	if (oldfd == -1)
 	{
-		perror("Dup error");
+		perror("minishell: Dup error");
 		return (-1);
 	}
 	if (add_vector(utils->fds_vector, &oldfd, NULL) == -1)

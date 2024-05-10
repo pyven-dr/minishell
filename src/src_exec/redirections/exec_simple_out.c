@@ -18,11 +18,12 @@ int	exec_simple_out(t_tree *node, t_utils *utils)
 	int	newfd;
 	int	exec_val;
 
-	exec_val = 0;
+	if (expand_redirect(node, utils->env_vector) == 1)
+		return (-1);
 	newfd = open(node->name, O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (newfd == -1)
 	{
-		perror("Redirect in error");
+		perror("minishell: Redirect in error");
 		return (-1);
 	}
 	oldfd = dup_oldfd(utils, STDOUT_FILENO);

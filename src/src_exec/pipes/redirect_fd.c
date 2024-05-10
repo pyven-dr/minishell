@@ -25,7 +25,7 @@ int	redirect_fd(int fd, int pipe_fd[2])
 	close(pipe_fd[1]);
 	if (val < 0)
 	{
-		perror("Dup2 Error");
+		perror("minishell: Dup2 Error");
 		return (1);
 	}
 	return (0);

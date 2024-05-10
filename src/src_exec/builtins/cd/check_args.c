@@ -28,7 +28,7 @@ static char	*get_home(t_utils *utils)
 	home_val = ft_strdup(home->value);
 	if (home_val == NULL)
 	{
-		perror("cd");
+		perror("minishell: cd");
 		return (NULL);
 	}
 	return (home_val);

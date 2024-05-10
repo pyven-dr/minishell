@@ -43,6 +43,7 @@ EXEC_SRC = exec.c \
 		   free_env.c \
 		   ft_getenv.c \
 		   create_env.c \
+		   nb_args.c \
 		   change_exit_val.c
 
 FIND_CMD_SRC = check_absolute_path.c \
@@ -61,7 +62,8 @@ REDIR_SRC = exec_simple_out.c \
 	  	    exec_double_out.c \
 	  	    exec_double_in.c \
 	  	    exec_simple_in.c \
-	  	    dup_oldfd.c
+	  	    dup_oldfd.c \
+	  	    expand_redirect.c
 
 PIPES_SRC = create_pipe.c \
 			redirect_fd.c \
@@ -95,9 +97,8 @@ BUILTINS_SRC = $(addprefix export/, $(EXPORT_SRC)) \
 			   check_builtins.c \
 			   pwd.c \
 			   exit.c \
-			   nb_args.c \
 			   env.c \
-			   unset.c \
+			   unset.c
 
 SRC = $(addprefix src_exec/find_command/, $(FIND_CMD_SRC)) \
 	  $(addprefix src_exec/heredocs/, $(HEREDOCS_SRC)) \

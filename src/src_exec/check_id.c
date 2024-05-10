@@ -16,12 +16,15 @@ int	check_id(int id, t_utils *utils)
 {
 	int	status;
 
-	status = 0;
 	if (id < 0)
 		return (id);
 	else if (id > 0)
 	{
-		waitpid(id, &status, 0);
+		if (waitpid(id, &status, 0) == -1)
+		{
+			change_exit_val(1, utils);
+			return (-1);
+		}
 		if (WEXITSTATUS(status) != 0)
 		{
 			if (change_exit_val(WEXITSTATUS(status), utils) == 1)
@@ -29,5 +32,7 @@ int	check_id(int id, t_utils *utils)
 			return (WEXITSTATUS(status) * -1);
 		}
 	}
+	if (change_exit_val(0, utils) == 1)
+		return (-1);
 	return (0);
 }

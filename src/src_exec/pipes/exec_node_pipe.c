@@ -17,12 +17,14 @@ int	exec_node_pipe(int pipe_fd[2], t_tree *node, int fd, t_utils *utils)
 	pid_t	id;
 	int		exec_id;
 	int		status;
-	t_tree	*root;
 
 	status = 0;
 	id = fork();
 	if (id < 0)
-		return (perror("fork error"), -1);
+	{
+		perror("minishell: fork error");
+		return (-1);
+	}
 	if (id == 0)
 	{
 		if (redirect_fd(fd, pipe_fd) != 0)
@@ -33,7 +35,6 @@ int	exec_node_pipe(int pipe_fd[2], t_tree *node, int fd, t_utils *utils)
 		close(STDOUT_FILENO);
 		close_fds(utils);
 		del_vector(utils->fds_vector, NULL);
-		root = find_root(node);
 		exit(status);
 	}
 	return (id);
