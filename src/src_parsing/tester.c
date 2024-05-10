@@ -28,10 +28,6 @@ void	signal_handler(int signal, siginfo_t *siginfo, void *content)
 	{
 		rl_done = 1;
 	}
-	if (signal == SIGQUIT)
-	{
-		
-	}
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -48,9 +44,8 @@ int	main(int argc, char **argv, char **envp)
 	if (utils.env_vector == NULL)
 		return (1);
 	s.sa_sigaction = signal_handler;
-	s.sa_handler = SIG_IGN;
 	sigaction(SIGINT, &s, NULL);
-	//signal(SIGQUIT, SIG_IGN);
+	s.sa_handler = SIG_IGN;
 	sigaction(SIGQUIT, &s, NULL);
 	init_env(&utils, envp);
 	while (1)
