@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 13:31:26 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/05/07 20:29:53 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/05/07 21:27:59 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static bool	is_valid_name(char *name, char *file)
 		if (!temp)
 			return (write(2, ERR_MALLOC, 25), false);
 		if (ft_strncmp_improved(temp, &file, strlen(temp)))
-			return (write(2, ERR_MALLOC, 25), free(temp), false);
+			return (free(temp), false);
 		free(temp);
 	}
 	while (1)
@@ -126,7 +126,7 @@ static char	*strdup_to_next_asterism(char **line)
 		i++;
 		(*line)++;
 	}
-	return (str[i] = '\0', printf("%s\n", str), str);
+	return (str[i] = '\0', str);
 }
 
 static char	*improved_strstr(char *big, char *little)
