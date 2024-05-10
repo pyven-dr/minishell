@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:18:26 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/05/03 19:47:31 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/05/10 20:17:18 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ char	*strdup_to_next_space(char **line, t_parsing *pars)
 		return (clean_continue(pars, line, 3));
 	str = malloc((i + 1) * sizeof(char));
 	if (!str)
-		return (NULL);
+		return (clean_continue(pars, line, 1));
 	i = 0;
 	while (**line && ((!is_whitespace(**line) && \
 	!is_special(**line)) || is_quoted(&scope, **line)))

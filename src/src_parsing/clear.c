@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 00:58:12 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/05/03 15:21:39 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/05/10 20:16:47 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,7 @@ void	*clean_continue(t_parsing *pars, char **line, int code)
 		write(2, ERR_SYNTHAX, 26);
 	else if (code == 3)
 		write(2, ERR_UNCLOSED, 42);
+	else if (code == 1)
+		write(2, ERR_MALLOC, 25);
 	return (NULL);
 }

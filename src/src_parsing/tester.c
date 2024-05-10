@@ -6,24 +6,52 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 22:34:51 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/05/07 20:37:03 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/05/10 21:27:48 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "exec.h"
 
+int	g_s = 1;
+
+int	event(void)
+{
+	return (0);
+}
+
+void	signal_handler(int signal, siginfo_t *siginfo, void *content)
+{
+	(void)siginfo;
+	(void)content;
+	if (signal == SIGINT)
+	{
+		rl_done = 1;
+	}
+	if (signal == SIGQUIT)
+	{
+		
+	}
+}
+
 int	main(int argc, char **argv, char **envp)
 {
-	char	*str;
-	t_tree	*tree;
-	t_utils	utils;
+	char				*str;
+	t_tree				*tree;
+	t_utils				utils;
+	struct sigaction	s;
 
 	(void)argc;
 	(void)argv;
+	rl_event_hook = event;
 	utils.env_vector = new_vector(10, sizeof(t_env));
 	if (utils.env_vector == NULL)
 		return (1);
+	s.sa_sigaction = signal_handler;
+	s.sa_handler = SIG_IGN;
+	sigaction(SIGINT, &s, NULL);
+	//signal(SIGQUIT, SIG_IGN);
+	sigaction(SIGQUIT, &s, NULL);
 	init_env(&utils, envp);
 	while (1)
 	{
