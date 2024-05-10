@@ -23,7 +23,7 @@ bool	save_parenthesis(t_parsing *pars, char **line)
 		pars->save = pars->save->next;
 	to_save = malloc(sizeof(t_parenthes));
 	if (!to_save)
-		clean_exit(pars, line, 1);
+		return (clean_continue(pars, line, 1));
 	to_save->next = NULL;
 	to_save->p = pars->tree;
 	if (!pars->save)

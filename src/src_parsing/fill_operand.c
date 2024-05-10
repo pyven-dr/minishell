@@ -37,7 +37,7 @@ bool	fill_pipe(t_parsing *pars, char **line)
 		pars->tree->parent->left = pars->tree;
 	}
 	if (!pars->tree->parent)
-		clean_exit(pars, line, 1);
+		return (clean_continue(pars, line, 1));
 	return (pars->tree = pars->tree->parent, true);
 }
 
@@ -59,7 +59,7 @@ bool	fill_operator(t_parsing *pars, char **line)
 	{
 		pars->tree->parent = new_node(NULL, pars->operand, NULL);
 		if (!pars->tree->parent)
-			clean_exit(pars, line, 1);
+			return (clean_continue(pars, line, 1));
 		pars->tree->parent->left = pars->tree;
 	}
 	pars->tree = pars->tree->parent;

@@ -12,7 +12,7 @@
 
 #include "parsing.h"
 
-static void	fill_cmd_2(t_parsing *pars, char **line, char *name);
+static int	fill_cmd_2(t_parsing *pars, char **line, char *name);
 static char	*join_cmd(char *s1, char *s2);
 
 bool	fill_cmd(t_parsing *pars, char **line)
@@ -21,43 +21,51 @@ bool	fill_cmd(t_parsing *pars, char **line)
 
 	name = strdup_to_next_operand(line, pars);
 	if (!name)
-		clean_exit(pars, line, 1);
+		return (NULL);
 	else if (!*name)
 		return (clean_continue(pars, line, 2));
 	if (!pars->tree)
 	{
 		pars->tree = new_node(NULL, pars->operand, name);
 		if (!pars->tree)
-			clean_exit(pars, line, 1);
+			return (clean_continue(pars, line, 1));
 	}
 	else if (pars->tree->operand == AND || pars->tree->operand == OR \
 	|| pars->tree->operand == PIPE)
 	{
 		pars->tree->right = new_node(pars->tree, pars->operand, name);
 		if (!pars->tree->right)
-			clean_exit(pars, line, 1);
+			return (clean_continue(pars, line, 1));
 		pars->tree = pars->tree->right;
 	}
 	else
-		fill_cmd_2(pars, line, name);
+		if (fill_cmd_2(pars, line, name) == 1)
+			return (NULL);
 	return (true);
 }
 
-static void	fill_cmd_2(t_parsing *pars, char **line, char *name)
+static int	fill_cmd_2(t_parsing *pars, char **line, char *name)
 {
 	if (pars->tree->operand == CMD)
 	{
 		pars->tree->name = join_cmd(pars->tree->name, name);
 		if (!pars->tree->name)
-			clean_exit(pars, line, 1);
+		{
+			clean_continue(pars, line, 1);
+			return (1);
+		}
 	}
 	else if (!pars->tree->left)
 	{
 		pars->tree->left = new_node(pars->tree, pars->operand, name);
 		if (!pars->tree->left)
-			clean_exit(pars, line, 1);
+		{
+			clean_continue(pars, line, 1);
+			return (1);
+		}
 		pars->tree = pars->tree->left;
 	}
+	return (0);
 }
 
 static char	*join_cmd(char *s1, char *s2)

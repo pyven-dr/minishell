@@ -12,9 +12,9 @@
 
 #include "parsing.h"
 
-static void	insert_to_right(t_tree *node, t_operand operand, \
+static int	insert_to_right(t_tree *node, t_operand operand, \
 char **line, t_parsing *pars);
-static void	insert_to_left(t_tree *node, t_operand operand, \
+static int	insert_to_left(t_tree *node, t_operand operand, \
 char **line, t_parsing *pars);
 
 t_tree	*new_node(t_tree *parent, t_operand operand, char *name)
@@ -48,7 +48,7 @@ char **line, t_parsing *pars)
 		insert_to_right(node, operand, line, pars);
 }
 
-static void	insert_to_right(t_tree *node, t_operand operand, \
+static int	insert_to_right(t_tree *node, t_operand operand, \
 char **line, t_parsing *pars)
 {
 	node->parent->right = NULL;
@@ -58,12 +58,16 @@ char **line, t_parsing *pars)
 		node->parent->right = new_node(node->parent, operand, \
 		strdup_to_next_space(line, pars));
 	if (!node->parent->right)
-		clean_exit(pars, line, 1);
+	{
+		clean_continue(pars, line, 1);
+		return (1);
+	}
 	node->parent->right->left = node;
 	node->parent = node->parent->right;
+	return (0);
 }
 
-static void	insert_to_left(t_tree *node, t_operand operand, \
+static int	insert_to_left(t_tree *node, t_operand operand, \
 char **line, t_parsing *pars)
 {
 	node->parent->left = NULL;
@@ -73,9 +77,13 @@ char **line, t_parsing *pars)
 		node->parent->left = new_node(node->parent, operand, \
 		strdup_to_next_space(line, pars));
 	if (!node->parent->left)
-		clean_exit(pars, line, 1);
+	{
+		clean_continue(pars, line, 1);
+		return (1);
+	}
 	node->parent->left->left = node;
 	node->parent = node->parent->left;
+	return (0);
 }
 
 bool	fill_tree(t_parsing *pars, char **line)

@@ -106,10 +106,10 @@ char	*strdup_to_next_operand(char **line, t_parsing *pars)
 	is_quoted(&scope, (*line)[i])))
 		i++;
 	if (scope.s_quote || scope.d_quote)
-		clean_exit(pars, line, 3);
+		return (clean_continue(pars, line, 3));
 	str = malloc((i + 1) * sizeof(char));
 	if (!str)
-		return (NULL);
+		return (clean_continue(pars, line, 1));
 	i = 0;
 	while (**line && (!is_special(**line) || is_quoted(&scope, **line)))
 	{
@@ -134,7 +134,7 @@ char	*strdup_to_next_space(char **line, t_parsing *pars)
 	!is_special((*line)[i])) || is_quoted(&scope, (*line)[i])))
 		i++;
 	if (scope.s_quote || scope.d_quote)
-		clean_exit(pars, line, 3);
+		return (clean_continue(pars, line, 3));
 	str = malloc((i + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
