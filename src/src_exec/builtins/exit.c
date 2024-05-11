@@ -31,7 +31,8 @@ static int	check_arg(char *arg)
 
 static void	free_utils(char **args, t_utils *utils)
 {
-	free_tab(args);
+	if (args != NULL)
+		free_tab(args);
 	del_vector(utils->env_vector, free_env_line);
 	del_vector(utils->fds_vector, NULL);
 }
@@ -55,7 +56,7 @@ int	exit_builtin(char **args, t_utils *utils)
 		ft_putstr_fd("minishell: exit: too many arguments\n", 2);
 		return (1);
 	}
-	if (nb_args(args) == 1)
+	if (nb_args(args) == 1 || args == NULL)
 	{
 		exit_status = (char)get_exit_status(utils);
 		free_utils(args, utils);

@@ -80,6 +80,12 @@ char	*random_name(void);
 char	*create_heredoc(char *delim);
 int		make_all_heredocs(t_tree *node);
 
+// Signals //
+
+void	init_sig(void);
+void	sig_exec(void);
+void	sig_end_exec(void);
+
 // Builtins //
 
 int		check_builtins(char **cmd, t_utils *utils);

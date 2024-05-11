@@ -24,6 +24,7 @@ int	exec_cmd(char **cmd, t_utils *utils)
 		perror("minishell: Fork error");
 		return (-1);
 	}
+	sig_exec();
 	if (id == 0)
 	{
 		env = create_env(utils->env_vector);
@@ -38,5 +39,6 @@ int	exec_cmd(char **cmd, t_utils *utils)
 		exit(1);
 	}
 	free_tab(cmd);
+	init_sig();
 	return (id);
 }
