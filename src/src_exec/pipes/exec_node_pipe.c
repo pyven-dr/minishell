@@ -12,7 +12,7 @@
 
 #include "exec.h"
 
-static int close_all(t_utils *utils)
+static int	close_all(t_utils *utils)
 {
 	int	ret_val;
 
