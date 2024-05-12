@@ -44,14 +44,13 @@ int	write_file(int fd, char *delim)
 				return (1);
 			if (ft_printf(2, " end-of-file (wanted '%s')\n", delim) == -1)
 				return (1);
-			break;
+			free(line);
+			return (0);
 		}
 		if (ft_strcmp(line, delim) == 0)
-			break;
+			return (free(line), 0);
 		if (add_to_file(line, fd) == 1)
 			return (1);
 		free(line);
 	}
-	free(line);
-	return (0);
 }

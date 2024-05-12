@@ -29,10 +29,7 @@ int	exec_simple_in(t_tree *node, t_utils *utils)
 	}
 	oldfd = dup_oldfd(utils, STDIN_FILENO);
 	if (oldfd == -1)
-	{
-		close(newfd);
-		return (-1);
-	}
+		return (close(newfd), -1);
 	if (dup_fd(newfd, STDIN_FILENO) == -1)
 		return (-1);
 	if (node->left != NULL)

@@ -53,8 +53,6 @@ int	main(int argc, char **argv, char **envp)
 		str = readline("minishell$> ");
 		if (str == NULL)
 			exit_builtin(NULL, &utils);
-		//if (check_sig(str, &utils) == 0)
-		//{
 		add_history(str);
 		tree = parse(str);
 		if (!tree)
@@ -62,13 +60,11 @@ int	main(int argc, char **argv, char **envp)
 		utils.root = tree;
 		if (tree != NULL && utils.fds_vector != NULL)
 		{
-		//	print_tree(tree, 1);
 			if (make_all_heredocs(tree) == 0)
 				check_id(exec(tree, &utils), &utils);
 		}
 		check_sig(&utils);
 		del_vector(utils.fds_vector, NULL);
 		free_tree(&tree);
-		//}
 	}
 }
