@@ -47,6 +47,7 @@ char	*random_name(void)
 		return (NULL);
 	}
 	name[20] = '\0';
-	close(fd_random);
+	if (close(fd_random) == -1)
+		return (NULL);
 	return (replace_chars(name));
 }

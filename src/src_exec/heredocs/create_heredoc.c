@@ -32,6 +32,7 @@ char	*create_heredoc(char *delim)
 		close(fd);
 		return (NULL);
 	}
-	close(fd);
+	if (close(fd) == -1)
+		return (NULL);
 	return (name);
 }

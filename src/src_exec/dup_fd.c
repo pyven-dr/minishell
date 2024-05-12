@@ -17,7 +17,8 @@ int	dup_fd(int fd1, int fd2)
 	int	dup_val;
 
 	dup_val = dup2(fd1, fd2);
-	close(fd1);
+	if (close(fd1) == -1)
+		return (-1);
 	if (dup_val < 0)
 	{
 		perror("minishell: Dup2 error");

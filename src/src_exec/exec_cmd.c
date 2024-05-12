@@ -28,9 +28,8 @@ int	exec_cmd(char **cmd, t_utils *utils)
 	if (id == 0)
 	{
 		env = create_env(utils->env_vector);
-		if (env == NULL)
+		if (env == NULL || close_fds(utils) == 1)
 			exit(1);
-		close_fds(utils);
 		execve(cmd[0], cmd, env);
 		perror("minishell: Execve error");
 		free_tab(cmd);

@@ -12,13 +12,27 @@
 
 #include "exec.h"
 
+static int close_all(t_utils *utils)
+{
+	int	ret_val;
+
+	ret_val = 0;
+	if (close(STDIN_FILENO) == -1)
+		ret_val = 1;
+	if (close(STDOUT_FILENO) == -1)
+		ret_val = 1;
+	if (close_fds(utils) == 1)
+		ret_val = 1;
+	del_vector(utils->fds_vector, NULL);
+	return (ret_val);
+}
+
 int	exec_node_pipe(int pipe_fd[2], t_tree *node, int fd, t_utils *utils)
 {
 	pid_t	id;
 	int		exec_id;
 	int		status;
 
-	status = 0;
 	id = fork();
 	if (id < 0)
 	{
@@ -31,10 +45,8 @@ int	exec_node_pipe(int pipe_fd[2], t_tree *node, int fd, t_utils *utils)
 			exit(1);
 		exec_id = exec(node, utils);
 		status = check_id(exec_id, utils);
-		close(STDIN_FILENO);
-		close(STDOUT_FILENO);
-		close_fds(utils);
-		del_vector(utils->fds_vector, NULL);
+		if (close_all(utils) == 1)
+			exit(1);
 		exit(status);
 	}
 	return (id);

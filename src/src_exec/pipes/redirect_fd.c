@@ -21,8 +21,13 @@ int	redirect_fd(int fd, int pipe_fd[2])
 		val = dup2(pipe_fd[1], STDOUT_FILENO);
 	else if (fd == STDIN_FILENO)
 		val = dup2(pipe_fd[0], STDIN_FILENO);
-	close(pipe_fd[0]);
-	close(pipe_fd[1]);
+	if (close(pipe_fd[0]) == -1)
+	{
+		close(pipe_fd[1]);
+		return (1);
+	}
+	if (close(pipe_fd[1]) == -1)
+		return (1);
 	if (val < 0)
 	{
 		perror("minishell: Dup2 Error");

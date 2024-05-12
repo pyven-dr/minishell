@@ -22,8 +22,13 @@ int	exec_pipe(t_tree *node, t_utils *utils)
 		return (-1);
 	id_left = exec_node_pipe(pipe_fd, node->left, STDOUT_FILENO, utils);
 	id_right = exec_node_pipe(pipe_fd, node->right, STDIN_FILENO, utils);
-	close(pipe_fd[0]);
-	close(pipe_fd[1]);
+	if (close(pipe_fd[0]) == -1)
+	{
+		close(pipe_fd[1]);
+		return (-1);
+	}
+	if (close(pipe_fd[1]) == -1)
+		return (-1);
 	waitpid(id_left, NULL, 0);
 	return (check_id(id_right, utils));
 }

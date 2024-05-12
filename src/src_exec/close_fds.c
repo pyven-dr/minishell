@@ -12,7 +12,7 @@
 
 #include "exec.h"
 
-void	close_fds(t_utils *utils)
+int	close_fds(t_utils *utils)
 {
 	size_t	i;
 	int		fd;
@@ -21,7 +21,9 @@ void	close_fds(t_utils *utils)
 	while (i < utils->fds_vector->size)
 	{
 		fd = *(int *)get_elem_vector(utils->fds_vector, i);
-		close(fd);
+		if (close(fd) == -1)
+			return (1);
 		i++;
 	}
+	return (0);
 }
