@@ -15,13 +15,17 @@
 
 int	g_s = 0;
 
-int	check_sig(char *str, t_utils *utils)
+int	check_sig(t_utils *utils)
 {
-	if (str == NULL)
-		exit_builtin(NULL, utils);
-	if (g_s == 1)
+	if (g_s == SIGINT)
 	{
 		change_exit_val(130, utils);
+		g_s = 0;
+		return (1);
+	}
+	if (g_s == SIGQUIT)
+	{
+		change_exit_val(131, utils);
 		g_s = 0;
 		return (1);
 	}
@@ -40,14 +44,17 @@ int	main(int argc, char **argv, char **envp)
 	if (utils.env_vector == NULL)
 		return (1);
 	init_env(&utils, envp);
-	init_sig();
 	while (1)
 	{
+		init_sig();
 		utils.fds_vector = new_vector(10, sizeof(int));
 		if (utils.fds_vector == NULL)
 			change_exit_val(1, &utils);
 		str = readline("minishell$> ");
-		check_sig(str, &utils);
+		if (str == NULL)
+			exit_builtin(NULL, &utils);
+		//if (check_sig(str, &utils) == 0)
+		//{
 		add_history(str);
 		tree = parse(str);
 		if (!tree)
@@ -58,10 +65,9 @@ int	main(int argc, char **argv, char **envp)
 			make_all_heredocs(tree);
 			check_id(exec(tree, &utils), &utils);
 		}
-		/*sigaction(SIGQUIT, &s, NULL);
-		s.sa_handler = NULL;
-		sigaction(SIGINT, &s, NULL);*/
+		check_sig(&utils);
 		del_vector(utils.fds_vector, NULL);
 		free_tree(&tree);
+		//}
 	}
 }

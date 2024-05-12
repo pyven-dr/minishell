@@ -17,7 +17,6 @@ int	nb_args(char **args)
 	int	nb_args;
 
 	nb_args = 0;
-
 	if (args == NULL)
 		return (0);
 	while (args[nb_args] != NULL)

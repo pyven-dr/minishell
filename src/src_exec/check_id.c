@@ -20,6 +20,7 @@ int	check_id(int id, t_utils *utils)
 		return (id);
 	else if (id > 0)
 	{
+		sig_end_exec();
 		if (waitpid(id, &status, 0) == -1)
 		{
 			change_exit_val(1, utils);

@@ -39,6 +39,5 @@ int	exec_cmd(char **cmd, t_utils *utils)
 		exit(1);
 	}
 	free_tab(cmd);
-	init_sig();
 	return (id);
 }

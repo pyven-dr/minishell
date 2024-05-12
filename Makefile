@@ -45,7 +45,8 @@ EXEC_SRC = exec.c \
 		   create_env.c \
 		   nb_args.c \
 		   change_exit_val.c \
-		   sig_handler.c
+		   sig_handler.c \
+		   sig_handler_exec.c
 
 FIND_CMD_SRC = check_absolute_path.c \
 			   find_command.c \
