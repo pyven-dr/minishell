@@ -79,6 +79,7 @@ int		exec_node_pipe(int pipe_fd[2], t_tree *node, int fd, t_utils *utils);
 char	*random_name(void);
 char	*create_heredoc(char *delim);
 int		make_all_heredocs(t_tree *node);
+int		write_file(int fd, char *delim);
 
 // Signals //
 

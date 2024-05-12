@@ -12,20 +12,6 @@
 
 #include "exec.h"
 
-static char	*add_nl(char *name)
-{
-	char	*temp;
-
-	temp = ft_strdup(name);
-	if (temp == NULL)
-		return (NULL);
-	name = ft_strjoin(temp, "\n");
-	free(temp);
-	if (name == NULL)
-		return (NULL);
-	return (name);
-}
-
 int	make_all_heredocs(t_tree *node)
 {
 	char	*name;
@@ -42,9 +28,6 @@ int	make_all_heredocs(t_tree *node)
 	}
 	if (node->operand == DOUBLE_IN)
 	{
-		node->name = add_nl(node->name);
-		if (node->name == NULL)
-			return (1);
 		name = create_heredoc(node->name);
 		if (name == NULL)
 			return (1);

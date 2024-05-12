@@ -18,6 +18,7 @@ int	exec_double_in(t_tree *node, t_utils *utils)
 	int	newfd;
 	int	exec_val;
 
+	exec_val = 0;
 	newfd = open(node->name, O_RDONLY);
 	if (newfd == -1)
 	{

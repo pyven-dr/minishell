@@ -54,7 +54,8 @@ FIND_CMD_SRC = check_absolute_path.c \
 
 HEREDOCS_SRC = create_heredoc.c \
 			   make_all_heredocs.c \
-			   random_name.c
+			   random_name.c \
+			   heredocs_write_file.c
 
 OPERATOR_SRC = exec_and.c \
 	  		   exec_or.c \

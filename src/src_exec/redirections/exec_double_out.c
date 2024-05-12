@@ -18,6 +18,7 @@ int	exec_double_out(t_tree *node, t_utils *utils)
 	int	newfd;
 	int	exec_val;
 
+	exec_val = 0;
 	if (expand_redirect(node, utils->env_vector) == 1)
 		return (-1);
 	newfd = open(node->name, O_RDWR | O_CREAT | O_APPEND, 0644);

@@ -12,37 +12,6 @@
 
 #include "exec.h"
 
-static int	check_error(char *name, int fd)
-{
-	if (errno != 0)
-	{
-		close(fd);
-		unlink(name);
-		free(name);
-		return (1);
-	}
-	return (0);
-}
-
-static int	write_file(int fd, char *name, char *delim)
-{
-	char	*line;
-
-	line = get_next_line(STDIN_FILENO);
-	if (check_error(name, fd) == 1)
-		return (1);
-	while (ft_strcmp(line, delim) != 0)
-	{
-		ft_putstr_fd(line, fd);
-		free(line);
-		line = get_next_line(STDIN_FILENO);
-		if (check_error(name, fd) == 1)
-			return (1);
-	}
-	free(line);
-	return (0);
-}
-
 char	*create_heredoc(char *delim)
 {
 	int		fd;
@@ -57,8 +26,12 @@ char	*create_heredoc(char *delim)
 		free(name);
 		return (NULL);
 	}
-	if (write_file(fd, name, delim) == 1)
+	if (write_file(fd, delim) == 1)
+	{
+		unlink(name);
+		close(fd);
 		return (NULL);
+	}
 	close(fd);
 	return (name);
 }
