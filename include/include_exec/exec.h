@@ -90,6 +90,7 @@ char	*random_name(void);
 char	*create_heredoc(char *delim);
 int		make_all_heredocs(t_tree *node);
 int		write_file(int fd, char *delim);
+void	del_all_heredocs(t_tree *node);
 
 // Signals //
 

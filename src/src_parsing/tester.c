@@ -62,6 +62,8 @@ int	main(int argc, char **argv, char **envp)
 		{
 			if (make_all_heredocs(tree) == 0)
 				check_id(exec(tree, &utils), &utils);
+			else
+				del_all_heredocs(tree);
 		}
 		check_sig(&utils);
 		del_vector(utils.fds_vector, NULL);

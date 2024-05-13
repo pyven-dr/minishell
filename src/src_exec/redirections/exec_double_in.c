@@ -37,6 +37,7 @@ int	exec_double_in(t_tree *node, t_utils *utils)
 		exec_val = exec(node->left, utils);
 	if (dup_fd(oldfd, STDIN_FILENO) == -1)
 		return (-1);
-	unlink(node->name);
+	if (unlink(node->name) == -1)
+		return (-1);
 	return (exec_val);
 }
