@@ -21,10 +21,7 @@ int	exec_double_in(t_tree *node, t_utils *utils)
 	exec_val = 0;
 	newfd = open(node->name, O_RDONLY);
 	if (newfd == -1)
-	{
-		perror("minishell: Redirect in error");
-		return (-1);
-	}
+		return (perror("minishell: Redirect in error"), -1);
 	oldfd = dup_oldfd(utils, STDIN_FILENO);
 	if (oldfd == -1)
 	{
@@ -38,6 +35,6 @@ int	exec_double_in(t_tree *node, t_utils *utils)
 	if (dup_fd(oldfd, STDIN_FILENO) == -1)
 		return (-1);
 	if (unlink(node->name) == -1)
-		return (-1);
+		return (perror("minishell: unlink"), -1);
 	return (exec_val);
 }
