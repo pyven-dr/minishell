@@ -43,7 +43,7 @@ bool	fill_file(t_parsing *pars, char **line)
 
 static bool	add_file_to_operator(t_parsing *pars, char **line)
 {
-	char *name;
+	char	*name;
 
 	name = strdup_to_next_space(line, pars);
 	if (name == NULL)
@@ -59,7 +59,7 @@ static bool	add_file_to_operator(t_parsing *pars, char **line)
 
 static bool	add_file_to_cmd(t_parsing *pars, char **line)
 {
-	char *name;
+	char	*name;
 
 	name = strdup_to_next_space(line, pars);
 	if (name == NULL)

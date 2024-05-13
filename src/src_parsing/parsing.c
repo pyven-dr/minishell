@@ -45,7 +45,6 @@ t_tree	*parse(char *line)
 
 static bool	pars_line(t_parsing *pars, char **line)
 {
-
 	while (**line && is_whitespace(**line))
 		(*line)++;
 	if (**line == '(' || **line == ')')

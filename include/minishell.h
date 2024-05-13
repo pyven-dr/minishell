@@ -16,7 +16,7 @@
 # include <stdbool.h>
 # include <signal.h>
 
-extern int g_s;
+extern int	g_s;
 
 typedef enum e_operand
 {
