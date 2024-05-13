@@ -25,8 +25,7 @@ static void	exec_line(char *line, t_utils *utils)
 	}
 	if (make_all_heredocs(tree) == 0)
 		check_id(exec(tree, utils), utils);
-	else
-		del_all_heredocs(tree);
+	del_all_heredocs(tree);
 	free_tree(&tree);
 }
 

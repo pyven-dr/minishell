@@ -69,7 +69,8 @@ REDIR_SRC = exec_simple_out.c \
 	  	    exec_double_in.c \
 	  	    exec_simple_in.c \
 	  	    dup_oldfd.c \
-	  	    expand_redirect.c
+	  	    expand_redirect.c \
+	  	    remove_fds_vector.c
 
 PIPES_SRC = create_pipe.c \
 			redirect_fd.c \

@@ -36,5 +36,7 @@ int	exec_simple_out(t_tree *node, t_utils *utils)
 		exec_val = exec(node->left, utils);
 	if (dup_fd(oldfd, STDOUT_FILENO) == -1)
 		return (-1);
+	if (remove_fds_vector(oldfd, utils->fds_vector) == 1)
+		return (1);
 	return (exec_val);
 }

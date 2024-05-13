@@ -112,11 +112,11 @@ void	print_tree(t_tree *tree, int space)
 	}
 	else
 	{
-		print_tree(tree->left, space + 5);
+		print_tree(tree->right, space + 5);
 		while (c-- > 0)
 			printf(" ");
 		print_node(tree);
-		print_tree(tree->right, space + 5);
+		print_tree(tree->left, space + 5);
 	}
 }
 
