@@ -24,6 +24,16 @@
 # include <fcntl.h>
 # include <sys/stat.h>
 
+# define ERR_PWD \
+"pwd: error retrieving current directory: cannot access parent directories"
+# define ERR_PDW_CD \
+"cd: error retrieving current directory: cannot access parent directories"
+# define ERR_CD_HOME "minishell: cd: HOME not set\n"
+# define ERR_CD_ARG "minishell: cd: too many arguments\n"
+# define ERR_CD_FILE "minishell: cd: %s: No such file or directory\n"
+# define ERR_CD_DIR "minishell: cd: %s: Not a directory\n"
+# define ERR_CD_NAME "minishell: cd: %s: File name too long\n"
+
 typedef struct s_utils
 {
 	t_vector	*fds_vector;

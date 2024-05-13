@@ -26,7 +26,10 @@ char	*add_pwd(char *curpath)
 		return (NULL);
 	pwd = getcwd(NULL, 0);
 	if (pwd == NULL)
+	{
+		perror(ERR_PDW_CD);
 		return (NULL);
+	}
 	new_curpath = ft_strjoin(pwd, temp_curpath);
 	free(pwd);
 	free(temp_curpath);

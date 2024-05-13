@@ -23,14 +23,13 @@ int	check_file(char **components, int last, int nb_components, char *directory)
 	if (stat(path, &file) == -1)
 	{
 		free(path);
-		ft_printf(2, "minishell: cd: %s: No such file or directory\n", \
-					directory);
+		ft_printf(2, ERR_CD_FILE, directory);
 		return (1);
 	}
 	if (S_ISDIR(file.st_mode) == 0)
 	{
 		free(path);
-		ft_printf(2, "minishell: cd: %s: Not a directory\n", directory);
+		ft_printf(2, ERR_CD_DIR, directory);
 		return (1);
 	}
 	free(path);
@@ -45,13 +44,11 @@ int	check_curpath(char *curpath, char *directory)
 	{
 		if (ft_strcmp(directory, "-") == 0)
 		{
-			ft_printf(2, "minishell: cd: %s: No such file or directory\n", \
-					curpath);
+			ft_printf(2, ERR_CD_FILE, curpath);
 		}
 		else
 		{
-			ft_printf(2, "minishell: cd: %s: No such file or directory\n", \
-					directory);
+			ft_printf(2, ERR_CD_FILE, directory);
 		}
 		free(curpath);
 		return (1);
@@ -59,7 +56,7 @@ int	check_curpath(char *curpath, char *directory)
 	if (S_ISDIR(file.st_mode) == 0)
 	{
 		free(curpath);
-		ft_printf(2, "minishell: cd: %s: Not a directory\n", directory);
+		ft_printf(2, ERR_CD_DIR, directory);
 		return (1);
 	}
 	return (0);

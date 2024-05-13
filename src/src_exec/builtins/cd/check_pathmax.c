@@ -37,7 +37,7 @@ static char	*symplify_path(char *curpath, char *directory)
 	pwd_pos = ft_strnstr(curpath, pwd, ft_strlen(pwd));
 	if (pwd_pos == NULL || pwd_pos != curpath)
 	{
-		ft_printf(2, "minishell: cd: %s: File name too long\n", directory);
+		ft_printf(2, ERR_CD_NAME, directory);
 		free(pwd_pos);
 		free(pwd);
 		return (NULL);
@@ -61,6 +61,6 @@ char	*check_pathmax(char *curpath, char *directory)
 		return (curpath);
 	}
 	free(curpath);
-	ft_printf(2, "minishell: cd: %s: File name too long\n", directory);
+	ft_printf(2, ERR_CD_NAME, directory);
 	return (NULL);
 }

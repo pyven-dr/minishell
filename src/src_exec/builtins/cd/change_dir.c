@@ -19,15 +19,16 @@ int	change_dir(char *curpath, t_utils *utils)
 
 	oldpwd = getcwd(NULL, 0);
 	if (oldpwd == NULL)
-		return (1);
+		perror(ERR_PDW_CD);
 	if (chdir(curpath) == -1)
 	{
-		free(oldpwd);
+		if (oldpwd != NULL)
+			free(oldpwd);
 		free(curpath);
 		return (1);
 	}
 	pwd = getcwd(NULL, 0);
 	if (pwd == NULL)
-		return (free(oldpwd), 1);
+		perror(ERR_PDW_CD);
 	return (change_env(pwd, oldpwd, utils));
 }

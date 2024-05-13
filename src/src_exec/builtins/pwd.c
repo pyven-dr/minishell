@@ -18,7 +18,10 @@ int	pwd(void)
 
 	cwd = getcwd(NULL, 0);
 	if (cwd == NULL)
+	{
+		perror(ERR_PWD);
 		return (-1);
+	}
 	if (write(1, cwd, ft_strlen(cwd)) == -1)
 	{
 		free(cwd);
