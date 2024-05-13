@@ -16,8 +16,7 @@ IFLAGS = \
 		 -I $(INCLUDE_DIR)/$(PARSING_INCLUDE_DIR) \
 		 -I $(LIBFT_DIR)/$(INCLUDE_DIR) \
 
-PARSING_SRC = tester.c \
-			  characters.c \
+PARSING_SRC = characters.c \
 			  fill_cmd.c \
 			  fill_operand.c \
 			  parsing.c \
@@ -30,7 +29,7 @@ PARSING_SRC = tester.c \
 			  get_name.c \
 			  remove_quote.c \
 			  wildcard.c \
-			  utils.c \
+			  utils.c
 
 EXEC_SRC = exec.c \
 	  	   exec_cmd.c \
@@ -45,8 +44,11 @@ EXEC_SRC = exec.c \
 		   create_env.c \
 		   nb_args.c \
 		   change_exit_val.c \
-		   sig_handler.c \
-		   sig_handler_exec.c
+		   exec_loop.c
+
+SIGNALS_SRC = sig_handler.c \
+			  sig_handler_exec.c \
+			  check_sig.c
 
 FIND_CMD_SRC = check_absolute_path.c \
 			   find_command.c \
@@ -110,8 +112,10 @@ SRC = $(addprefix src_exec/find_command/, $(FIND_CMD_SRC)) \
 	  $(addprefix src_exec/redirections/, $(REDIR_SRC)) \
 	  $(addprefix src_exec/pipes/, $(PIPES_SRC)) \
 	  $(addprefix src_exec/builtins/, $(BUILTINS_SRC)) \
+	  $(addprefix src_exec/signals/, $(SIGNALS_SRC)) \
 	  $(addprefix src_parsing/, $(PARSING_SRC)) \
-	  $(addprefix src_exec/, $(EXEC_SRC))
+	  $(addprefix src_exec/, $(EXEC_SRC)) \
+	  main.c
 
 BUILD_DIR = .build
 

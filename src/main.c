@@ -15,27 +15,8 @@
 
 int	g_s = 0;
 
-int	check_sig(t_utils *utils)
-{
-	if (g_s == SIGINT)
-	{
-		change_exit_val(130, utils);
-		g_s = 0;
-		return (1);
-	}
-	if (g_s == SIGQUIT)
-	{
-		change_exit_val(131, utils);
-		g_s = 0;
-		return (1);
-	}
-	return (0);
-}
-
 int	main(int argc, char **argv, char **envp)
 {
-	char				*str;
-	t_tree				*tree;
 	t_utils				utils;
 
 	(void)argc;
@@ -44,29 +25,5 @@ int	main(int argc, char **argv, char **envp)
 	if (utils.env_vector == NULL)
 		return (1);
 	init_env(&utils, envp);
-	while (1)
-	{
-		init_sig();
-		utils.fds_vector = new_vector(10, sizeof(int));
-		if (utils.fds_vector == NULL)
-			change_exit_val(1, &utils);
-		str = readline("minishell$> ");
-		if (str == NULL)
-			exit_builtin(NULL, &utils);
-		add_history(str);
-		tree = parse(str);
-		if (!tree)
-			change_exit_val(2, &utils);
-		utils.root = tree;
-		if (tree != NULL && utils.fds_vector != NULL)
-		{
-			if (make_all_heredocs(tree) == 0)
-				check_id(exec(tree, &utils), &utils);
-			else
-				del_all_heredocs(tree);
-		}
-		check_sig(&utils);
-		del_vector(utils.fds_vector, NULL);
-		free_tree(&tree);
-	}
+	exec_loop(&utils);
 }
