@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 18:03:49 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/05/03 14:07:46 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/05/13 19:36:31 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,10 @@ static bool	add_file_after_parenthesis(t_parsing *pars, char **line);
 
 bool	fill_file(t_parsing *pars, char **line)
 {
-	char *name;
-
-	name = strdup_to_next_space(line, pars);
-	if (name == NULL)
-		return (NULL);
 	if (!pars->tree)
 	{
-		pars->tree = new_node(NULL, pars->operand, name);
+		pars->tree = new_node(NULL, pars->operand, \
+		strdup_to_next_space(line, pars));
 		if (!pars->tree)
 			return (clean_continue(pars, line, 1));
 		if (!*pars->tree->name)
