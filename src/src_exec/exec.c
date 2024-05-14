@@ -24,7 +24,7 @@ static void	init_tab(t_exec_funcs tab[7])
 	tab[6] = exec_double_out;
 }
 
-int	cmd_not_found(char **split_cmd, t_utils *utils)
+static int	cmd_not_found(char **split_cmd, t_utils *utils)
 {
 	if (change_exit_val(127, utils) == -1)
 		return (-1);
