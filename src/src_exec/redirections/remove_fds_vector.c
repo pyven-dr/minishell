@@ -15,7 +15,7 @@
 int	remove_fds_vector(int oldfd, t_vector *fds_vector)
 {
 	int	i;
-	int *elem;
+	int	*elem;
 
 	i = 0;
 	elem = get_elem_vector(fds_vector, 0);
