@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 00:25:13 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/05/10 20:20:28 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/05/15 17:37:25 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,21 +67,6 @@ static char	**split_all_values(char **tab_splitted)
 	free_tab(tab_splitted);
 	return (get_all_values(double_tabs));
 }
-
-// void	free_tab_value(void *value)
-// {
-// 	char	***tab;
-// 	size_t	i;
-
-// 	i = 0;
-// 	tab = value;
-// 	while ((*tab)[i])
-// 	{
-// 		free((*tab)[i]);
-// 		i++;
-// 	}
-// 	free(*tab);
-// }
 
 static char	**get_all_values(t_vector *double_tabs)
 {

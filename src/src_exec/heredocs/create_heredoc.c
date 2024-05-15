@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   create_heredoc.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pyven-dr <pyven-dr@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 01:42:46 by pyven-dr          #+#    #+#             */
-/*   Updated: 2024/03/31 01:42:46 by pyven-dr         ###   ########.fr       */
+/*   Updated: 2024/05/15 18:54:41 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-char	*create_heredoc(char *delim)
+char	*create_heredoc(char *delim, t_vector *env)
 {
 	int		fd;
 	char	*name;
@@ -26,7 +26,7 @@ char	*create_heredoc(char *delim)
 		free(name);
 		return (NULL);
 	}
-	if (write_file(fd, delim) == 1)
+	if (write_file(fd, delim, env) == 1)
 	{
 		unlink(name);
 		close(fd);

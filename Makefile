@@ -29,7 +29,8 @@ PARSING_SRC = characters.c \
 			  get_name.c \
 			  remove_quote.c \
 			  wildcard.c \
-			  utils.c
+			  utils.c \
+			  remove_quote_heredoc.c 
 
 EXEC_SRC = exec.c \
 	  	   exec_cmd.c \

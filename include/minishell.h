@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 14:02:22 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/05/10 20:38:10 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/05/15 18:24:39 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ void	free_tree(t_tree **tree);
 
 typedef struct s_is_quoted
 {
-	char	*s;
+	char	*str;
 	bool	is_quoted;
-}	t_quoted;
+}	t_is_quoted;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:26:00 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/05/02 02:32:38 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/05/15 19:04:05 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static char	*ft_expand(char *line, t_vector *env)
 		return (NULL);
 	name = get_elem_vector(env, i);
 	free(line);
-	return (name->value);
+	return (replace_quote(name->value));
 }
 
 char	*strdup_var(char **line)
@@ -115,8 +115,6 @@ static char	*replace_vars(char *line, t_vector *env, char *s)
 		{
 			line[i] = '\0';
 			s = ft_strjoin_free(s, line);
-			if (!s)
-				return (NULL);
 			line += i + 1;
 			var = ft_expand(strdup_var(&line), env);
 			if (var != NULL)
@@ -124,6 +122,7 @@ static char	*replace_vars(char *line, t_vector *env, char *s)
 			if (!s)
 				return (NULL);
 			i = -1;
+			put_quote_back(var);
 		}
 	}
 	return (s = ft_strjoin_free(s, line), s);

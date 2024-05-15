@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pyven-dr <pyven-dr@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 01:32:49 by pyven-dr          #+#    #+#             */
-/*   Updated: 2024/04/27 16:55:28 by pyven-dr         ###   ########.fr       */
+/*   Updated: 2024/05/15 18:55:36 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,9 @@ int		exec_node_pipe(int pipe_fd[2], t_tree *node, int fd, t_utils *utils);
 // Heredocs //
 
 char	*random_name(void);
-char	*create_heredoc(char *delim);
-int		make_all_heredocs(t_tree *node);
-int		write_file(int fd, char *delim);
+char	*create_heredoc(char *delim, t_vector *env);
+int		make_all_heredocs(t_tree *node, t_vector *env);
+int		write_file(int fd, char *delim, t_vector *env);
 void	del_all_heredocs(t_tree *node);
 
 // Signals //

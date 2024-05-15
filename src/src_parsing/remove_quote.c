@@ -6,13 +6,13 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 16:17:22 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/04/25 18:04:31 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/05/15 19:42:46 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-static size_t	count_size(char	*s)
+size_t	count_size(char	*s)
 {
 	size_t	i;
 	t_quote	scope;
@@ -55,7 +55,7 @@ char	*remove_quote(char *s)
 	s = head;
 	free (s);
 	str[i] = '\0';
-	return (str);
+	return (put_quote_back(str));
 }
 
 char	**remove_quote_from_tab(char **tab)
@@ -76,4 +76,40 @@ char	**remove_quote_from_tab(char **tab)
 		i++;
 	}
 	return (tab);
+}
+
+char	*replace_quote(char *s)
+{
+	char	*head;
+
+	head = s;
+	if (!s)
+		return (NULL);
+	while (*s)
+	{
+		if (*s == '"')
+			*s = -2;
+		else if (*s == '\'')
+			*s = -1;
+		s++;
+	}
+	return (head);
+}
+
+char	*put_quote_back(char *s)
+{
+	char	*head;
+
+	head = s;
+	if (!s)
+		return (NULL);
+	while (*s)
+	{
+		if (*s == -2)
+			*s = '"';
+		else if (*s == -1)
+			*s = '\'';
+		s++;
+	}
+	return (head);
 }

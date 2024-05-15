@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pyven-dr <pyven-dr@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 22:51:26 by pyven-dr          #+#    #+#             */
-/*   Updated: 2024/05/13 22:51:26 by pyven-dr         ###   ########.fr       */
+/*   Updated: 2024/05/15 18:55:52 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	exec_line(char *line, t_utils *utils)
 		change_exit_val(2, utils);
 		return ;
 	}
-	if (make_all_heredocs(tree) == 0)
+	if (make_all_heredocs(tree, utils->env_vector) == 0)
 		check_id(exec(tree, utils), utils);
 	del_all_heredocs(tree);
 	free_tree(&tree);
