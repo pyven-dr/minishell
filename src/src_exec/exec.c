@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:01:47 by pyven-dr          #+#    #+#             */
-/*   Updated: 2024/05/07 15:48:59 by pyven-dr         ###   ########.fr       */
+/*   Updated: 2024/05/16 18:19:09 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	exec(t_tree *node, t_utils *utils)
 		split_cmd = expand(node->name, utils->env_vector);
 		if (split_cmd == NULL)
 			return (-1);
-		ret_value = check_builtins(split_cmd, utils);
+		ret_value = check_builtins(split_cmd, utils, node);
 		if (ret_value != -127)
 		{
 			if (change_exit_val(ret_value, utils) == -1)
@@ -55,7 +55,7 @@ int	exec(t_tree *node, t_utils *utils)
 		split_cmd[0] = get_cmd_path(split_cmd[0], utils->env_vector);
 		if (split_cmd[0] == NULL)
 			return (cmd_not_found(split_cmd, utils));
-		return (exec_cmd(split_cmd, utils));
+		return (exec_cmd(split_cmd, utils, find_root(node)));
 	}
 	return (exec_funcs_tab[node->operand - 1](node, utils));
 }

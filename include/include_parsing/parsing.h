@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:08:58 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/05/15 19:42:59 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/05/16 18:39:40 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char		*replace_quote(char *s);
 char		*put_quote_back(char *s);
 char		*remove_quote(char *s);
 char		**remove_quote_from_tab(char **tab);
-t_is_quoted remove_quote_heredoc(char *s);
+t_is_quoted	remove_quote_heredoc(char *s);
 size_t		count_size(char	*s);
 char		**ft_split_quoted(char *s);
 bool		there_is_a_wildcard(char *s);
@@ -80,10 +80,5 @@ t_vector	*ft_wildcard(char *line);
 void		free_value(void *value);
 void		free_save(t_parenthes **save);
 void		*clean_continue(t_parsing *pars, char **line, int code);
-
-#include <stdio.h>
-#include <unistd.h>
-void	print_node(t_tree *node);
-void	print_tree(t_tree *tree, int space);
 
 #endif

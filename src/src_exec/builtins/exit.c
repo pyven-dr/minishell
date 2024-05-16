@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pyven-dr <pyven-dr@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 19:04:50 by pyven-dr          #+#    #+#             */
-/*   Updated: 2024/04/18 12:40:27 by pyven-dr         ###   ########.fr       */
+/*   Updated: 2024/05/16 18:00:48 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	check_arg(char *arg)
 	return (0);
 }
 
-static void	free_utils(char **args, t_utils *utils)
+void	free_utils(char **args, t_utils *utils)
 {
 	if (args != NULL)
 		free_tab(args);

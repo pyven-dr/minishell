@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 04:33:51 by pyven-dr          #+#    #+#             */
-/*   Updated: 2024/04/08 15:33:31 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/05/16 18:25:41 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	close_all(t_utils *utils)
 		ret_val = 1;
 	if (close_fds(utils) == 1)
 		ret_val = 1;
-	del_vector(utils->fds_vector, NULL);
+	free_utils(NULL, utils);
 	return (ret_val);
 }
 
@@ -32,18 +32,22 @@ int	exec_node_pipe(int pipe_fd[2], t_tree *node, int fd, t_utils *utils)
 	pid_t	id;
 	int		exec_id;
 	int		status;
+	t_tree	*root;
 
 	id = fork();
 	if (id < 0)
-	{
-		perror("minishell: fork error");
-		return (-1);
-	}
+		return (perror("minishell: fork error"), -1);
 	if (id == 0)
 	{
+		root = find_root(node);
 		if (redirect_fd(fd, pipe_fd) != 0)
+		{
+			free_utils(NULL, utils);
+			free_tree(&root);
 			exit(1);
+		}
 		exec_id = exec(node, utils);
+		free_tree(&root);
 		status = check_id(exec_id, utils);
 		if (close_all(utils) == 1)
 			exit(1);
