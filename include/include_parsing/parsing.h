@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 00:08:58 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/05/16 18:39:40 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/05/16 20:41:39 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,10 @@ t_vector	*ft_wildcard(char *line);
 void		free_value(void *value);
 void		free_save(t_parenthes **save);
 void		*clean_continue(t_parsing *pars, char **line, int code);
+
+//---------------PRINT TREE FUNCTIUN----------------//
+void	print_tree(t_tree *tree, int space);
+void	print_node(t_tree *node);
+//---------------PRINT TREE FUNCTIUN----------------//
 
 #endif

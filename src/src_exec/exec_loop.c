@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 22:51:26 by pyven-dr          #+#    #+#             */
-/*   Updated: 2024/05/15 18:55:52 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/05/16 20:51:46 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static void	exec_line(char *line, t_utils *utils)
 	t_tree	*tree;
 
 	tree = parse(line);
+	//print tree
+	print_tree(tree, 0);
 	if (tree == NULL)
 	{
 		change_exit_val(2, utils);
