@@ -21,9 +21,9 @@ int	exec_cmd(char **cmd, t_utils *utils, t_tree *root)
 	id = fork();
 	if (id < 0)
 		return (perror("minishell: Fork error"), -1);
-	sig_exec();
 	if (id == 0)
 	{
+		sig_exec();
 		free_tree(&root);
 		env = create_env(utils->env_vector);
 		if (env == NULL || close_fds(utils) == 1)

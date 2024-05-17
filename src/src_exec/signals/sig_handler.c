@@ -18,16 +18,6 @@ static int	event(void)
 	return (0);
 }
 
-static void	signal_handler(int signal)
-{
-	g_s = signal;
-	if (signal != 0)
-	{
-		rl_replace_line("", 0);
-		rl_done = 1;
-	}
-}
-
 void	init_sig(void)
 {
 	struct sigaction	sig_a;

@@ -101,6 +101,7 @@ void	del_all_heredocs(t_tree *node);
 void	init_sig(void);
 void	sig_exec(void);
 void	sig_end_exec(void);
+void	signal_handler(int signal);
 
 // Builtins //
 

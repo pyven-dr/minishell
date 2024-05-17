@@ -49,7 +49,8 @@ EXEC_SRC = exec.c \
 
 SIGNALS_SRC = sig_handler.c \
 			  sig_handler_exec.c \
-			  check_sig.c
+			  check_sig.c \
+			  signal_handler.c
 
 FIND_CMD_SRC = check_absolute_path.c \
 			   find_command.c \

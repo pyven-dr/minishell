@@ -12,6 +12,21 @@
 
 #include "exec.h"
 
+static int	print_sig_cmd(void)
+{
+	if (g_s == SIGINT)
+	{
+		if (ft_putchar_fd('\n', STDOUT_FILENO) == -1)
+			return (1);
+	}
+	else if (g_s == SIGQUIT)
+	{
+		if (ft_putstr_fd("Quit (core dumped)\n", STDOUT_FILENO) == -1)
+			return (1);
+	}
+	return (0);
+}
+
 int	check_id(int id, t_utils *utils)
 {
 	int	status;
@@ -26,6 +41,8 @@ int	check_id(int id, t_utils *utils)
 			change_exit_val(1, utils);
 			return (-1);
 		}
+		if (print_sig_cmd() == 1)
+			return (-1);
 		if (WEXITSTATUS(status) != 0)
 		{
 			if (change_exit_val(WEXITSTATUS(status), utils) == 1)
