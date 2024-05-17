@@ -45,7 +45,8 @@ EXEC_SRC = exec.c \
 		   create_env.c \
 		   nb_args.c \
 		   change_exit_val.c \
-		   exec_loop.c
+		   exec_loop.c \
+		   print_sig_cmd.c
 
 SIGNALS_SRC = sig_handler.c \
 			  sig_handler_exec.c \

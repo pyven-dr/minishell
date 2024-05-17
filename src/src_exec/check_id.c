@@ -12,18 +12,19 @@
 
 #include "exec.h"
 
-static int	print_sig_cmd(void)
+static int	check_status(int status, t_utils *utils)
 {
-	//printf("%d\n", g_s);
-	if (g_s == SIGINT)
+	if (WIFSIGNALED(status) == true)
 	{
-		if (ft_putchar_fd('\n', STDERR_FILENO) == -1)
-			return (1);
+		if (print_sig_cmd() == 1)
+			return (-1);
+		return (check_sig(utils));
 	}
-	else if (g_s == SIGQUIT)
+	else if (WEXITSTATUS(status) != 0)
 	{
-		if (ft_putstr_fd("Quit (core dumped)\n", STDERR_FILENO) == -1)
-			return (1);
+		if (change_exit_val(WEXITSTATUS(status), utils) == 1)
+			return (-1);
+		return (WEXITSTATUS(status) * -1);
 	}
 	return (0);
 }
@@ -42,18 +43,7 @@ int	check_id(int id, t_utils *utils)
 			change_exit_val(1, utils);
 			return (-1);
 		}
-		if (WIFSIGNALED(status) == true)
-		{
-			if (print_sig_cmd() == 1)
-				return (-1);
-			return (check_sig(utils));
-		}
-		else if (WEXITSTATUS(status) != 0)
-		{
-			if (change_exit_val(WEXITSTATUS(status), utils) == 1)
-				return (-1);
-			return (WEXITSTATUS(status) * -1);
-		}
+		return (check_status(status, utils));
 	}
 	if (change_exit_val(0, utils) == 1)
 		return (-1);

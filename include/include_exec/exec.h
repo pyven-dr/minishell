@@ -59,6 +59,7 @@ int		change_exit_val(int val, t_utils *utils);
 void	exec_loop(t_utils *utils);
 int		check_sig(t_utils *utils);
 void	free_utils(char **args, t_utils *utils);
+int		print_sig_cmd(void);
 
 // Find command //
 
