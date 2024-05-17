@@ -19,10 +19,11 @@ static void	exec_line(char *line, t_utils *utils)
 
 	tree = parse(line);
 	//print tree
-	print_tree(tree, 0);
+	//print_tree(tree, 0);
 	if (tree == NULL)
 	{
 		change_exit_val(2, utils);
+		check_sig(utils);
 		return ;
 	}
 	if (make_all_heredocs(tree, utils->env_vector) == 0)
@@ -50,6 +51,5 @@ void	exec_loop(t_utils *utils)
 			exec_line(str, utils);
 			del_vector(utils->fds_vector, NULL);
 		}
-		check_sig(utils);
 	}
 }
