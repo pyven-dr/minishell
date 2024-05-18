@@ -15,10 +15,12 @@
 int	exec_or(t_tree *node, t_utils *utils)
 {
 	pid_t	id;
+	int 	status;
 
 	id = exec(node->left, utils);
-	if (check_id(id, utils) == 0)
-		return (id);
+	status = check_id(id, utils);
+	if (status == 0)
+		return (status);
 	id = exec(node->right, utils);
 	return (check_id(id, utils));
 }
