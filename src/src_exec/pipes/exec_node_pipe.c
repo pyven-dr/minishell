@@ -48,10 +48,10 @@ int	exec_node_pipe(int pipe_fd[2], t_tree *node, int fd, t_utils *utils)
 		}
 		exec_id = exec(node, utils);
 		free_tree(&root);
-		status = check_id(exec_id, utils);
+		status = check_id_pipe(exec_id, utils);
 		if (close_all(utils) == 1)
 			exit(1);
-		exit(status);
+		exit(status * -1);
 	}
 	return (id);
 }

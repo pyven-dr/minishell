@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_or.c                                          :+:      :+:    :+:   */
+/*   check_sig_pipe.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pyven-dr <pyven-dr@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/22 23:27:21 by pyven-dr          #+#    #+#             */
-/*   Updated: 2024/03/22 23:27:21 by pyven-dr         ###   ########.fr       */
+/*   Created: 2024/05/21 00:25:17 by pyven-dr          #+#    #+#             */
+/*   Updated: 2024/05/21 00:25:17 by pyven-dr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-int	exec_or(t_tree *node, t_utils *utils)
+int	check_sig_pipe(t_utils *utils)
 {
-	pid_t	id;
-	int		status;
-
-	id = exec(node->left, utils);
-	status = check_id(id, utils, node);
-	if (status == 0)
-		return (status);
-	id = exec(node->right, utils);
-	return (check_id(id, utils, node));
+	if (g_s == SIGINT)
+	{
+		change_exit_val(130, utils);
+		g_s = 0;
+		return (-130);
+	}
+	if (g_s == SIGQUIT)
+	{
+		change_exit_val(131, utils);
+		g_s = 0;
+		return (-131);
+	}
+	return (0);
 }

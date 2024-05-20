@@ -46,7 +46,7 @@ EXEC_SRC = exec.c \
 		   nb_args.c \
 		   change_exit_val.c \
 		   exec_loop.c \
-		   print_sig_cmd.c
+		   print_sig_cmd.c \
 
 SIGNALS_SRC = sig_handler.c \
 			  sig_handler_exec.c \
@@ -77,7 +77,9 @@ REDIR_SRC = exec_simple_out.c \
 
 PIPES_SRC = create_pipe.c \
 			redirect_fd.c \
-			exec_node_pipe.c
+			exec_node_pipe.c \
+			check_id_pipe.c \
+			check_sig_pipe.c
 
 EXPORT_SRC = check_arg_env.c \
 			 display_env.c \

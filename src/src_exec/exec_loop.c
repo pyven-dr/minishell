@@ -27,7 +27,7 @@ static void	exec_line(char *line, t_utils *utils)
 		return ;
 	}
 	if (make_all_heredocs(tree, utils->env_vector) == 0)
-		check_id(exec(tree, utils), utils);
+		check_id(exec(tree, utils), utils, tree);
 	del_all_heredocs(tree);
 	free_tree(&tree);
 }

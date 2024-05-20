@@ -18,13 +18,13 @@ int	check_sig(t_utils *utils)
 	{
 		change_exit_val(130, utils);
 		g_s = 0;
-		return (130);
+		return (-130);
 	}
 	if (g_s == SIGQUIT)
 	{
 		change_exit_val(131, utils);
 		g_s = 0;
-		return (131);
+		return (-131);
 	}
 	return (0);
 }

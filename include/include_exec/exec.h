@@ -47,7 +47,7 @@ typedef int	(*t_exec_funcs)(t_tree *node, t_utils *utils);
 int		exec(t_tree *node, t_utils *utils);
 void	free_cmd(char **cmd);
 int		exec_cmd(char **cmd, t_utils *utils, t_tree *root);
-int		check_id(int id, t_utils *utils);
+int		check_id(int id, t_utils *utils, t_tree *node);
 int		dup_fd(int fd1, int fd2);
 int		close_fds(t_utils *utils);
 t_tree	*find_root(t_tree *node);
@@ -88,6 +88,8 @@ int		remove_fds_vector(int oldfd, t_vector *fds_vector);
 int		*create_pipe(int pipe_fd[2]);
 int		redirect_fd(int fd, int pipe_fd[2]);
 int		exec_node_pipe(int pipe_fd[2], t_tree *node, int fd, t_utils *utils);
+int		check_id_pipe(int id, t_utils *utils);
+int		check_sig_pipe(t_utils *utils);
 
 // Heredocs //
 

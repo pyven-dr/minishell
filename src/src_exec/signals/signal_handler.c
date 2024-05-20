@@ -15,9 +15,9 @@
 
 void	signal_handler(int signal)
 {
-	g_s = signal;
 	if (signal != 0)
 	{
+		g_s = signal;
 		rl_replace_line("", 0);
 		rl_done = 1;
 	}

@@ -30,5 +30,5 @@ int	exec_pipe(t_tree *node, t_utils *utils)
 	if (close(pipe_fd[1]) == -1)
 		return (-1);
 	waitpid(id_left, NULL, 0);
-	return (check_id(id_right, utils));
+	return (check_id_pipe(id_right, utils));
 }

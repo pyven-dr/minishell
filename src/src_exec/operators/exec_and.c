@@ -15,12 +15,12 @@
 int	exec_and(t_tree *node, t_utils *utils)
 {
 	pid_t	id;
-	int 	status;
+	int		status;
 
 	id = exec(node->left, utils);
-	status = check_id(id, utils);
+	status = check_id(id, utils, node);
 	if (status != 0)
 		return (status);
 	id = exec(node->right, utils);
-	return (check_id(id, utils));
+	return (check_id(id, utils, node));
 }
