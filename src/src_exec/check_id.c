@@ -26,7 +26,12 @@ static int	check_status(int status, t_utils *utils)
 			return (-1);
 		return (WEXITSTATUS(status) * -1);
 	}
-	return (0);
+	else
+	{
+		if (change_exit_val(0, utils) == 1)
+			return (-1);
+		return (0);
+	}
 }
 
 static int	check_pipe(int id, t_tree *node)
