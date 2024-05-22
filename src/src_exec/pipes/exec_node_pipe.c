@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "exec.h"
+#include "exec_pipe.h"
 
 static int	close_all(t_utils *utils)
 {

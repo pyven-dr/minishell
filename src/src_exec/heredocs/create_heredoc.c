@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "exec.h"
+#include "exec_heredoc.h"
 
 char	*create_heredoc(char *delim, t_vector *env)
 {

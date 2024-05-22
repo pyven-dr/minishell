@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "exec.h"
+#include "exec_builtins.h"
 
 static int	add_to_env(char	*pwd, t_utils *utils)
 {

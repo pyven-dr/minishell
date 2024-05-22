@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "exec.h"
+#include "exec_redir.h"
 
 int	exec_double_in(t_tree *node, t_utils *utils)
 {

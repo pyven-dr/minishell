@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "exec.h"
+#include "exec_builtins.h"
 
 static int	insert_in_env(char *arg, t_vector *env_vector)
 {

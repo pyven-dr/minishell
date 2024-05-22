@@ -1,33 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sig_handler.c                                      :+:      :+:    :+:   */
+/*   exec_find_cmd.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pyven-dr <pyven-dr@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/11 23:41:47 by pyven-dr          #+#    #+#             */
-/*   Updated: 2024/05/11 23:41:47 by pyven-dr         ###   ########.fr       */
+/*   Created: 2024/05/23 00:29:46 by pyven-dr          #+#    #+#             */
+/*   Updated: 2024/05/23 00:29:46 by pyven-dr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
-#include "parsing.h"
-#include "exec_signal.h"
+#ifndef EXEC_FIND_CMD_H
+# define EXEC_FIND_CMD_H
 
-static int	event(void)
-{
-	return (0);
-}
+char	*check_absolute_path(char *cmd);
+char	*find_command(char **path, char *command);
+char	*get_cmd_path(char *command, t_vector *env_vector);
 
-void	init_sig(void)
-{
-	struct sigaction	sig_a;
-
-	sig_a.sa_flags = 0;
-	sigemptyset(&sig_a.sa_mask);
-	sig_a.sa_handler = signal_handler;
-	sigaction(SIGINT, &sig_a, NULL);
-	sig_a.sa_handler = SIG_IGN;
-	sigaction(SIGQUIT, &sig_a, NULL);
-	rl_event_hook = event;
-}
+#endif

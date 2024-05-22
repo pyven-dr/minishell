@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "exec.h"
+#include "exec_error.h"
+#include "exec_builtins.h"
 
 int	change_dir(char *curpath, t_utils *utils)
 {

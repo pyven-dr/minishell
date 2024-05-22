@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "exec.h"
+#include "exec_error.h"
 
 static char	*add_slash_pwd(char *pwd)
 {

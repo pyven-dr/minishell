@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "exec.h"
+#include "exec_heredoc.h"
 
 int	make_all_heredocs(t_tree *node, t_vector *env)
 {

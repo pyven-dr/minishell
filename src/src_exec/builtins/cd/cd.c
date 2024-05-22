@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "exec.h"
+#include "exec_builtins.h"
 
 static void	free_dir(char *directory, char **args)
 {

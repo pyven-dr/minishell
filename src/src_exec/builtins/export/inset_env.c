@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "exec.h"
+#include "exec_builtins.h"
 
 int	add_env(char *arg, t_vector *env_vector)
 {

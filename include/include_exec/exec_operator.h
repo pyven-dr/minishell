@@ -1,33 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sig_handler.c                                      :+:      :+:    :+:   */
+/*   exec_operator.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pyven-dr <pyven-dr@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/11 23:41:47 by pyven-dr          #+#    #+#             */
-/*   Updated: 2024/05/11 23:41:47 by pyven-dr         ###   ########.fr       */
+/*   Created: 2024/05/23 00:31:47 by pyven-dr          #+#    #+#             */
+/*   Updated: 2024/05/23 00:31:47 by pyven-dr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
-#include "parsing.h"
-#include "exec_signal.h"
+#ifndef EXEC_OPERATOR_H
+# define EXEC_OPERATOR_H
 
-static int	event(void)
-{
-	return (0);
-}
+int		exec_pipe(t_tree *node, t_utils *utils);
+int		exec_and(t_tree *node, t_utils *utils);
+int		exec_or(t_tree *node, t_utils *utils);
 
-void	init_sig(void)
-{
-	struct sigaction	sig_a;
-
-	sig_a.sa_flags = 0;
-	sigemptyset(&sig_a.sa_mask);
-	sig_a.sa_handler = signal_handler;
-	sigaction(SIGINT, &sig_a, NULL);
-	sig_a.sa_handler = SIG_IGN;
-	sigaction(SIGQUIT, &sig_a, NULL);
-	rl_event_hook = event;
-}
+#endif

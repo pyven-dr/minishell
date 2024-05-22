@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "exec.h"
+#include "exec_builtins.h"
 
 int	check_builtins(char **cmd, t_utils *utils, t_tree *tree)
 {

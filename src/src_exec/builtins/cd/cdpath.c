@@ -12,6 +12,7 @@
 
 #include "exec.h"
 #include "parsing.h"
+#include "exec_builtins.h"
 
 static int	check_path(char *elem, char *path, int *print_path)
 {

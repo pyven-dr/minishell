@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "exec.h"
+#include "exec_error.h"
 
 char	*add_pwd(char *curpath)
 {

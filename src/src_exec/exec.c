@@ -12,6 +12,10 @@
 
 #include "exec.h"
 #include "parsing.h"
+#include "exec_find_cmd.h"
+#include "exec_operator.h"
+#include "exec_redir.h"
+#include "exec_builtins.h"
 
 static void	init_tab(t_exec_funcs tab[7])
 {

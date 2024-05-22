@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "exec.h"
+#include "exec_pipe.h"
+#include "exec_signal.h"
 
 static int	check_status(int status, t_utils *utils)
 {

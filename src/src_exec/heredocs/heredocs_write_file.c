@@ -12,6 +12,7 @@
 
 #include "exec.h"
 #include "parsing.h"
+#include "exec_error.h"
 
 static int	add_to_file(char *line, int fd)
 {

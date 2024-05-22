@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "exec.h"
+#include "exec_error.h"
 
 static char	*get_home(t_utils *utils)
 {

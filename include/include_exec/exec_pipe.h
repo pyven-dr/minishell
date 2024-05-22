@@ -1,33 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sig_handler.c                                      :+:      :+:    :+:   */
+/*   exec_pipe.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pyven-dr <pyven-dr@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/11 23:41:47 by pyven-dr          #+#    #+#             */
-/*   Updated: 2024/05/11 23:41:47 by pyven-dr         ###   ########.fr       */
+/*   Created: 2024/05/23 00:34:40 by pyven-dr          #+#    #+#             */
+/*   Updated: 2024/05/23 00:34:40 by pyven-dr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
-#include "parsing.h"
-#include "exec_signal.h"
+#ifndef EXEC_PIPE_H
+# define EXEC_PIPE_H
 
-static int	event(void)
-{
-	return (0);
-}
+int		*create_pipe(int pipe_fd[2]);
+int		redirect_fd(int fd, int pipe_fd[2]);
+int		exec_node_pipe(int pipe_fd[2], t_tree *node, int fd, t_utils *utils);
+int		check_id_pipe(int id, t_utils *utils);
+int		check_sig_pipe(t_utils *utils);
 
-void	init_sig(void)
-{
-	struct sigaction	sig_a;
-
-	sig_a.sa_flags = 0;
-	sigemptyset(&sig_a.sa_mask);
-	sig_a.sa_handler = signal_handler;
-	sigaction(SIGINT, &sig_a, NULL);
-	sig_a.sa_handler = SIG_IGN;
-	sigaction(SIGQUIT, &sig_a, NULL);
-	rl_event_hook = event;
-}
+#endif

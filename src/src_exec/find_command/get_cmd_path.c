@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "exec.h"
+#include "exec_find_cmd.h"
 
 char	*get_path(t_vector *env_vector)
 {

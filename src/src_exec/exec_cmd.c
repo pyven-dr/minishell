@@ -12,6 +12,7 @@
 
 #include "exec.h"
 #include "parsing.h"
+#include "exec_signal.h"
 
 int	exec_cmd(char **cmd, t_utils *utils, t_tree *root)
 {

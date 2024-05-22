@@ -12,6 +12,9 @@
 
 #include "exec.h"
 #include "parsing.h"
+#include "exec_heredoc.h"
+#include "exec_signal.h"
+#include "exec_builtins.h"
 
 static void	exec_line(char *line, t_utils *utils)
 {
