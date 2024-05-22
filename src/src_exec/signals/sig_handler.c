@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
-#include "parsing.h"
+#include <readline/readline.h>
 #include "exec_signal.h"
 
 static int	event(void)

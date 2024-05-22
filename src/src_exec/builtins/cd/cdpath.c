@@ -11,8 +11,8 @@
 /* ************************************************************************** */
 
 #include "exec.h"
-#include "parsing.h"
 #include "exec_builtins.h"
+#include <sys/stat.h>
 
 static int	check_path(char *elem, char *path, int *print_path)
 {

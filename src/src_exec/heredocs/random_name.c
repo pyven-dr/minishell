@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "exec.h"
+#include <fcntl.h>
 
 static char	*replace_chars(char *name)
 {

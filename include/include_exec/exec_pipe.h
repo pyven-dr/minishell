@@ -17,6 +17,5 @@ int		*create_pipe(int pipe_fd[2]);
 int		redirect_fd(int fd, int pipe_fd[2]);
 int		exec_node_pipe(int pipe_fd[2], t_tree *node, int fd, t_utils *utils);
 int		check_id_pipe(int id, t_utils *utils);
-int		check_sig_pipe(t_utils *utils);
 
 #endif

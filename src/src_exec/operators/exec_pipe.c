@@ -12,6 +12,7 @@
 
 #include "exec.h"
 #include "exec_pipe.h"
+#include <sys/wait.h>
 
 int	exec_pipe(t_tree *node, t_utils *utils)
 {

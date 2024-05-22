@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "exec.h"
-#include "parsing.h"
 
 static int	check_arg(char *arg)
 {

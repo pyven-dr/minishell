@@ -14,6 +14,8 @@
 #include "parsing.h"
 #include "exec_error.h"
 
+extern int	g_s;
+
 static int	add_to_file(char *line, int fd)
 {
 	if (ft_putstr_fd(line, fd) == 1)

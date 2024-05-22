@@ -14,9 +14,6 @@
 # define MINISHELL_H
 
 # include <stdbool.h>
-# include <signal.h>
-
-extern int	g_s;
 
 typedef enum e_operand
 {
@@ -53,5 +50,7 @@ typedef struct s_is_quoted
 	char	*str;
 	bool	is_quoted;
 }	t_is_quoted;
+
+void	free_tab(void *content);
 
 #endif

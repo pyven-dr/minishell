@@ -74,7 +74,6 @@ t_is_quoted	remove_quote_heredoc(char *s);
 size_t		count_size(char	*s);
 char		**ft_split_quoted(char *s);
 bool		there_is_a_wildcard(char *s);
-void		free_tab(void *content);
 char		**expand(char *line, t_vector *env);
 t_vector	*ft_wildcard(char *line);
 void		free_value(void *value);

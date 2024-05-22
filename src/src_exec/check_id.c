@@ -12,6 +12,7 @@
 
 #include "exec.h"
 #include "exec_signal.h"
+#include <sys/wait.h>
 
 static int	check_status(int status, t_utils *utils)
 {

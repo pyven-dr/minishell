@@ -13,6 +13,7 @@
 #include "exec.h"
 #include "exec_error.h"
 #include "exec_builtins.h"
+#include <sys/stat.h>
 
 int	check_file(char **components, int last, int nb_components, char *directory)
 {

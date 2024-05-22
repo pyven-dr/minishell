@@ -11,6 +11,9 @@
 /* ************************************************************************** */
 
 #include "exec.h"
+#include "exec_signal.h"
+
+extern int	g_s;
 
 int	check_sig(t_utils *utils)
 {

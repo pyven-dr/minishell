@@ -13,6 +13,8 @@
 #ifndef EXEC_REDIR_H
 # define EXEC_REDIR_H
 
+# include <fcntl.h>
+
 int		exec_simple_in(t_tree *node, t_utils *utils);
 int		exec_simple_out(t_tree *node, t_utils *utils);
 int		exec_double_out(t_tree *node, t_utils *utils);

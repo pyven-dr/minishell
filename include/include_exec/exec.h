@@ -20,9 +20,6 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <errno.h>
-# include <sys/wait.h>
-# include <fcntl.h>
-# include <sys/stat.h>
 
 typedef struct s_utils
 {
@@ -45,9 +42,7 @@ int		ft_getenv(char *name, t_vector *env_vector);
 char	**create_env(t_vector *env_vector);
 int		change_exit_val(int val, t_utils *utils);
 void	exec_loop(t_utils *utils);
-int		check_sig(t_utils *utils);
 void	free_utils(char **args, t_utils *utils);
-int		print_sig_cmd(void);
 int		nb_args(char **args);
 
 #endif

@@ -12,6 +12,7 @@
 
 #include "exec.h"
 #include "exec_heredoc.h"
+#include <fcntl.h>
 
 char	*create_heredoc(char *delim, t_vector *env)
 {

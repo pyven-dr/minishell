@@ -10,8 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
-#include "parsing.h"
+#include <readline/readline.h>
+
+extern int	g_s;
 
 void	signal_handler(int signal)
 {
