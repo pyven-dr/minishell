@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 16:26:00 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/05/15 19:04:05 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/05/24 18:26:58 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,13 @@ char	*strdup_var(char **line)
 	char	*s;
 
 	i = 0;
-	while ((*line)[i] && !is_special((*line)[i]) && (*line)[i] != '$' \
-	&& !is_whitespace((*line)[i]) && (*line)[i] != '*')
+	while ((*line)[i] && (ft_isalnum((*line)[i]) || (*line)[i] == '_'))
 		i++;
 	s = malloc(sizeof(char) * (i + 1));
 	if (!s)
 		return (NULL);
 	i = 0;
-	while (**line && !is_special(**line) && **line != '$' \
-	&& !is_whitespace(**line) && **line != '*')
+	while (**line && (ft_isalnum(**line) || **line == '_'))
 	{
 		s[i] = **line;
 		i++;
@@ -106,12 +104,12 @@ static char	*replace_vars(char *line, t_vector *env, char *s)
 	t_quote	scope;
 
 	i = -1;
-	scope.s_quote = false;
-	scope.d_quote = false;
+	ft_memset(&scope, 0, sizeof(t_quote));
 	while (line[++i])
 	{
 		is_quoted(&scope, line[i]);
-		if (!scope.s_quote && line[i] == '$' && line[i + 1] != '\0')
+		if (!scope.s_quote && line[i] == '$' && line[i + 1] != '\0' \
+		&& !is_whitespace(line[i + 1]) && line[i + 1] != '$')
 		{
 			line[i] = '\0';
 			s = ft_strjoin_free(s, line);
