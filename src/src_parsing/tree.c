@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:35:50 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/05/16 20:47:00 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/05/24 17:26:55 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,46 +97,3 @@ bool	fill_tree(t_parsing *pars, char **line)
 	else
 		return (fill_file(pars, line));
 }
-
-//---------------PRINT TREE FUNCTIUN----------------//
-void	print_tree(t_tree *tree, int space)
-{
-	int	c;
-
-	c = space;
-	if (!tree)
-	{
-		while (c-- > 0)
-			printf(" ");
-		printf("NULL\n");
-	}
-	else
-	{
-		print_tree(tree->left, space + 5);
-		while (c-- > 0)
-			printf(" ");
-		print_node(tree);
-		print_tree(tree->right, space + 5);
-	}
-}
-
-void	print_node(t_tree *node)
-{
-	if (node->operand == AND)
-		printf("&&\n");
-	else if (node->operand == OR)
-		printf("||\n");
-	else if (node->operand == PIPE)
-		printf("|\n");
-	else if (node->operand == CMD)
-		printf("CMD : %s\n", node->name);
-	else if (node->operand == SIMPLE_IN)
-		printf("< : %s\n", node->name);
-	else if (node->operand == DOUBLE_IN)
-		printf("<< : %s\n", node->name);
-	else if (node->operand == SIMPLE_OUT)
-		printf("> : %s\n", node->name);
-	else if (node->operand == DOUBLE_OUT)
-		printf(">> : %s\n", node->name);
-}
-//---------------PRINT TREE FUNCTIUN----------------//

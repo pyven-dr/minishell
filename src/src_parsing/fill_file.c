@@ -6,7 +6,7 @@
 /*   By: sabitbol <sabitbol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 18:03:49 by sabitbol          #+#    #+#             */
-/*   Updated: 2024/05/16 22:19:01 by sabitbol         ###   ########.fr       */
+/*   Updated: 2024/05/24 17:25:43 by sabitbol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,29 +75,37 @@ static bool	add_file_to_cmd(t_parsing *pars, char **line)
 
 static bool	add_file_at_top(t_parsing *pars, char **line)
 {
-	char	*name;
-
-	name = strdup_to_next_space(line, pars);
-	if (name == NULL)
-		return (NULL);
-	pars->tree->parent = new_node(NULL, pars->operand, name);
+	if (pars->tree->parent)
+	{
+		insert_node(pars->tree, pars->operand, line, pars);
+		return (true);
+	}
+	pars->tree->parent = new_node(NULL, pars->operand, \
+	strdup_to_next_space(line, pars));
 	if (!pars->tree->parent)
 		return (clean_continue(pars, line, 1));
-	pars->tree->parent->left = pars->tree;
 	if (!*pars->tree->parent->name)
 		return (clean_continue(pars, line, 2));
+	pars->tree->parent->left = pars->tree;
+	pars->tree = pars->tree->parent;
 	return (true);
 }
 
 static bool	add_file_after_parenthesis(t_parsing *pars, char **line)
 {
-	if (pars->parenthes)
-	{
+	if (pars->parenthes && pars->tree->operand != SIMPLE_IN)
 		pars->tree = pars->tree->right;
-		pars->parenthes = 0;
+	if (pars->tree->parent)
+		insert_node(pars->tree, pars->operand, line, pars);
+	else
+	{
+		pars->tree->parent = new_node(NULL, pars->operand, \
+		strdup_to_next_space(line, pars));
+		pars->tree->parent->left = pars->tree;
+		pars->tree = pars->tree->parent;
 	}
-	insert_node(pars->tree, pars->operand, line, pars);
 	if (!*pars->tree->parent->name)
 		return (clean_continue(pars, line, 2));
+	pars->tree = pars->tree->parent;
 	return (true);
 }
