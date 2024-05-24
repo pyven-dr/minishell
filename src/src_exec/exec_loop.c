@@ -45,7 +45,7 @@ void	exec_loop(t_utils *utils)
 			change_exit_val(1, utils);
 		str = readline("minishell$> ");
 		if (str == NULL)
-			exit_builtin(NULL, utils);
+			exit_builtin(NULL, utils, NULL);
 		add_history(str);
 		if (utils->fds_vector != NULL)
 		{

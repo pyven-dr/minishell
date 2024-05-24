@@ -28,8 +28,10 @@ static int	check_arg(char *arg)
 	return (0);
 }
 
-void	free_utils(char **args, t_utils *utils)
+static void	free_utils_exit(char **args, t_utils *utils, t_tree *tree)
 {
+	if (tree != NULL)
+		free_tree(&tree);
 	if (args != NULL)
 		free_tab(args);
 	del_vector(utils->env_vector, free_env_line);
@@ -46,7 +48,7 @@ static int	get_exit_status(t_utils *utils)
 	return (ft_atoi(env->value));
 }
 
-int	exit_builtin(char **args, t_utils *utils)
+int	exit_builtin(char **args, t_utils *utils, t_tree *tree)
 {
 	char	exit_status;
 
@@ -58,7 +60,7 @@ int	exit_builtin(char **args, t_utils *utils)
 	if (nb_args(args) == 1 || args == NULL)
 	{
 		exit_status = (char)get_exit_status(utils);
-		free_utils(args, utils);
+		free_utils_exit(args, utils, tree);
 		if (write(2, "exit\n", 5) == -1)
 			exit(1);
 		exit(exit_status);
@@ -69,7 +71,7 @@ int	exit_builtin(char **args, t_utils *utils)
 		exit(2);
 	}
 	exit_status = (char)ft_atoi(args[1]);
-	free_utils(args, utils);
+	free_utils_exit(args, utils, tree);
 	if (write(2, "exit\n", 5) == -1)
 		exit(1);
 	exit(exit_status);

@@ -67,11 +67,11 @@ int	write_file(int fd, char *delim, t_vector *env)
 		line = readline("> ");
 		if (line == NULL)
 			return (eof_heredoc(delim, line, s));
+		if (ft_strcmp(line, s.str) == 0)
+			return (free(line), free(s.str), 0);
 		if (s.is_quoted == false)
 			if (get_expanded_line(&line, env) == 1)
 				return (1);
-		if (ft_strcmp(line, s.str) == 0)
-			return (free(line), free(s.str), 0);
 		if (add_to_file(line, fd) == 1)
 			return (free(s.str), 1);
 		free(line);

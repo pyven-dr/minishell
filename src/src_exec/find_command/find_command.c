@@ -12,18 +12,6 @@
 
 #include "exec.h"
 
-static int	print_error(char *command)
-{
-	char	*error;
-
-	error = ft_strjoin(command, ": command not found\n");
-	if (error == NULL)
-		return (1);
-	ft_putstr_fd(error, STDERR_FILENO);
-	free(error);
-	return (0);
-}
-
 char	*find_command(char **path, char *command)
 {
 	size_t	i;
@@ -45,7 +33,7 @@ char	*find_command(char **path, char *command)
 		i++;
 	}
 	free(temp);
-	if (print_error(command) == 1)
+	if (ft_printf(2, "minishell: %s: command not found\n", command) == -1)
 		return (NULL);
 	return (NULL);
 }

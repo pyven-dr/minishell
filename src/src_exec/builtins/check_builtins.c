@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "exec.h"
+#include "minishell.h"
 #include "exec_builtins.h"
 
 int	check_builtins(char **cmd, t_utils *utils, t_tree *tree)
@@ -26,8 +27,7 @@ int	check_builtins(char **cmd, t_utils *utils, t_tree *tree)
 		else if (ft_strcmp(cmd[0], "exit") == 0)
 		{
 			root = find_root(tree);
-			free_tree(&root);
-			exit_builtin(cmd, utils);
+			return (exit_builtin(cmd, utils, root));
 		}
 		else if (ft_strcmp(cmd[0], "env") == 0)
 			return (env(utils->env_vector));

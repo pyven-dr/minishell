@@ -16,7 +16,7 @@
 int		check_builtins(char **cmd, t_utils *utils, t_tree *tree);
 int		echo(char **args);
 int		pwd(void);
-int		exit_builtin(char **args, t_utils *utils);
+int		exit_builtin(char **args, t_utils *utils, t_tree *tree);
 int		env(t_vector *env);
 int		unset(char **args, t_utils *utils);
 

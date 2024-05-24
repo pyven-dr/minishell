@@ -42,7 +42,7 @@ int		ft_getenv(char *name, t_vector *env_vector);
 char	**create_env(t_vector *env_vector);
 int		change_exit_val(int val, t_utils *utils);
 void	exec_loop(t_utils *utils);
-void	free_utils(char **args, t_utils *utils);
 int		nb_args(char **args);
+void	free_utils(char **args, t_utils *utils);
 
 #endif
