@@ -63,7 +63,7 @@ int	write_file(int fd, char *delim, t_vector *env)
 	while (1)
 	{
 		if (g_s != 0)
-			return (free(s.str),1);
+			return (free(s.str), 1);
 		line = readline("> ");
 		if (line == NULL)
 			return (eof_heredoc(delim, line, s));
