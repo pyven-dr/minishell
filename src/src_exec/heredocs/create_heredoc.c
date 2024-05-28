@@ -31,10 +31,11 @@ char	*create_heredoc(char *delim, t_vector *env)
 	if (write_file(fd, delim, env) == 1)
 	{
 		unlink(name);
+		free(name);
 		close(fd);
 		return (NULL);
 	}
 	if (close(fd) == -1)
-		return (NULL);
+		return (free(name), NULL);
 	return (name);
 }

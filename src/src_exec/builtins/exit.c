@@ -53,10 +53,7 @@ int	exit_builtin(char **args, t_utils *utils, t_tree *tree)
 	char	exit_status;
 
 	if (nb_args(args) > 2)
-	{
-		ft_putstr_fd("minishell: exit: too many arguments\n", 2);
-		return (1);
-	}
+		return (ft_putstr_fd("minishell: exit: too many arguments\n", 2), 1);
 	if (nb_args(args) == 1 || args == NULL)
 	{
 		exit_status = (char)get_exit_status(utils);
@@ -67,6 +64,7 @@ int	exit_builtin(char **args, t_utils *utils, t_tree *tree)
 	}
 	if (check_arg(args[1]) == 1)
 	{
+		free_utils_exit(args, utils, tree);
 		ft_putstr_fd("minishell: exit: numeric argument required\n", 2);
 		exit(2);
 	}

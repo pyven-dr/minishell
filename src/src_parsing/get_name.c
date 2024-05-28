@@ -54,13 +54,14 @@ char	*strdup_var(char **line)
 	char	*s;
 
 	i = 0;
-	while ((*line)[i] && (ft_isalnum((*line)[i]) || (*line)[i] == '_'))
+	while ((*line)[i] && (ft_isalnum((*line)[i]) || (*line)[i] == '?' \
+							|| (*line)[i] == '_'))
 		i++;
 	s = malloc(sizeof(char) * (i + 1));
 	if (!s)
 		return (NULL);
 	i = 0;
-	while (**line && (ft_isalnum(**line) || **line == '_'))
+	while (**line && (ft_isalnum(**line) || **line == '?' || **line == '_'))
 	{
 		s[i] = **line;
 		i++;
