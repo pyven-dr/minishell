@@ -44,10 +44,10 @@ Run minishell
   - `Ctrl-D`
   - `Ctrl-\`
 - Builtins :
-  - `echo` with option -n
-  - `cd` with only a relative or absolute path
-  - `pwd` with no options
-  - `export` with no options
-  - `unset` with no options
-  - `env` with no options or arguments
-  - `exit` with no options
+  - `echo` with option -n ([echo documentation](https://www.gnu.org/software/bash/manual/bash.html#index-echo))
+  - `cd` with only a relative or absolute path ([cd documentation](https://www.gnu.org/software/bash/manual/bash.html#index-cd))
+  - `pwd` with no options ([pwd documentation](https://www.gnu.org/software/bash/manual/bash.html#index-pwd))
+  - `export` with no options ([export documentation](https://www.gnu.org/software/bash/manual/bash.html#index-export))
+  - `unset` with no options ([unset documentation](https://www.gnu.org/software/bash/manual/bash.html#index-unset))
+  - `env` with no options or arguments ([env documentation](https://www.gnu.org/software/bash/manual/bash.html#index-env))
+  - `exit` with no options ([exit documentation](https://www.gnu.org/software/bash/manual/bash.html#index-exit))
